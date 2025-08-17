@@ -1,0 +1,4322 @@
+KitManager default currentKitNamed: 'CoreUI' !
+
+KitManager default currentKit ensureLoaded: #('Core') !
+
+Object subclassNamed: #Color
+	instVarNames: 'red green blue alpha'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #Emphasis
+	instVarNames: 'startEmphasisTag endEmphasisTag'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #EmphasisSpan
+	instVarNames: 'emphasis startOffset endOffset'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #EmphasisStream
+	instVarNames: 'sortedEmphasisSpans nextOffset nestedSpans sortedSpanIndex'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #Event
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Event subclassNamed: #DoubleClickEvent
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+EventBase subclassNamed: #EventModel
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #HTMLBuilder
+	instVarNames: 'nodeStack currentNode htmlNode'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #HTMLStyleDefinition
+	instVarNames: 'name keys attributes'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #HTMLTag
+	instVarNames: 'tagName styles attributes children'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #HTMLText
+	instVarNames: 'text'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #JSONEvaluator
+	instVarNames: 'webSession'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Event subclassNamed: #KeyEvent
+	instVarNames: 'key modifiers'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Event subclassNamed: #ListSelectionEvent
+	instVarNames: 'selectionIndex'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Event subclassNamed: #MessageReceivedEvent
+	instVarNames: 'message'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #PopupMenuItem
+	instVarNames: 'name id widgetId enabled action requestedValues enabledBlock'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #Rectangle
+	instVarNames: 'origin corner'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #SessionVariable
+	instVarNames: 'value'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+EventBase subclassNamed: #UIComponent
+	instVarNames: 'menu id ui displayBlock height'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+UIComponent subclassNamed: #CompositeComponent
+	instVarNames: 'children'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+UIComponent subclassNamed: #ListComponent
+	instVarNames: 'list selectionIndex listNumberOfRows optionStyles'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+UIComponent subclassNamed: #ListDivComponent
+	instVarNames: 'list selectionIndex listNumberOfRows optionStyles'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+UIComponent subclassNamed: #PushButtonComponent
+	instVarNames: 'label actionBlock'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+UIComponent subclassNamed: #RichTextEditorComponent
+	instVarNames: 'text selectionStart selectionEnd emphasisCollection subject'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+UIComponent subclassNamed: #TextComponent
+	instVarNames: 'text'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+UIComponent subclassNamed: #TextEditorComponent
+	instVarNames: 'text selectionStart selectionEnd emphasisCollection subject'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #UIOperation
+	instVarNames: 'name arguments'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #UIScreen
+	instVarNames: 'components addedComponents deletedComponents modifiedComponents commandHandler webSocket componentNumber'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+EventModel subclassNamed: #ValueHolder
+	instVarNames: 'value'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #WebSession
+	instVarNames: 'sessionVariables random applications currentOpenLocation'
+	classInstVarNames: 'current'
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+Object subclassNamed: #WebUI
+	instVarNames: 'appName parentName bindings updateStream flags bounds title origin extent dragPoint opened htmlTree'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+WebUI subclassNamed: #ListChoiceBox
+	instVarNames: 'message choices values answerBlock'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+WebUI subclassNamed: #MessageBox
+	instVarNames: 'message severity'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+WebUI subclassNamed: #MultipleChoiceBox
+	instVarNames: 'message choices values'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+WebUI subclassNamed: #PopupMenuUI
+	instVarNames: 'widgetId popupMenu menuItems'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+WebUI subclassNamed: #RequestBox
+	instVarNames: 'message initialAnswer answerBlock'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'CoreUI' !
+
+! Color methodsFor: 'accessing' !
+alpha
+
+	^alpha ! !
+
+! Color methodsFor: 'accessing' !
+alpha: aNumber
+
+	alpha := aNumber asInteger! !
+
+! Color methodsFor: 'accessing' !
+blue
+
+	^blue ! !
+
+! Color methodsFor: 'accessing' !
+blue: aNumber
+
+	blue := aNumber asInteger! !
+
+! Color methodsFor: 'accessing' !
+green
+
+	^green ! !
+
+! Color methodsFor: 'accessing' !
+green: aNumber
+
+	green := aNumber asInteger! !
+
+! Color methodsFor: 'accessing' !
+hue
+
+	^self asHSV at: 1! !
+
+! Color methodsFor: 'accessing' !
+hue: aNumber
+
+	^self copy fromHSV: (self asHSV at: 1 put: (aNumber mod: 360.0); yourself)! !
+
+! Color methodsFor: 'accessing' !
+red
+
+	^red ! !
+
+! Color methodsFor: 'accessing' !
+red: aNumber
+
+	red := aNumber asInteger! !
+
+! Color methodsFor: 'accessing' !
+saturation
+
+	^self asHSV at: 2! !
+
+! Color methodsFor: 'accessing' !
+saturation: aNumber
+
+	^self copy fromHSV: (self asHSV at: 2 put: ((aNumber max: 100.0) min: 0.0); yourself)! !
+
+! Color methodsFor: 'accessing' !
+value
+
+	^self asHSV at: 3! !
+
+! Color methodsFor: 'accessing' !
+value: aNumber
+
+	^self copy fromHSV: (self asHSV at: 3 put: ((aNumber max: 100.0) min: 0.0); yourself)! !
+
+! Color methodsFor: 'converting' !
+asHSV
+
+	| redNormalized greenNormalized blueNormalized cMin cMax delta hue saturation value |
+
+	redNormalized := self red / 255.0.
+	greenNormalized := self green / 255.0.
+	blueNormalized := self blue / 255.0.
+
+	cMax := (redNormalized max: greenNormalized) max: blueNormalized.
+	cMin := (redNormalized min: greenNormalized) min: blueNormalized.
+	delta := cMax - cMin.
+	
+	hue := delta = 0.0
+		ifTrue: [0.0]
+		ifFalse: [
+			cMax = redNormalized
+				ifTrue: [(greenNormalized - blueNormalized) / delta]
+				ifFalse: [
+					cMax = greenNormalized
+						ifTrue: [(blueNormalized - redNormalized) / delta + 2.0]
+						ifFalse: [(redNormalized - greenNormalized) / delta + 4.0]]].
+
+	hue := (hue mod: 6.0) * 60.0.
+	saturation := (cMax = 0.0 ifTrue: [0.0] ifFalse: [delta / cMax]) *  100.0.
+	value := cMax * 100.0.
+
+	^Array with: hue with: saturation with: value
+! !
+
+! Color methodsFor: 'converting' !
+fromHSV: anArray
+
+	| h s v c x m rgb |
+
+	h := (anArray at: 1) mod: 360.0.
+	s := (((anArray at: 2) min: 100.0) max: 0.0) / 100.0.
+	v := (((anArray at: 3) min: 100.0) max: 0.0) / 100.0.
+
+	c := v * s.
+	x := c * (1.0 - (((h / 60.0) mod: 2.0) - 1) abs).
+	m := v - c.
+
+	rgb := self hueFrom: h c: c x: x.
+
+	self red: ((rgb at: 1) + m) * 255.
+	self green: ((rgb at: 2) + m) * 255.
+	self blue: ((rgb at: 3) + m) * 255.
+
+! !
+
+! Color methodsFor: 'converting' !
+hueFrom: h c: c x: x
+
+	h < 60.0 ifTrue: [^Array with: c with: x with: 0.0].
+	h < 120.0 ifTrue: [^Array with: x with: c with: 0.0].
+	h < 180.0 ifTrue: [^Array with: 0.0 with: c with: x].
+	h < 240.0 ifTrue: [^Array with: 0.0 with: x with: c].
+	h < 300 ifTrue: [^Array with: x with: 0.0 with: c].
+	^Array with: c with: 0.0 with: x
+
+
+! !
+
+! Color methodsFor: 'printing' !
+asString
+
+	| stream |
+	stream := WriteStream on: (String new: 10).
+	stream nextPut: $#.
+	self red printOn: stream paddedWith: $0 to: 2 base: 16.
+	self green printOn: stream paddedWith: $0 to: 2 base: 16.
+	self blue printOn: stream paddedWith: $0 to: 2 base: 16.
+	self alpha printOn: stream paddedWith: $0 to: 2 base: 16.
+ 
+	^stream contents! !
+
+! Color methodsFor: 'printing' !
+printOn: aStream
+
+	aStream nextPutAll: self asString! !
+
+! Color class methodsFor: 'instance creation' !
+red: red green: green blue: blue
+
+	^self red: red green: green blue: blue alpha: 255 ! !
+
+! Color class methodsFor: 'instance creation' !
+red: red green: green blue: blue alpha: alpha
+
+	^self new
+		red: red;
+		green: green;
+		blue: blue;
+		alpha: alpha;
+		yourself ! !
+
+! Color class methodsFor: 'instance creation' !
+white
+
+	^self red: 255 green: 255 blue: 255! !
+
+! Emphasis methodsFor: 'accessing' !
+endEmphasisTag
+
+	^endEmphasisTag! !
+
+! Emphasis methodsFor: 'accessing' !
+endEmphasisTag: aString
+
+	endEmphasisTag := aString! !
+
+! Emphasis methodsFor: 'accessing' !
+startEmphasisTag
+
+	^startEmphasisTag! !
+
+! Emphasis methodsFor: 'accessing' !
+startEmphasisTag: aString
+
+	startEmphasisTag := aString! !
+
+! Emphasis methodsFor: 'emphasizing' !
+endEmphasisOn: stream
+
+	stream nextPutAll: self endEmphasisTag! !
+
+! Emphasis methodsFor: 'emphasizing' !
+startEmphasisOn: stream
+
+	stream nextPutAll: self startEmphasisTag! !
+
+! Emphasis class methodsFor: 'instance creation' !
+blue
+
+	^self new
+		startEmphasisTag: '<span style=\"color:blue;\">';
+		endEmphasisTag: '</span>';
+		yourself! !
+
+! Emphasis class methodsFor: 'instance creation' !
+bold
+
+	^self new
+		startEmphasisTag:  '<strong>';
+		endEmphasisTag: '</strong>';
+		yourself! !
+
+! Emphasis class methodsFor: 'instance creation' !
+brown
+
+	^self new
+		startEmphasisTag: '<span style=\"color:brown;\">';
+		endEmphasisTag: '</span>';
+		yourself! !
+
+! Emphasis class methodsFor: 'instance creation' !
+compileErrorHighlight
+
+	^self new
+		startEmphasisTag: '<span style=\"background-color:#C00;color:white;\">';
+		endEmphasisTag: '</span>';
+		yourself ! !
+
+! Emphasis class methodsFor: 'instance creation' !
+green
+
+	^self new
+		startEmphasisTag: '<span style=\"color:green;\">';
+		endEmphasisTag: '</span>';
+		yourself! !
+
+! Emphasis class methodsFor: 'instance creation' !
+red
+
+	^self new
+		startEmphasisTag: '<span style=\"color:red;\">';
+		endEmphasisTag: '</span>';
+		yourself! !
+
+! Emphasis class methodsFor: 'instance creation' !
+walkbackCallHighlight
+
+	^self new
+		startEmphasisTag: '<span style=\"background-color:#0C0;color:white;\">';
+		endEmphasisTag: '</span>';
+		yourself! !
+
+! EmphasisSpan methodsFor: 'accessing' !
+emphasis
+
+	^emphasis! !
+
+! EmphasisSpan methodsFor: 'accessing' !
+emphasis: anEmphasis
+
+	emphasis := anEmphasis! !
+
+! EmphasisSpan methodsFor: 'accessing' !
+endOffset
+
+	^endOffset! !
+
+! EmphasisSpan methodsFor: 'accessing' !
+endOffset: anInteger
+
+	endOffset := anInteger! !
+
+! EmphasisSpan methodsFor: 'accessing' !
+startOffset
+
+	^startOffset! !
+
+! EmphasisSpan methodsFor: 'accessing' !
+startOffset: anInteger
+
+	startOffset := anInteger! !
+
+! EmphasisSpan methodsFor: 'emphasizing' !
+emphasizeForPosition: anInteger to: stream
+
+	startOffset = anInteger ifTrue: [emphasis startEmphasisOn: stream].
+	endOffset + 1 = anInteger ifTrue: [emphasis endEmphasisOn: stream].
+! !
+
+! EmphasisSpan methodsFor: 'emphasizing' !
+endEmphasizeForPosition: anInteger to: stream
+
+	endOffset + 1 = anInteger ifTrue: [emphasis endEmphasisOn: stream].
+! !
+
+! EmphasisSpan methodsFor: 'emphasizing' !
+startEmphasizeForPosition: anInteger to: stream
+
+	startOffset = anInteger ifTrue: [emphasis startEmphasisOn: stream].
+
+! !
+
+! EmphasisSpan methodsFor: 'printing' !
+printOn: aStream
+
+	aStream nextPutAll: 'Emphasis from ', self startOffset printString, ' to ', self endOffset printString! !
+
+! EmphasisSpan class methodsFor: 'instance creation' !
+from: start to: end with: emphasis
+
+	^self new
+		startOffset: start;
+		endOffset: end;
+		emphasis: emphasis;
+		yourself! !
+
+! EmphasisStream methodsFor: 'emphasizing' !
+writeEmphasisOn: aStream forIndex: index
+
+	nextOffset = index ifFalse: [^self].
+
+	self
+		writeEndEmphasisOn: aStream forIndex: index;
+		writeStartEmphasisOn: aStream forIndex: index.
+! !
+
+! EmphasisStream methodsFor: 'emphasizing' !
+writeEndEmphasisOn: aStream forIndex: anInteger
+
+	nestedSpans copy reverseDo: [:span |
+		span endOffset + 1 = anInteger ifTrue: [
+			span endEmphasizeForPosition: anInteger to: aStream.
+			nestedSpans remove: span] ]
+
+
+! !
+
+! EmphasisStream methodsFor: 'emphasizing' !
+writeStartEmphasisOn: aStream forIndex: anInteger
+
+	| nextSpan |
+
+	[
+	sortedSpanIndex > sortedEmphasisSpans size ifTrue: [
+		nextSpan := nil.
+		nextOffset := 0.
+		^self].
+	nextSpan := (sortedEmphasisSpans at: sortedSpanIndex).
+	anInteger = nextSpan startOffset] whileTrue: [
+		nestedSpans add: nextSpan.
+		sortedSpanIndex := sortedSpanIndex + 1.
+		nextSpan startEmphasizeForPosition: anInteger to: aStream].
+
+	nextSpan := (sortedEmphasisSpans at: sortedSpanIndex).
+	nextOffset := nestedSpans inject: nextSpan startOffset into: [:index :span | index min: span endOffset + 1].
+
+! !
+
+! EmphasisStream methodsFor: 'initializing' !
+on: aCollection
+
+	sortedEmphasisSpans := aCollection copy sortedBy: [:a :b | a startOffset < b startOffset or: [a startOffset = b startOffset and: [a endOffset > b endOffset]]].
+	sortedSpanIndex := 1.
+	aCollection isEmpty ifFalse: [nextOffset := aCollection first startOffset].
+	nestedSpans := OrderedCollection new
+	
+! !
+
+! EmphasisStream class methodsFor: 'instance creation' !
+on: aCollection
+
+	^super new on: aCollection; yourself! !
+
+! Event methodsFor: 'converting' !
+eventKey
+
+	^self class! !
+
+! EventModel methodsFor: 'accessing' !
+changed
+
+	self signalEvent: #changed! !
+
+! EventModel methodsFor: 'events' !
+on: eventName send: selector to: receiver
+
+	(eventRegistry at: eventName ifAbsentPut: [OrderedCollection new])
+		add: [receiver perform: selector with: self]! !
+
+! EventModel methodsFor: 'events' !
+on: eventName send: selector to: receiver with: argument
+
+	(eventRegistry at: eventName ifAbsentPut: [OrderedCollection new])
+		add: [receiver perform: selector with: argument with: self]! !
+
+! EventModel methodsFor: 'events' !
+signalEvent: aSymbol
+
+	(eventRegistry at: aSymbol ifAbsent: [
+		^self]) do: [:each | each value]! !
+
+! HTMLBuilder methodsFor: 'accessing' !
+currentNode
+
+	^currentNode! !
+
+! HTMLBuilder methodsFor: 'accessing' !
+currentNode: anObject
+
+	currentNode := anObject! !
+
+! HTMLBuilder methodsFor: 'accessing' !
+htmlNode
+
+	^htmlNode! !
+
+! HTMLBuilder methodsFor: 'accessing' !
+htmlNode: anObject
+
+	htmlNode := anObject! !
+
+! HTMLBuilder methodsFor: 'accessing' !
+nodeStack
+
+	^nodeStack! !
+
+! HTMLBuilder methodsFor: 'accessing' !
+nodeStack: anOrderedCollection
+
+	nodeStack := anOrderedCollection! !
+
+! HTMLBuilder methodsFor: 'building' !
+attributeAt: keyString put: valueString
+
+	self currentNode attributeAt: keyString put: valueString! !
+
+! HTMLBuilder methodsFor: 'building' !
+class: aString
+
+	self key: 'class' value: aString! !
+
+! HTMLBuilder methodsFor: 'building' !
+div
+
+	self startTag: 'div'! !
+
+! HTMLBuilder methodsFor: 'building' !
+div: aBlock
+
+	self inTag: 'div' do: aBlock! !
+
+! HTMLBuilder methodsFor: 'building' !
+endDiv
+
+	self endTag: 'div'! !
+
+! HTMLBuilder methodsFor: 'building' !
+endTag: aString
+
+	self nodeStack removeLast.
+	self currentNode: (self nodeStack isEmpty
+		ifTrue: [nil]
+		ifFalse: [self nodeStack last])! !
+
+! HTMLBuilder methodsFor: 'building' !
+endTagStyle
+
+	self nodeStack removeLast.
+	self currentNode: (self nodeStack isEmpty
+		ifTrue: [nil]
+		ifFalse: [self nodeStack last])! !
+
+! HTMLBuilder methodsFor: 'building' !
+htmlString
+
+	| stream |
+
+	stream := WriteStream on: (ByteString new: 10).
+	self htmlNode htmlPrintOn: stream.
+	^stream contents! !
+
+! HTMLBuilder methodsFor: 'building' !
+id: aString
+
+	self key: 'id' value: aString! !
+
+! HTMLBuilder methodsFor: 'building' !
+inHorizontalLayout: aString do: aBlock
+
+	self inTag: 'div' do: [:builder |
+		builder
+			id: aString;
+			attributeAt: 'style' put: 'grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); display: grid;'.
+		aBlock value: builder]
+ ! !
+
+! HTMLBuilder methodsFor: 'building' !
+inStyle: aString do: aBlock
+
+	| style |
+
+	style := HTMLStyleDefinition name: aString.
+
+	self currentNode ifNotNil: [:node | node addStyle: style].
+
+	self nodeStack add: style.
+	self currentNode: style.
+
+	aBlock cull: self.
+
+	self nodeStack removeLast.
+	self currentNode: (self nodeStack isEmpty
+		ifTrue: [nil]
+		ifFalse: [self nodeStack last])! !
+
+! HTMLBuilder methodsFor: 'building' !
+inTag: aString do: aBlock
+
+	self startTag: aString.
+	aBlock cull: self.
+	self endTag: aString! !
+
+! HTMLBuilder methodsFor: 'building' !
+install: anObject
+
+	anObject renderOn: self
+ ! !
+
+! HTMLBuilder methodsFor: 'building' !
+key: keyString value: valueString
+
+	self attributeAt: keyString put: valueString! !
+
+! HTMLBuilder methodsFor: 'building' !
+perform: aSelector on: anObject
+
+	anObject perform: aSelector with: self
+! !
+
+! HTMLBuilder methodsFor: 'building' !
+startTag: aString
+
+	| tag |
+
+	tag := HTMLTag name: aString.
+
+	htmlNode isNil ifTrue: [htmlNode := tag].
+
+	self currentNode ifNotNil: [:node | node addTag: tag].
+
+	self nodeStack add: tag.
+	self currentNode: tag.! !
+
+! HTMLBuilder methodsFor: 'building' !
+tagStyle
+
+	| style |
+
+	style := HTMLStyleDefinition name: ''.
+
+	self currentNode ifNotNil: [:node | node addStyle: style].
+
+	self nodeStack add: style.
+	self currentNode: style.! !
+
+! HTMLBuilder methodsFor: 'building' !
+text: aString
+
+	self currentNode addTag: (HTMLText text: aString)! !
+
+! HTMLBuilder methodsFor: 'initialize-release' !
+initialize
+
+	self
+		nodeStack: OrderedCollection new;
+		htmlNode: nil! !
+
+! HTMLBuilder methodsFor: 'string quoting' !
+htmlUnquote: aString
+
+	| in out inTag|
+
+	in := aString readStream.
+	out := WriteStream on: (String new: aString size).
+	inTag := false.
+
+	[in atEnd] whileFalse: [
+		| character |
+		character := in next.
+		self htmlUnquoteCharacter: character from: in to: out].
+
+	^out contents
+! !
+
+! HTMLBuilder methodsFor: 'string quoting' !
+htmlUnquoteCharacter: character from: in to: out
+
+	character = $< ifTrue: [^self htmlUnquoteTagIn: in out: out].
+	character = $& ifTrue: [^self htmlUnquoteSpecialCharacterIn: in out: out].
+	out nextPut: character! !
+
+! HTMLBuilder methodsFor: 'string quoting' !
+htmlUnquoteSpecialCharacterIn: in out: out
+
+	| stream finished characterName |
+
+	stream := WriteStream on: (String new: 10).
+	finished := false.
+
+	[in atEnd not & finished not] whileTrue: [
+		| character |
+		character := in next.
+		character = $;
+			ifTrue: [finished := true]
+			ifFalse: [stream nextPut: character]].
+
+	characterName := stream contents.
+	characterName = 'gt' ifTrue: [out nextPut: $>. ^self].
+	characterName = 'lt' ifTrue: [out nextPut: $<. ^self].
+	characterName = 'amp' ifTrue: [out nextPut: $&. ^self].
+	characterName = 'quot' ifTrue: [out nextPut: $". ^self].
+	characterName = 'apos' ifTrue: [out nextPut: $'. ^self].
+
+
+! !
+
+! HTMLBuilder methodsFor: 'string quoting' !
+htmlUnquoteTagIn: in out: out
+
+	[in atEnd] whileFalse: [in next = $> ifTrue: [^self]].! !
+
+! HTMLBuilder class methodsFor: 'instance creation' !
+new
+
+	^super new initialize! !
+
+! HTMLStyleDefinition methodsFor: 'accessing' !
+attributes
+
+	^attributes! !
+
+! HTMLStyleDefinition methodsFor: 'accessing' !
+attributes: anObject
+
+	attributes := anObject! !
+
+! HTMLStyleDefinition methodsFor: 'accessing' !
+for: aString
+
+	self name: aString! !
+
+! HTMLStyleDefinition methodsFor: 'accessing' !
+keys
+
+	^keys! !
+
+! HTMLStyleDefinition methodsFor: 'accessing' !
+keys: anObject
+
+	keys := anObject! !
+
+! HTMLStyleDefinition methodsFor: 'accessing' !
+name
+
+	^name! !
+
+! HTMLStyleDefinition methodsFor: 'accessing' !
+name: anObject
+
+	name := anObject! !
+
+! HTMLStyleDefinition methodsFor: 'building' !
+addKey: aString
+
+	self keys add: aString! !
+
+! HTMLStyleDefinition methodsFor: 'building' !
+attributeAt: key put: value
+
+	self attributes at: key put: value! !
+
+! HTMLStyleDefinition methodsFor: 'html' !
+htmlPrintAttributesOn: aStream
+
+	self attributes keysAndValuesDo: [:key :value |
+		aStream
+			nextPutAll: key;
+			nextPutAll: ': ';
+			nextPutAll: value;
+			nextPutAll: ';';
+			cr].! !
+
+! HTMLStyleDefinition methodsFor: 'html' !
+htmlPrintOn: aStream
+
+	self keys do: [:each | aStream nextPutAll: each] separatedBy: [aStream space].
+	aStream
+		nextPutAll: self name;
+		nextPutAll: ' {'; cr.
+	self htmlPrintAttributesOn: aStream.
+	aStream nextPutAll: '}'; cr! !
+
+! HTMLStyleDefinition methodsFor: 'initialize-release' !
+initialize
+
+	self keys: OrderedCollection new.
+	self attributes: Dictionary new! !
+
+! HTMLStyleDefinition methodsFor: 'printing' !
+printOn: aStream
+
+	self htmlPrintOn: aStream! !
+
+! HTMLStyleDefinition methodsFor: 'uncategorized' !
+with: aBlock
+
+	aBlock value: self! !
+
+! HTMLStyleDefinition class methodsFor: 'instance creation' !
+name: aString
+
+	^self new
+		name: aString;
+		yourself! !
+
+! HTMLStyleDefinition class methodsFor: 'instance creation' !
+new
+
+	^super new initialize! !
+
+! HTMLTag methodsFor: 'accessing' !
+addStyle: aStyleDefinition
+
+	self styles add: aStyleDefinition! !
+
+! HTMLTag methodsFor: 'accessing' !
+addTag: aTag
+
+	self children add: aTag! !
+
+! HTMLTag methodsFor: 'accessing' !
+attributes
+
+	^attributes! !
+
+! HTMLTag methodsFor: 'accessing' !
+attributes: anObject
+
+	attributes := anObject! !
+
+! HTMLTag methodsFor: 'accessing' !
+children
+
+	^children! !
+
+! HTMLTag methodsFor: 'accessing' !
+children: anObject
+
+	children := anObject! !
+
+! HTMLTag methodsFor: 'accessing' !
+styles
+
+	^styles! !
+
+! HTMLTag methodsFor: 'accessing' !
+styles: anObject
+
+	styles := anObject! !
+
+! HTMLTag methodsFor: 'accessing' !
+tagName
+
+	^tagName! !
+
+! HTMLTag methodsFor: 'accessing' !
+tagName: anObject
+
+	tagName := anObject! !
+
+! HTMLTag methodsFor: 'attributes' !
+htmlClass: aString
+
+	self attributeAt: 'class' put: aString! !
+
+! HTMLTag methodsFor: 'attributes' !
+id: aString
+
+	self attributeAt: 'id' put: aString! !
+
+! HTMLTag methodsFor: 'attributes' !
+on: aSymbol send: selector to: receiver
+
+	self attributeAt: 'on', aSymbol put: 'simTalkCallback0(''', receiver, ''', ''', selector, ''')'! !
+
+! HTMLTag methodsFor: 'attributes' !
+on: aSymbol send: selector to: receiver with: aString
+
+	self attributeAt: 'on', aSymbol put: 'simTalkCallback1(''$', receiver appName, ''', ''', selector, ''', ''', aString, ''')'! !
+
+! HTMLTag methodsFor: 'attributes' !
+with: aBlock
+
+	| newBuilder |
+
+	newBuilder := HTMLBuilder new.
+	aBlock value: newBuilder.
+	self children: newBuilder htmlNode allNodes! !
+
+! HTMLTag methodsFor: 'html' !
+htmlPrintOn: aStream
+
+	aStream nextPutAll: '<';
+		nextPutAll: self tagName;
+		space.
+	self attributes keysAndValuesDo: [:key :value |
+		aStream nextPutAll: key;
+			nextPutAll: '="';
+			nextPutAll: value;
+			nextPutAll: '" '].
+	aStream nextPutAll: '>'; cr.
+	self styles isEmpty ifFalse: [
+		aStream nextPutAll: '<style>'; cr.
+		self styles do: [:eachStyle | eachStyle htmlPrintOn: aStream].
+		aStream nextPutAll: '</style>'; cr].
+	self children do: [:child | child htmlPrintOn: aStream].
+	aStream
+		nextPutAll: '</';
+		nextPutAll: self tagName;
+		nextPutAll: '>';
+		cr! !
+
+! HTMLTag methodsFor: 'initialize-release' !
+attributeAt: key
+
+	^attributes at: key ifAbsent: [nil]! !
+
+! HTMLTag methodsFor: 'initialize-release' !
+attributeAt: key put: value
+
+	attributes at: key put: value! !
+
+! HTMLTag methodsFor: 'initialize-release' !
+initialize
+
+	attributes := Dictionary new.
+	children := OrderedCollection new.
+	styles := OrderedCollection new! !
+
+! HTMLTag methodsFor: 'printing' !
+printOn: aStream
+
+	self htmlPrintOn: aStream! !
+
+! HTMLTag class methodsFor: 'instance creation' !
+name: aString
+
+	^self new
+		tagName: aString;
+		yourself! !
+
+! HTMLTag class methodsFor: 'instance creation' !
+new
+
+	^super new initialize! !
+
+! HTMLText methodsFor: 'accessing' !
+text
+
+	^text! !
+
+! HTMLText methodsFor: 'accessing' !
+text: anObject
+
+	text := anObject! !
+
+! HTMLText methodsFor: 'html' !
+htmlPrintOn: aStream
+
+	aStream nextPutAll: self text! !
+
+! HTMLText methodsFor: 'printing' !
+printOn: aStream
+
+	aStream nextPutAll: self text! !
+
+! HTMLText class methodsFor: 'instance creation' !
+text: aString
+
+	^self new text: aString! !
+
+! JSONEvaluator methodsFor: 'accessing' !
+webSession
+
+	^webSession ifNil: [WebSession current]! !
+
+! JSONEvaluator methodsFor: 'accessing' !
+webSession: anObject
+
+	webSession := anObject! !
+
+! JSONEvaluator methodsFor: 'evaluating' !
+evaluate: aCollection
+
+	| result |
+
+	aCollection do: [:each |
+		result := self evaluateCommand: each].
+	^result! !
+
+! JSONEvaluator methodsFor: 'evaluating' !
+evaluateCommand: anArray
+
+	| receiver |
+
+	anArray size = 1 ifTrue: [^self evaluateObject: anArray first].
+	receiver := self evaluateObject: anArray first.
+	(receiver isUI and: [receiver isDisabled]) ifTrue: [^nil].
+	^receiver perform: (anArray at: 2) asSymbol withArguments: (anArray copyFrom: 3 to: anArray size)! !
+
+! JSONEvaluator methodsFor: 'evaluating' !
+evaluateObject: anObject
+
+	anObject isNumber ifTrue: [^anObject].
+	anObject = true  ifTrue: [^anObject].
+	anObject = false  ifTrue: [^anObject].
+	anObject = nil ifTrue: [^anObject].
+	anObject isString ifTrue: [
+		anObject first = $$ ifTrue: [^self webSession sessionVariableAt: (anObject copyFrom: 2 to: anObject size)].
+		^anObject].
+	anObject isCollection ifTrue: [^self evaluateCommand: anObject].
+	self error: 'Unknown object'! !
+
+! KeyEvent methodsFor: 'converting' !
+key
+	^key! !
+
+! KeyEvent methodsFor: 'converting' !
+key: aCharacter
+	key := aCharacter! !
+
+! KeyEvent methodsFor: 'converting' !
+modifiers: aSet
+	modifiers := aSet! !
+
+! ListSelectionEvent methodsFor: 'accessing' !
+selectionIndex
+
+	^selectionIndex! !
+
+! ListSelectionEvent methodsFor: 'accessing' !
+selectionIndex: aNumber
+
+	selectionIndex := aNumber! !
+
+! MessageReceivedEvent methodsFor: 'accessing' !
+message
+
+	^message! !
+
+! MessageReceivedEvent methodsFor: 'accessing' !
+message: aString
+
+	message := aString! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+action
+
+	^action! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+action: aString
+
+	action := aString! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+enabledBlock
+
+	^enabledBlock! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+enabledBlock: aBlock
+
+	enabledBlock := aBlock! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+id
+
+	^id! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+id: aSymbol
+
+	id := aSymbol! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+name
+
+	^name! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+name: aString
+
+	name := aString! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+requestedValues
+
+	^requestedValues! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+requestedValues: aCollection
+
+	requestedValues := aCollection! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+widgetId
+
+	^widgetId! !
+
+! PopupMenuItem methodsFor: 'accessing' !
+widgetId: aString
+
+	widgetId := aString! !
+
+! PopupMenuItem methodsFor: 'adding and removing' !
+addRequestedValue: aSymbol
+
+	self requestedValues add: aSymbol! !
+
+! PopupMenuItem methodsFor: 'initializing' !
+initialize
+
+	super initialize.
+	enabledBlock := [true].
+	requestedValues := Set new! !
+
+! PopupMenuItem methodsFor: 'rendering' !
+menuCallbackString
+
+	| stream |
+
+	stream := WriteStream on: (String new: 40).
+	stream
+		nextPutAll: 'requestedFieldsCallbackNoCapture(''$$appName$'', ''';
+		nextPutAll: self id;
+		nextPutAll: ''', ''';
+		nextPutAll: self widgetId;
+		nextPutAll: ''', ''doMenuWith:'', ['.
+
+	self requestedValues do: [:each | stream nextPut: $'; nextPutAll: each; nextPut: $'] separatedBy: [stream nextPutAll: ' , '].
+
+	stream
+		nextPutAll: '], event);'.
+
+	^stream contents! !
+
+! PopupMenuItem methodsFor: 'rendering' !
+renderHTMLOn: anHTMLBuilder
+
+	anHTMLBuilder div: [
+		anHTMLBuilder
+			attributeAt: 'class' put: 'menuItem'.
+
+		self enabledBlock value
+			ifTrue: [anHTMLBuilder attributeAt: 'onclick' put: self menuCallbackString]
+			ifFalse: [anHTMLBuilder attributeAt: 'style' put: 'color: #A0A0A0;'].
+
+		anHTMLBuilder attributeAt: 'onmouseover' put: 'captureRichTextSelection(''', self widgetId,''');'.
+		anHTMLBuilder text: self name]! !
+
+! PopupMenuItem class methodsFor: 'instance creation' !
+new
+
+	^super new initialize! !
+
+! Rectangle methodsFor: 'accessing' !
+bottom
+
+	^corner y! !
+
+! Rectangle methodsFor: 'accessing' !
+bounds
+
+	^origin corner: corner! !
+
+! Rectangle methodsFor: 'accessing' !
+center
+
+	^Point x: (origin x + corner x) / 2.0 y: (origin y + corner y) / 2.0! !
+
+! Rectangle methodsFor: 'accessing' !
+corner
+
+	^corner! !
+
+! Rectangle methodsFor: 'accessing' !
+corner: aPoint 
+
+	corner := aPoint! !
+
+! Rectangle methodsFor: 'accessing' !
+extent
+
+	^Point x: self width y: self height! !
+
+! Rectangle methodsFor: 'accessing' !
+left
+
+	^origin x! !
+
+! Rectangle methodsFor: 'accessing' !
+origin
+
+	^origin! !
+
+! Rectangle methodsFor: 'accessing' !
+origin: aPoint 
+
+	origin := aPoint! !
+
+! Rectangle methodsFor: 'accessing' !
+right
+
+	^corner x! !
+
+! Rectangle methodsFor: 'accessing' !
+top
+
+	^origin y! !
+
+! Rectangle methodsFor: 'computed values' !
++ aPoint
+
+	^self translatedBy: aPoint! !
+
+! Rectangle methodsFor: 'computed values' !
+- aPoint
+
+	^self translatedBy: aPoint negated! !
+
+! Rectangle methodsFor: 'computed values' !
+height
+	^corner y - origin y! !
+
+! Rectangle methodsFor: 'computed values' !
+translatedBy: aPoint
+
+	^self origin + aPoint corner: self corner + aPoint! !
+
+! Rectangle methodsFor: 'computed values' !
+width
+	^corner x - origin x! !
+
+! Rectangle methodsFor: 'printing' !
+printOn: aStream 
+
+	self origin printOn: aStream.
+	aStream nextPutAll: ' corner: '.
+	self corner printOn: aStream! !
+
+! Rectangle methodsFor: 'rendering' !
+triangleVertices
+
+	^(Array new: 12)
+		at: 1 put: origin x;
+		at: 2 put: corner y;
+		at: 3 put: origin x;
+		at: 4 put: origin y;
+		at: 5 put: corner x;
+		at: 6 put: origin y;
+		at: 7 put: origin x;
+		at: 8 put: corner y;
+		at: 9 put: corner x;
+		at: 10 put: origin y;
+		at: 11 put: corner x;
+		at: 12 put: corner y;
+		yourself! !
+
+! Rectangle methodsFor: 'testing' !
+containsPoint: aPoint 
+
+	(aPoint x between: origin x and: corner x)
+		ifTrue: [^aPoint y between: origin y and: corner y].
+	^false! !
+
+! Rectangle class methodsFor: 'instance creation' !
+origin: origin corner: corner 
+
+	^self new
+		origin: origin;
+		corner: corner;
+		yourself! !
+
+! Rectangle class methodsFor: 'instance creation' !
+origin: origin extent: extent 
+
+	^self new
+		origin: origin;
+		corner: origin + extent;
+		yourself! !
+
+! SessionVariable methodsFor: 'accessing' !
+value
+
+	^value! !
+
+! SessionVariable methodsFor: 'accessing' !
+value: anObject
+
+	value := anObject! !
+
+! SessionVariable methodsFor: 'integer operations' !
+decrement
+
+	^value := value - 1! !
+
+! SessionVariable methodsFor: 'integer operations' !
+decrementBy: aNumber
+
+	^value := value - aNumber! !
+
+! SessionVariable methodsFor: 'integer operations' !
+increment
+
+	^value := value + 1! !
+
+! SessionVariable methodsFor: 'integer operations' !
+incrementBy: aNumber
+
+	^value := value + aNumber! !
+
+! UIComponent methodsFor: 'accessing' !
+displayBlock
+
+	^displayBlock! !
+
+! UIComponent methodsFor: 'accessing' !
+displayBlock: aBlock
+
+	displayBlock := aBlock! !
+
+! UIComponent methodsFor: 'accessing' !
+height
+
+	^height! !
+
+! UIComponent methodsFor: 'accessing' !
+height: aString
+
+	height := aString! !
+
+! UIComponent methodsFor: 'accessing' !
+id
+
+	^id! !
+
+! UIComponent methodsFor: 'accessing' !
+id: aString
+
+	id := aString! !
+
+! UIComponent methodsFor: 'accessing' !
+menu
+
+	^menu! !
+
+! UIComponent methodsFor: 'accessing' !
+menu: aMenu
+
+	menu := aMenu! !
+
+! UIComponent methodsFor: 'accessing' !
+ui
+
+	^ui! !
+
+! UIComponent methodsFor: 'accessing' !
+ui: aString
+
+	ui := aString! !
+
+! UIComponent methodsFor: 'binding' !
+bind
+
+	WebSession current sessionVariableAt: self id put: self
+! !
+
+! UIComponent methodsFor: 'binding' !
+bindTo: aUI
+
+	aUI bindComponent: self
+ ! !
+
+! UIComponent methodsFor: 'binding' !
+bindTo: aUI as: aSymbol
+
+	self id: (aUI idFor: aSymbol).
+	self bindTo: aUI
+ ! !
+
+! UIComponent methodsFor: 'binding' !
+bindTo: aUI id: aString
+
+	self id: aString.
+	self bindTo: aUI
+ ! !
+
+! UIComponent methodsFor: 'binding' !
+unbind
+
+	WebSession current removeSessionVariableAt: self id
+! !
+
+! UIComponent methodsFor: 'callbacks' !
+openMenuX: x y: y
+
+	self menu openIn: (self idFor: self id, 'Div') x: x y: y
+! !
+
+! UIComponent methodsFor: 'rendering' !
+htmlString
+
+	| builder |
+	builder := HTMLBuilder new.
+	self renderOn: builder.
+	^builder htmlString
+   ! !
+
+! UIComponent methodsFor: 'updating' !
+update! !
+
+! UIComponent methodsFor: 'utility' !
+idFor: aString
+
+	^self ui idFor: aString! !
+
+! UIComponent methodsFor: 'utility' !
+renderOn: anHTMLBuilder
+
+
+! !
+
+! CompositeComponent methodsFor: 'accessing' !
+children
+
+	^children! !
+
+! CompositeComponent methodsFor: 'accessing' !
+children: anObject
+
+	children := anObject! !
+
+! CompositeComponent methodsFor: 'initializing' !
+initialize
+
+	super initialize.
+	self children: OrderedCollection new! !
+
+! ListComponent methodsFor: 'accessing' !
+list
+
+	^list! !
+
+! ListComponent methodsFor: 'accessing' !
+list: anObject
+
+	list = anObject ifTrue: [^self].
+
+	list := anObject.
+	selectionIndex := -1.
+	self
+		updateList;
+		updateSelectionIndex! !
+
+! ListComponent methodsFor: 'accessing' !
+listNumberOfRows
+
+	^listNumberOfRows! !
+
+! ListComponent methodsFor: 'accessing' !
+listNumberOfRows: anObject 
+
+	listNumberOfRows:= anObject! !
+
+! ListComponent methodsFor: 'accessing' !
+optionStyles
+
+	^optionStyles! !
+
+! ListComponent methodsFor: 'accessing' !
+optionStyles: anObject 
+
+	optionStyles := anObject! !
+
+! ListComponent methodsFor: 'accessing' !
+selectionIndex
+
+	^selectionIndex! !
+
+! ListComponent methodsFor: 'accessing' !
+selectionIndex: anObject 
+	selectionIndex = anObject ifTrue: [^self].
+	selectionIndex := anObject.
+	self updateSelectionIndex! !
+
+! ListComponent methodsFor: 'accessing' !
+ui
+
+	^ui! !
+
+! ListComponent methodsFor: 'accessing' !
+ui: aWebUI
+
+	ui := aWebUI! !
+
+! ListComponent methodsFor: 'callbacks' !
+changedSelectedItem: aString
+
+	self selectionIndex: (Integer readFrom: aString readStream).
+	self raiseEvent: (ListSelectionEvent new
+		selectionIndex: self selectionIndex;
+		yourself) ! !
+
+! ListComponent methodsFor: 'callbacks' !
+doubleClick
+
+	self raiseEvent: DoubleClickEvent new! !
+
+! ListComponent methodsFor: 'rendering' !
+renderOn: anHTMLBuilder
+
+	| heightString |
+
+	anHTMLBuilder
+		div;
+			id: (self id, 'Div');
+			attributeAt: 'width' put: '100%'.
+
+	self menu isNil ifFalse: [
+		anHTMLBuilder
+			attributeAt: 'oncontextmenu'
+			put: 'simTalkCallback2(''$', self id , ''', ''openMenuX:y:'', event.pageX, event.pageY); return false;'].
+
+	heightString := self height isNil
+		ifTrue: ['100%']
+		ifFalse: [self height].
+
+	anHTMLBuilder
+			startTag: 'select';
+				id: (self id);
+				attributeAt: 'name' put: self id;
+				attributeAt: 'size' put: self listNumberOfRows printString;
+				attributeAt: 'style' put: 'width: 100%; height: ', heightString, '; background-color: rgba(255, 255, 255, 0.0);';
+				attributeAt: 'onchange' put: 'simTalkCallback1(''$', self id , ''', ''changedSelectedItem:'' , event.target.value);';
+				attributeAt: 'ondblclick' put: 'simTalkCallback0(''$', self id , ''', ''doubleClick'');';
+			endTag: 'select';
+		endDiv
+ ! !
+
+! ListComponent methodsFor: 'updating' !
+optionStyleFor: index
+
+	self optionStyles isNil ifTrue: [^''].
+	self optionStyles size >= index ifFalse: [^''].
+	^' style=\"', (self optionStyles at: index), '\"'
+! !
+
+! ListComponent methodsFor: 'updating' !
+selection
+
+	self selectionIndex = 0 ifTrue: [^nil].
+	^self list at: self selectionIndex ! !
+
+! ListComponent methodsFor: 'updating' !
+updateList
+
+	| stream |
+
+	stream := WriteStream on: (ByteString new: 1000).
+
+	self list keysAndValuesDo: [:key :eachElement |
+		stream
+			nextPutAll: '<option value=', key printString, (self optionStyleFor: key), '>';
+			nextPutAll: (self displayBlock isNil ifTrue: [eachElement] ifFalse: [self displayBlock value: eachElement]);
+			nextPutAll: '</option>'].
+
+	self ui setInnerHTMLOf: self id to: stream contents! !
+
+! ListComponent methodsFor: 'updating' !
+updateSelectionIndex
+
+	self ui runJavaScript: 'document.getElementById("', self id, '").selectedIndex = "', (self selectionIndex - 1) printString, '";' ! !
+
+! ListDivComponent methodsFor: 'accessing' !
+list
+
+	^list! !
+
+! ListDivComponent methodsFor: 'accessing' !
+list: anObject
+
+	list = anObject ifTrue: [^self].
+
+	list := anObject.
+	selectionIndex := -1.
+	self
+		updateList;
+		updateSelectionIndex! !
+
+! ListDivComponent methodsFor: 'accessing' !
+listNumberOfRows
+
+	^listNumberOfRows! !
+
+! ListDivComponent methodsFor: 'accessing' !
+listNumberOfRows: anObject 
+
+	listNumberOfRows:= anObject! !
+
+! ListDivComponent methodsFor: 'accessing' !
+optionStyles
+
+	^optionStyles! !
+
+! ListDivComponent methodsFor: 'accessing' !
+optionStyles: anObject 
+
+	optionStyles := anObject! !
+
+! ListDivComponent methodsFor: 'accessing' !
+selection
+
+	selectionIndex = 0 ifTrue: [^nil].
+	^self list at: self selectionIndex! !
+
+! ListDivComponent methodsFor: 'accessing' !
+selectionIndex
+
+	^selectionIndex! !
+
+! ListDivComponent methodsFor: 'accessing' !
+selectionIndex: anObject 
+	selectionIndex = anObject ifTrue: [^self].
+	selectionIndex := anObject.
+	self updateSelectionIndex! !
+
+! ListDivComponent methodsFor: 'accessing' !
+ui
+
+	^ui! !
+
+! ListDivComponent methodsFor: 'accessing' !
+ui: aWebUI
+
+	ui := aWebUI! !
+
+! ListDivComponent methodsFor: 'actions' !
+changedSelectedItem: anObject
+
+	self selectionIndex: (Integer readFrom: anObject readStream).
+	self raiseEvent: (ListSelectionEvent new
+		selectionIndex: self selectionIndex;
+		yourself).
+	self updateList
+! !
+
+! ListDivComponent methodsFor: 'callbacks' !
+doubleClick
+
+	self raiseEvent: DoubleClickEvent new! !
+
+! ListDivComponent methodsFor: 'rendering' !
+renderOn: anHTMLBuilder
+
+	| heightString |
+
+	anHTMLBuilder
+		div;
+			id: (self id, 'Div');
+			attributeAt: 'width' put: '100%';
+			attributeAt: 'style' put: 'border: 1px black solid; overflow-y: auto;';
+			attributeAt: 'padding' put: '5px'.
+
+	self menu isNil ifFalse: [
+		anHTMLBuilder
+			attributeAt: 'oncontextmenu'
+			put: 'simTalkCallback2(''$', self id , ''', ''openMenuX:y:'', event.pageX, event.pageY); return false;'].
+
+	heightString := self height isNil
+		ifTrue: ['100%']
+		ifFalse: [self height].
+
+	anHTMLBuilder
+			startTag: 'div';
+				attributeAt: 'style' put: 'list-style-type: none';
+				id: (self id);
+			endTag: 'dov';
+		endDiv
+ ! !
+
+! ListDivComponent methodsFor: 'updating' !
+optionStyleFor: index
+
+	self optionStyles isNil ifTrue: [^''].
+	self optionStyles size >= index ifFalse: [^''].
+	^' style=\"', (self optionStyles at: index), '\"'
+! !
+
+! ListDivComponent methodsFor: 'updating' !
+updateList
+
+	| htmlBuilder |
+
+	htmlBuilder := HTMLBuilder new.
+
+	htmlBuilder div: [:builder1 |
+		builder1 attributeAt: 'style' put: 'padding: 5px;'.
+		self list keysAndValuesDo: [:key :eachElement |
+			builder1 div: [:builder2 |
+				builder2 id: self id, '-', key printString.
+				key = self selectionIndex ifTrue: [
+					builder2 attributeAt: 'style' put: 'background-color: #C0C0FF;'].
+				builder2 attributeAt: 'onclick' put: 'simTalkCallback1(''$', self id , ''', ''changedSelectedItem:'' , ''', key printString, ''');'.
+				builder2 text: (self displayBlock isNil ifTrue: [eachElement] ifFalse: [self displayBlock value: eachElement])
+				]]].
+
+	self ui setInnerHTMLOf: self id to: (self ui javascriptQuote: htmlBuilder htmlString)! !
+
+! ListDivComponent methodsFor: 'updating' !
+updateSelectionIndex
+
+! !
+
+! PushButtonComponent methodsFor: 'accessing' !
+actionBlock
+
+	^actionBlock ! !
+
+! PushButtonComponent methodsFor: 'accessing' !
+actionBlock: aBlock
+
+	actionBlock := aBlock ! !
+
+! PushButtonComponent methodsFor: 'accessing' !
+label
+
+	^label ! !
+
+! PushButtonComponent methodsFor: 'accessing' !
+label: aString
+
+	label := aString ! !
+
+! PushButtonComponent methodsFor: 'actions' !
+pressAction
+
+	self actionBlock value
+ ! !
+
+! PushButtonComponent methodsFor: 'rendering' !
+renderOn: anHTMLBuilder
+
+	anHTMLBuilder
+		div;
+			id: (self id);
+			attributeAt: 'class' put: 'button';
+			attributeAt: 'tabIndex' put: '2';
+			attributeAt: 'onclick' put: 'simTalkCallback0(''$', self id , ''', ''pressAction'');';
+			attributeAt: 'style' put: 'align-self: center;';
+			text: (self label ifNil: ['']);
+		endDiv
+     ! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+emphasisCollection
+
+	^emphasisCollection! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+emphasisCollection: aCollection
+
+	emphasisCollection := aCollection! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+selectionEnd
+
+	^selectionEnd! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+selectionEnd: aNumber
+
+	selectionEnd := aNumber! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+selectionStart
+
+	^selectionStart! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+selectionStart: aNumber
+
+	selectionStart := aNumber! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+subject
+
+	^subject ifNil: [Doit]! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+subject: anObject
+
+	subject := anObject! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+text
+
+	^text! !
+
+! RichTextEditorComponent methodsFor: 'accessing' !
+text: aString
+
+	text := aString.
+	self
+		clearEmphasis;
+		updateText ! !
+
+! RichTextEditorComponent methodsFor: 'emphasis' !
+addEmphasis: anEmphasisSpan
+
+	self emphasisCollection add: anEmphasisSpan! !
+
+! RichTextEditorComponent methodsFor: 'emphasis' !
+clearEmphasis
+
+	emphasisCollection := OrderedCollection new! !
+
+! RichTextEditorComponent methodsFor: 'initializing' !
+initialize
+
+	super initialize.
+	self
+		text: '';
+		selectionStart: 0;
+		selectionEnd: 0;
+		emphasisCollection: OrderedCollection new
+! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+codeMenu
+
+	^PopupMenuUI new
+		widgetId: self id;
+		addMenuItem: self doItMenuItem;
+		addMenuItem: self printItMenuItem;
+		addMenuItem: self inspectItMenuItem;
+		addMenuItem: self loadMenuItem;
+		addMenuItem: self saveMenuItem;
+		yourself! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+doItMenuItem
+
+	^PopupMenuItem new
+		id: #doIt;
+		name: 'Do It';
+		action: [:args | self doItWith: args];
+		requestedValues: #('selectedString');
+		yourself! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+doItWith: aDictionary
+
+	self ui disableWhile: [SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self subject]! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+inspectItMenuItem
+
+	^PopupMenuItem new
+			id: #inspectIt;
+			name: 'Inspect It';
+			action: [:args | self inspectItWith: args];
+			requestedValues: #('selectedString');
+			yourself! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+inspectItWith: aDictionary
+
+	| object |
+
+	self ui disableWhile: [object := SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self subject].
+
+	object inspect! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+installCodeMenu
+
+	self menu: self codeMenu! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+load: aString
+
+	| workspaceContents fileStream |
+
+	aString isNil ifTrue: [^self].
+	aString asFilename exists ifFalse: [^self message: 'File doesn''t exist'].
+
+	fileStream := aString asFilename readStream.
+	workspaceContents := fileStream upToEnd.
+	fileStream close.
+
+	self
+		clearEmphasis;
+		text: workspaceContents;
+		updateText! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+loadMenuItem
+
+	^PopupMenuItem new
+		id: #load;
+		name: 'Load...';
+		action: [:args | self loadWith: args];
+		requestedValues: #();
+		yourself! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+loadWith: aDictionary
+
+	self request: 'Filename to load?' initialAnswer: 'workspace.ws' answerBlock: [:string | self load: string]! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+printItMenuItem
+
+	^PopupMenuItem new
+		id: #printIt;
+		name: 'Print It';
+		action: [:args | self printItWith: args];
+		requestedValues: #('selectedString' 'selectionStart' 'selectionEnd');
+		yourself! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+printItWith: aDictionary
+
+	| result |
+
+	self ui disableWhile: [result := ' ==> ', (SmalltalkParser evaluate: (aDictionary at: 'selectedString')) printString].
+
+	self write: result inTextArea: self id position: (aDictionary at: 'selectionEnd')! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+save: aString to: filenameString
+
+	| file |
+
+	file := filenameString asFilename writeStream.
+	file nextPutAll: aString.
+	file close
+! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+saveMenuItem
+
+	^PopupMenuItem new
+		id: #save;
+		name: 'Save...';
+		action: [:args | self saveWith: args];
+		requestedValues: #('innerHTML');
+		yourself! !
+
+! RichTextEditorComponent methodsFor: 'menus' !
+saveWith: aDictionary
+
+	self request: 'Filename to save?' initialAnswer: 'workspace.ws' answerBlock: [:string | self save: (aDictionary at: 'value') to: string]! !
+
+! RichTextEditorComponent methodsFor: 'rendering' !
+renderOn: anHTMLBuilder
+
+	| heightString |
+
+	anHTMLBuilder
+		div;
+			id: (self id, 'Div');
+			attributeAt: 'width' put: '100%'.
+
+	self menu isNil ifFalse: [
+		anHTMLBuilder
+			attributeAt: 'oncontextmenu'
+			put: 'simTalkCallback2(''$', self id , ''', ''openMenuX:y:'', event.pageX, event.pageY); return false;'].
+
+	heightString := self height isNil
+		ifTrue: ['100%']
+		ifFalse: [self height].
+
+	anHTMLBuilder
+			startTag: 'div';
+				id: (self id);
+				attributeAt: 'contenteditable' put: 'true';
+				attributeAt: 'name' put: self id;
+				attributeAt: 'width' put: '100%';
+				attributeAt: 'spellcheck' put: 'false';
+				attributeAt: 'style' put: 'border: 1px solid black; padding: 3px;overflow-y: scroll;width: 100%; height: ', heightString,
+					';background-color: transparent; resize: none; white-space:pre; font-family:arial; font-size:14px;line-height:1.4;';
+				attributeAt: 'tabIndex' put: '2'.
+
+			self height isNil
+				ifTrue: [anHTMLBuilder attributeAt: 'height' put: '100%']
+				ifFalse: [anHTMLBuilder attributeAt: 'height' put: self height].
+
+		anHTMLBuilder
+			endTag: 'div';
+		endDiv
+   ! !
+
+! RichTextEditorComponent methodsFor: 'updating' !
+quotedText
+
+	| in out mappings emphasisStream |
+	in := self text readStream.
+	out := WriteStream on: (String new: self text size).
+	mappings := Dictionary new.
+	mappings
+		at: $\ put: '\\';
+		at: Character cr put: '\r\n';
+		at: Character tab put: '\t';
+		at: $< put: '&lt;';
+		at: $> put: '&gt;';
+		at: $& put: '&amp;';
+		at: $" put: '\"';
+		at: $' put: '&apos;'.
+
+	emphasisStream := EmphasisStream on: emphasisCollection.
+
+	[in atEnd] whileFalse: [
+		| character replacement |
+		character := in next.
+
+		emphasisStream writeEmphasisOn: out forIndex: in position.
+
+		replacement := mappings at: character ifAbsent: [nil].
+		replacement isNil
+			ifTrue: [out nextPut: character]
+			ifFalse: [out nextPutAll: replacement]].
+
+	emphasisStream writeEmphasisOn: out forIndex: in position.
+
+	^out contents! !
+
+! RichTextEditorComponent methodsFor: 'updating' !
+setSelectionFrom: startOffset to: endOffset
+
+	self ui runJavaScript: 'setSelectionByAbsoluteOffsets(''', self id , ''',' , startOffset printString, ',' , endOffset printString, ');'.! !
+
+! RichTextEditorComponent methodsFor: 'updating' !
+updateText
+
+	self ui isNil ifTrue: [^self].
+
+	self ui setInnerHTMLOf: self id to: self quotedText! !
+
+! TextComponent methodsFor: 'accessing' !
+text
+
+	^text! !
+
+! TextComponent methodsFor: 'accessing' !
+text: anObject
+
+	text := anObject! !
+
+! TextComponent methodsFor: 'rendering' !
+renderOn: anHTMLBuilder
+
+	anHTMLBuilder text: self text! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+emphasisCollection
+
+	^emphasisCollection! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+emphasisCollection: aCollection
+
+	emphasisCollection := aCollection! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+selectionEnd
+
+	^selectionEnd! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+selectionEnd: aNumber
+
+	selectionEnd := aNumber! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+selectionStart
+
+	^selectionStart! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+selectionStart: aNumber
+
+	selectionStart := aNumber! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+subject
+
+	^subject ifNil: [Doit]! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+subject: anObject
+
+	subject := anObject! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+text
+
+	^text! !
+
+! TextEditorComponent methodsFor: 'accessing' !
+text: aString
+
+	text := aString.
+	self updateText ! !
+
+! TextEditorComponent methodsFor: 'emphasis' !
+addEmphasis: anEmphasisSpan
+
+	self emphasisCollection add: anEmphasisSpan! !
+
+! TextEditorComponent methodsFor: 'emphasis' !
+clearEmphasis
+
+	emphasisCollection := OrderedCollection new! !
+
+! TextEditorComponent methodsFor: 'initializing' !
+initialize
+
+	super initialize.
+	self
+		text: '';
+		selectionStart: 0;
+		selectionEnd: 0;
+		emphasisCollection: OrderedCollection new
+! !
+
+! TextEditorComponent methodsFor: 'menus' !
+codeMenu
+
+	^PopupMenuUI new
+		widgetId: self id;
+		addMenuItem: self doItMenuItem;
+		addMenuItem: self printItMenuItem;
+		addMenuItem: self inspectItMenuItem;
+		addMenuItem: self loadMenuItem;
+		addMenuItem: self saveMenuItem;
+		yourself! !
+
+! TextEditorComponent methodsFor: 'menus' !
+doItMenuItem
+
+	^PopupMenuItem new
+		id: #doIt;
+		name: 'Do It';
+		action: [:args | self doItWith: args];
+		requestedValues: #('selectedString');
+		yourself! !
+
+! TextEditorComponent methodsFor: 'menus' !
+doItWith: aDictionary
+
+	self ui disableWhile: [SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self subject]! !
+
+! TextEditorComponent methodsFor: 'menus' !
+inspectItMenuItem
+
+	^PopupMenuItem new
+			id: #inspectIt;
+			name: 'Inspect It';
+			action: [:args | self inspectItWith: args];
+			requestedValues: #('selectedString');
+			yourself! !
+
+! TextEditorComponent methodsFor: 'menus' !
+inspectItWith: aDictionary
+
+	| object |
+
+	self ui disableWhile: [object := SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self subject].
+
+	object inspect! !
+
+! TextEditorComponent methodsFor: 'menus' !
+installCodeMenu
+
+	self menu: self codeMenu! !
+
+! TextEditorComponent methodsFor: 'menus' !
+load: aString
+
+	| workspaceContents fileStream |
+
+	aString isNil ifTrue: [^self].
+	aString asFilename exists ifFalse: [^self message: 'File doesn''t exist'].
+
+	fileStream := aString asFilename readStream.
+	workspaceContents := fileStream upToEnd.
+	fileStream close.
+
+	self
+		clearEmphasis;
+		text: workspaceContents;
+		updateText! !
+
+! TextEditorComponent methodsFor: 'menus' !
+loadMenuItem
+
+	^PopupMenuItem new
+		id: #load;
+		name: 'Load...';
+		action: [:args | self loadWith: args];
+		requestedValues: #();
+		yourself! !
+
+! TextEditorComponent methodsFor: 'menus' !
+loadWith: aDictionary
+
+	self request: 'Filename to load?' initialAnswer: 'workspace.ws' answerBlock: [:string | self load: string]! !
+
+! TextEditorComponent methodsFor: 'menus' !
+printItMenuItem
+
+	^PopupMenuItem new
+		id: #printIt;
+		name: 'Print It';
+		action: [:args | self printItWith: args];
+		requestedValues: #('selectedString' 'selectionStart' 'selectionEnd');
+		yourself! !
+
+! TextEditorComponent methodsFor: 'menus' !
+printItWith: aDictionary
+
+	| result |
+
+	self ui disableWhile: [result := ' ==> ', (SmalltalkParser evaluate: (aDictionary at: 'selectedString')) printString].
+
+	self write: result inTextArea: self id position: (aDictionary at: 'selectionEnd')! !
+
+! TextEditorComponent methodsFor: 'menus' !
+save: aString to: filenameString
+
+	| file |
+
+	file := filenameString asFilename writeStream.
+	file nextPutAll: aString.
+	file close
+! !
+
+! TextEditorComponent methodsFor: 'menus' !
+saveMenuItem
+
+	^PopupMenuItem new
+		id: #save;
+		name: 'Save...';
+		action: [:args | self saveWith: args];
+		requestedValues: #('value');
+		yourself! !
+
+! TextEditorComponent methodsFor: 'menus' !
+saveWith: aDictionary
+
+	self request: 'Filename to save?' initialAnswer: 'workspace.ws' answerBlock: [:string | self save: (aDictionary at: 'value') to: string]! !
+
+! TextEditorComponent methodsFor: 'rendering' !
+renderOn: anHTMLBuilder
+
+	| heightString |
+
+	anHTMLBuilder
+		div;
+			id: (self id, 'Div');
+			attributeAt: 'width' put: '100%'.
+
+	self menu isNil ifFalse: [
+		anHTMLBuilder
+			attributeAt: 'oncontextmenu'
+			put: 'simTalkCallback2(''$', self id , ''', ''openMenuX:y:'', event.pageX, event.pageY); return false;'].
+
+	heightString := self height isNil
+		ifTrue: ['100%']
+		ifFalse: [self height].
+
+	anHTMLBuilder
+			startTag: 'textarea';
+				id: (self id);
+				attributeAt: 'spellcheck' put: 'false';
+				attributeAt: 'name' put: self id;
+				attributeAt: 'width' put: '100%';
+				attributeAt: 'style' put: 'width: 100%; height: ', heightString, ';background-color: transparent; resize: none;';
+				attributeAt: 'tabIndex' put: '2'.
+
+			self height isNil
+				ifTrue: [anHTMLBuilder attributeAt: 'height' put: '100%']
+				ifFalse: [anHTMLBuilder attributeAt: 'height' put: self height].
+
+		anHTMLBuilder
+			endTag: 'textarea';
+		endDiv
+   ! !
+
+! TextEditorComponent methodsFor: 'updating' !
+updateText
+
+	self ui isNil ifTrue: [^self].
+	self ui setAttribute: 'value' of: self id to: (self ui javascriptQuote: self text withEmphasis: self emphasisCollection) ! !
+
+! UIOperation methodsFor: 'accessing' !
+arguments
+
+	^arguments! !
+
+! UIOperation methodsFor: 'accessing' !
+arguments: anObject
+
+	arguments := anObject! !
+
+! UIOperation methodsFor: 'accessing' !
+name
+
+	^name! !
+
+! UIOperation methodsFor: 'accessing' !
+name: anObject
+
+	name := anObject! !
+
+! UIScreen methodsFor: 'accessing' !
+addComponent: aComponent
+
+	aComponent
+		name: self nextComponentName;
+		screen: self.
+	self components add: aComponent.
+	self addedComponents add: aComponent.
+	self modifiedComponents add: aComponent.
+	! !
+
+! UIScreen methodsFor: 'accessing' !
+addedCommands
+	^self addedComponents collect: [:each |
+		each addedCommand]
+! !
+
+! UIScreen methodsFor: 'accessing' !
+addedComponents
+
+	^addedComponents! !
+
+! UIScreen methodsFor: 'accessing' !
+addedComponents: anObject
+
+	addedComponents := anObject! !
+
+! UIScreen methodsFor: 'accessing' !
+componentNumber
+	^componentNumber
+! !
+
+! UIScreen methodsFor: 'accessing' !
+componentNumber: aNumber
+	componentNumber := aNumber
+! !
+
+! UIScreen methodsFor: 'accessing' !
+components
+
+	^components! !
+
+! UIScreen methodsFor: 'accessing' !
+components: anObject
+
+	components := anObject! !
+
+! UIScreen methodsFor: 'accessing' !
+deletedCommands
+	^self deletedComponents collect: [:each |
+		each deletedCommand]
+! !
+
+! UIScreen methodsFor: 'accessing' !
+deletedComponents
+
+	^deletedComponents! !
+
+! UIScreen methodsFor: 'accessing' !
+deletedComponents: anObject
+
+	deletedComponents := anObject! !
+
+! UIScreen methodsFor: 'accessing' !
+modifiedCommands
+	^self modifiedComponents collect: [:each |
+		each updateCommand]
+! !
+
+! UIScreen methodsFor: 'accessing' !
+modifiedComponents
+
+	^modifiedComponents! !
+
+! UIScreen methodsFor: 'accessing' !
+modifiedComponents: anObject
+
+	modifiedComponents := anObject! !
+
+! UIScreen methodsFor: 'accessing' !
+nextComponentName
+
+	self componentNumber: self componentNumber + 1.
+	^'c-', self componentNumber printString
+! !
+
+! UIScreen methodsFor: 'accessing' !
+webSocket
+	^webSocket
+! !
+
+! UIScreen methodsFor: 'accessing' !
+webSocket: aWebSocket
+	webSocket := aWebSocket
+! !
+
+! UIScreen methodsFor: 'adding and removing' !
+removeComponent: aComponent
+
+	self components remove: aComponent! !
+
+! UIScreen methodsFor: 'initialize-release' !
+initialize
+
+	self
+		components: OrderedCollection new;
+		componentNumber: 0;
+		reset
+! !
+
+! UIScreen methodsFor: 'initialize-release' !
+reset
+	self
+		addedComponents: OrderedCollection new;
+		deletedComponents: OrderedCollection new;
+		modifiedComponents: OrderedCollection new
+! !
+
+! UIScreen methodsFor: 'rendering' !
+refreshCommands
+	^self addedCommands copy
+		addAll: self modifiedCommands;
+		addAll: self deletedCommands;
+		add: #('render' #());
+		yourself
+! !
+
+! UIScreen methodsFor: 'rendering' !
+renderChanges
+
+	| stream |
+	stream := WriteStream on: (String new: 100).
+
+	stream nextPut: $~.
+	self renderChangesOn: stream.
+	webSocket send: stream contents! !
+
+! UIScreen methodsFor: 'rendering' !
+renderChangesOn: aStream
+
+	self refreshCommands jsonOn: aStream.
+	self reset! !
+
+! UIScreen class methodsFor: 'instance creation' !
+new
+
+	^super new initialize! !
+
+! ValueHolder methodsFor: 'accessing' !
+value
+
+	^value! !
+
+! ValueHolder methodsFor: 'accessing' !
+value: anObject 
+	value := anObject.
+	self changed! !
+
+! ValueHolder class methodsFor: 'instance creation' !
+value: anObject
+
+	^self new
+		value: anObject;
+		yourself! !
+
+! WebSession methodsFor: 'accessing' !
+applications
+
+	^applications! !
+
+! WebSession methodsFor: 'accessing' !
+applications: anObject
+
+	applications := anObject! !
+
+! WebSession methodsFor: 'accessing' !
+currentOpenLocation
+
+	^currentOpenLocation! !
+
+! WebSession methodsFor: 'accessing' !
+currentOpenLocation: aPoint
+
+	currentOpenLocation := aPoint! !
+
+! WebSession methodsFor: 'accessing' !
+sessionVariables
+
+	^sessionVariables! !
+
+! WebSession methodsFor: 'accessing' !
+sessionVariables: anObject
+
+	sessionVariables := anObject! !
+
+! WebSession methodsFor: 'applications' !
+closeAllApplications
+
+	self applications do: [:each | each close]! !
+
+! WebSession methodsFor: 'applications' !
+openWindowIDs
+
+	^(BeagleSystem runJavaScriptWithReturn: 'Array.from(document.getElementById(''simTalkRootSection'').children).map(child => child.id)')
+		splitBy: $,! !
+
+! WebSession methodsFor: 'initialize-release' !
+initialize
+
+	sessionVariables := Dictionary new.
+	applications := OrderedCollection new.
+	random := Random new.
+	currentOpenLocation := 100 @ 100.! !
+
+! WebSession methodsFor: 'opening and closing' !
+closeAllWindows
+
+	self applications do: [:each |
+		[each close]
+			on: Error
+			do: [:ex | ex return]].
+	self applications copy do: [:each | self applications remove: each].
+	self clearSessionVariables
+! !
+
+! WebSession methodsFor: 'opening and closing' !
+closeApplication: anApplication
+	self applications remove: anApplication.
+	self sessionVariables removeKey: anApplication appName! !
+
+! WebSession methodsFor: 'opening and closing' !
+openApplication: anApplication
+
+	self applications add: anApplication.
+	self sessionVariableAt: anApplication appName put: anApplication.
+! !
+
+! WebSession methodsFor: 'opening locations' !
+nextOpenLocation
+
+	self currentOpenLocation y > 200 ifTrue: [
+		self currentOpenLocation x > 200 ifTrue: [
+			self currentOpenLocation: 100 @ 100.
+			^self currentOpenLocation].
+
+		self currentOpenLocation: (self currentOpenLocation x + self openingLocationIncrement) @ 100.
+		^self currentOpenLocation].
+
+	self currentOpenLocation: (self currentOpenLocation x + self openingLocationIncrement) @ (self currentOpenLocation y + self openingLocationIncrement).
+	^self currentOpenLocation! !
+
+! WebSession methodsFor: 'opening locations' !
+openingLocationIncrement
+
+	^25! !
+
+! WebSession methodsFor: 'session variables' !
+clearSessionVariables
+
+	self sessionVariables: Dictionary new! !
+
+! WebSession methodsFor: 'session variables' !
+newVariableName
+
+	| stream variableName |
+
+	[
+		stream := WriteStream on: (String new: 10).
+		8 timesRepeat: [
+			| value |
+			value := (random next * 52) truncated + 1.
+			stream nextPut: ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ' at: value)
+			].
+		variableName := stream contents.
+		sessionVariables includesKey: variableName] whileTrue.
+
+	^variableName! !
+
+! WebSession methodsFor: 'session variables' !
+removeSessionVariableAt: aString
+
+	^sessionVariables removeKey: aString ifAbsent: []! !
+
+! WebSession methodsFor: 'session variables' !
+sessionVariableAt: aString
+
+	^sessionVariables at: aString ifAbsentPut: [SessionVariable new]! !
+
+! WebSession methodsFor: 'session variables' !
+sessionVariableAt: aString put: anObject
+
+	^(self sessionVariableAt: aString) value: anObject! !
+
+! WebSession class methodsFor: 'applications' !
+closeAllApplications
+
+	self current closeAllApplications; clearSessionVariables! !
+
+! WebSession class methodsFor: 'instance creation' !
+current
+
+	^current ifNil: [current := self new]! !
+
+! WebSession class methodsFor: 'instance creation' !
+new
+
+	^super new initialize! !
+
+! WebUI methodsFor: 'DOM access' !
+addHTMLAfterBeginOf: widgetName to: aString
+
+	| html |
+
+	html := 'document.getElementById("', widgetName, '").insertAdjacentHTML("afterbegin",`', (self replaceAppNameIn: aString), '`);'.
+
+	self runJavaScript: html! !
+
+! WebUI methodsFor: 'DOM access' !
+addHTMLAfterEndOf: widgetName to: aString
+
+	| html |
+
+	html := 'document.getElementById("', widgetName, '").insertAdjacentHTML("afterend",`', (self replaceAppNameIn: aString), '`);'.
+
+	self runJavaScript: html! !
+
+! WebUI methodsFor: 'DOM access' !
+addHTMLBeforeBeginOf: widgetName to: aString
+
+	| html |
+
+	html := 'document.getElementById("', widgetName, '").insertAdjacentHTML("beforebegin",`', (self replaceAppNameIn: aString), '`);'.
+
+	self runJavaScript: html! !
+
+! WebUI methodsFor: 'DOM access' !
+addHTMLBeforeEndOf: widgetName to: aString
+
+	| html |
+
+	html := 'document.getElementById("', widgetName, '").insertAdjacentHTML("beforeend",`', (self replaceAppNameIn: aString), '`);'.
+
+	self runJavaScript: html! !
+
+! WebUI methodsFor: 'DOM access' !
+addToInnerHTML: aString
+
+	self runJavaScript: 'document.getElementById("', self rootName, '").insertAdjacentHTML("beforeend",`', aString, '`);'! !
+
+! WebUI methodsFor: 'DOM access' !
+bringToTop
+
+	| html |
+
+	html := 'document.getElementById("simTalkRootSection").appendChild(document.getElementById("', self appName, '"));'.
+
+	self runJavaScript: html! !
+
+! WebUI methodsFor: 'DOM access' !
+changeClassOf: aString from: oldClassString to: newClassString
+
+
+	self runJavaScript: 'const element = document.getElementById("', aString, '");
+element.classList.remove("', oldClassString, '");
+element.classList.add("', newClassString, '");'! !
+
+! WebUI methodsFor: 'DOM access' !
+removeElement: aString
+
+	self runJavaScript: 'document.getElementById("', aString, '").remove();' ! !
+
+! WebUI methodsFor: 'DOM access' !
+replaceHTMLFor: widgetName with: aString
+
+	| html |
+
+	html := 'document.getElementById("', widgetName, '").innerHTML = ', (self replaceAppNameIn: aString), '`);'.
+
+	self runJavaScript: html! !
+
+! WebUI methodsFor: 'DOM access' !
+rootName
+
+	^'simTalkRootSection'! !
+
+! WebUI methodsFor: 'DOM access' !
+setAttribute: attributeName of: aString to: value
+
+	| command valueString |
+	value isString
+		ifTrue: [valueString := '"', value, '"']
+		ifFalse: [valueString := value printString].
+
+	command := 'document.getElementById("', aString, '").', attributeName , ' = ' , valueString, ';'.
+	self runJavaScript: command! !
+
+! WebUI methodsFor: 'DOM access' !
+setInnerHTML: aString
+
+	^'document.getElementById("', parentName, '").innerHTML = `', aString, '`;'! !
+
+! WebUI methodsFor: 'DOM access' !
+setInnerHTMLOf: aString to: htmlString
+
+	self runJavaScript: 'document.getElementById("', aString, '").innerHTML="', htmlString, '";'.! !
+
+! WebUI methodsFor: 'accessing' !
+appName
+
+	^appName! !
+
+! WebUI methodsFor: 'accessing' !
+appName: anObject
+
+	appName := anObject! !
+
+! WebUI methodsFor: 'accessing' !
+bindings
+
+	^bindings! !
+
+! WebUI methodsFor: 'accessing' !
+bindings: anObject
+
+	bindings := anObject! !
+
+! WebUI methodsFor: 'accessing' !
+bounds: aRectangle
+
+	bounds := aRectangle.
+	origin := aRectangle origin.
+	aRectangle corner isNil
+		ifTrue: [extent := nil]
+		ifFalse: [extent := aRectangle extent]! !
+
+! WebUI methodsFor: 'accessing' !
+extent
+
+	^extent! !
+
+! WebUI methodsFor: 'accessing' !
+extent: aPoint
+
+	extent := aPoint! !
+
+! WebUI methodsFor: 'accessing' !
+flags
+
+	^flags! !
+
+! WebUI methodsFor: 'accessing' !
+flags: aSet
+
+	flags := aSet! !
+
+! WebUI methodsFor: 'accessing' !
+htmlTree
+
+	^htmlTree! !
+
+! WebUI methodsFor: 'accessing' !
+htmlTree: anObject
+
+	htmlTree := anObject! !
+
+! WebUI methodsFor: 'accessing' !
+opened
+
+	^opened! !
+
+! WebUI methodsFor: 'accessing' !
+opened: aBoolean
+
+	opened := aBoolean! !
+
+! WebUI methodsFor: 'accessing' !
+origin
+
+	^origin! !
+
+! WebUI methodsFor: 'accessing' !
+origin: aPoint
+
+	origin := aPoint! !
+
+! WebUI methodsFor: 'accessing' !
+parentName
+	^parentName! !
+
+! WebUI methodsFor: 'accessing' !
+parentName: aString
+	parentName := aString! !
+
+! WebUI methodsFor: 'bindings' !
+bindingAt: bindingName
+
+	^self bindingAt: bindingName ifAbsentPut: [ValueHolder new]! !
+
+! WebUI methodsFor: 'bindings' !
+bindingAt: bindingName ifAbsentPut: aBlock
+
+	^self bindings at: bindingName ifAbsentPut: aBlock! !
+
+! WebUI methodsFor: 'bindings' !
+runJavaScript: aString
+
+	updateStream
+		ifNil: [BeagleSystem runJavaScript: aString]
+		ifNotNil: [updateStream nextPutAll: aString]! !
+
+! WebUI methodsFor: 'bindings' !
+updateIndexedTableTo: value
+
+	| stream columnSpecs |
+
+	stream := WriteStream on: (ByteString new: 1000).
+	columnSpecs := self widgetSpec at: 6.
+
+	value do: [:eachRow |
+		stream nextPutAll: '<tr>'.
+		columnSpecs do: [:eachSpec |
+			stream
+				nextPutAll: '<td>';
+				nextPutAll: (self convertValueToString: (eachRow at: (eachSpec at: 2)) type: (eachSpec at: 3));
+				nextPutAll: '</td>'].
+		stream nextPutAll: '</tr>'.
+		].
+
+	self setInnerHTMLOf: self name to: stream contents! !
+
+! WebUI methodsFor: 'bindings' !
+updateRadioButtonField: aspectSpec to: value
+
+	self
+		setAttribute: #checked
+		of: (aspectSpec at: 3)
+		to: (value = (aspectSpec at: 5) ifTrue: [true] ifFalse: [false])! !
+
+! WebUI methodsFor: 'bindings' !
+withinWebUpdateDo: aBlock
+	| javaScriptString |
+
+	updateStream := WriteStream on: (String new: 1000).
+	[
+		aBlock value.
+		javaScriptString := updateStream contents.
+		updateStream := nil.
+		self runJavaScript: javaScriptString]
+	ensure: [updateStream := nil]
+! !
+
+! WebUI methodsFor: 'building' !
+addComponent: aComponent beforeEndOf: parentName
+
+	self addHTMLBeforeEndOf: parentName to: aComponent htmlString! !
+
+! WebUI methodsFor: 'building' !
+postBuild! !
+
+! WebUI methodsFor: 'building' !
+postOpen
+! !
+
+! WebUI methodsFor: 'changing' !
+htmlQuote: aString withEmphasis: aCollectionOfEmphasisSpan
+
+	| in out mappings |
+	in := aString readStream.
+	out := WriteStream on: (String new: aString size).
+	mappings := Dictionary new.
+	mappings
+		at: $\ put: '\\';
+		at: Character cr put: '\r\n';
+		at: Character tab put: '\t';
+		at: $" put: '\"'.
+
+	[in atEnd] whileFalse: [
+		| character replacement |
+		character := in next.
+
+		aCollectionOfEmphasisSpan do: [:each | each emphasizeForPosition: in position to: out].
+
+		replacement := mappings at: character ifAbsent: [nil].
+		replacement isNil
+			ifTrue: [out nextPut: character]
+			ifFalse: [out nextPutAll: replacement]].
+
+	aCollectionOfEmphasisSpan do: [:each | each emphasizeForPosition: in position + 1 to: out].
+
+	^out contents! !
+
+! WebUI methodsFor: 'changing' !
+javascriptQuote: aString
+
+	| in out mappings |
+	in := aString readStream.
+	out := WriteStream on: (String new: aString size).
+	mappings := Dictionary new.
+	mappings
+		at: $\ put: '\\';
+		at: Character cr put: '\n';
+		at: Character lf put: '\n';
+		at: $" put: '\"'.
+
+	[in atEnd] whileFalse: [
+		| character replacement |
+		character := in next.
+		replacement := mappings at: character ifAbsent: [nil].
+		replacement isNil
+			ifTrue: [out nextPut: character]
+			ifFalse: [out nextPutAll: replacement]].
+
+	^out contents! !
+
+! WebUI methodsFor: 'changing' !
+javascriptQuote: aString withEmphasis: aCollectionOfEmphasisSpan
+
+	| in out mappings |
+	in := aString readStream.
+	out := WriteStream on: (String new: aString size).
+	mappings := Dictionary new.
+	mappings
+		at: $\ put: '\\';
+		at: Character cr put: '\n';
+		at: Character lf put: '\n';
+		at: $" put: '\"'.
+
+	[in atEnd] whileFalse: [
+		| character replacement |
+		character := in next.
+
+		aCollectionOfEmphasisSpan do: [:each | each emphasizeForPosition: in position to: out].
+
+		replacement := mappings at: character ifAbsent: [nil].
+		replacement isNil
+			ifTrue: [out nextPut: character]
+			ifFalse: [out nextPutAll: replacement]].
+
+	aCollectionOfEmphasisSpan do: [:each | each emphasizeForPosition: in position + 1 to: out].
+
+	^out contents! !
+
+! WebUI methodsFor: 'closing' !
+close
+	WebSession current closeApplication: self.
+	self bindings keys do: [:key | (bindings at: key) unbind].
+
+	self runJavaScript: 'document.getElementById("', self appName, '").remove();'! !
+
+! WebUI methodsFor: 'components' !
+bindComponent: aComponent
+
+	aComponent id isNil ifTrue: [aComponent id: (self idFor: WebSession current newVariableName)].
+	aComponent ui: self.
+	WebSession current sessionVariableAt: aComponent id put: aComponent ! !
+
+! WebUI methodsFor: 'components' !
+listComponentNamed: aSymbol menu: aMenu
+
+	^self bindingAt: aSymbol ifAbsentPut: [
+		ListComponent new
+			bindTo: self as: aSymbol;
+			listNumberOfRows: 10;
+			menu: aMenu;
+			yourself] ! !
+
+! WebUI methodsFor: 'components' !
+textEditorComponentNamed: aSymbol menu: aMenu
+
+	^self bindingAt: aSymbol ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self as: aSymbol;
+			menu: aMenu;
+			yourself] ! !
+
+! WebUI methodsFor: 'initialize-release' !
+initialize
+
+	parentName := 'simTalkRootSection'.
+	self
+		appName: WebSession current newVariableName;
+		bindings: Dictionary new;
+		flags: Set new;
+		origin: self defaultWindowOrigin;
+		extent: self defaultWindowExtent;
+		opened: false! !
+
+! WebUI methodsFor: 'opening' !
+appDivOn: anHTMLBuilder
+
+	anHTMLBuilder div: [:builder |
+		builder attributeAt: 'id' put: self appName.
+		self
+			enableDisableDivOn: builder;
+			resizeDivOn: builder]! !
+
+! WebUI methodsFor: 'opening' !
+bottomRightResizeDiv
+
+	^HTMLBuilder new
+		div: [:builder |
+			builder
+				attributeAt: 'id' put: (self idFor: 'windowDrag');
+				attributeAt: 'style' put: 'position: absolute; top: 0; bottom: 0; width: 3000px; height: 2000px; background-color: transparent;';
+				attributeAt: 'onmousemove' put: self bottomRightResizeMouseMoveCallbackString;
+				attributeAt: 'onmouseup' put: self bottomRightResizeMouseUpCallbackString];
+		htmlString! !
+
+! WebUI methodsFor: 'opening' !
+bottomRightResizeMouseMoveCallbackString
+
+	| stream |
+
+	stream := WriteStream on: (String new: 40).
+	stream
+		nextPutAll: 'requestedFieldsCallback(''$', self appName, ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''resizeBottomRightWindow:'', [''pageX'', ''pageY''], event);'.
+
+	^stream contents! !
+
+! WebUI methodsFor: 'opening' !
+bottomRightResizeMouseUpCallbackString
+
+	| stream |
+
+	stream := WriteStream on: (String new: 40).
+	stream
+		nextPutAll: 'requestedFieldsCallback(''$', self appName, ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''stopDrag:'', [''pageX'', ''pageY''], event);'.
+
+	^stream contents! !
+
+! WebUI methodsFor: 'opening' !
+bringToTop: aDictionary
+
+	self bringToTop.
+	dragPoint := (aDictionary at: 'pageX') @ (aDictionary at: 'pageY') - self origin.
+	self addHTMLBeforeEndOf: self rootName to: self dragDiv! !
+
+! WebUI methodsFor: 'opening' !
+closeButtonDivOn: anHTMLBuilder
+
+	anHTMLBuilder div: [:builder |
+		builder
+			attributeAt: 'id' put: (self idFor: 'closeButton');
+			"attributeAt: 'class' put: 'toolbarButton';"
+			attributeAt: 'style' put: 'margin-left: auto;';
+			attributeAt: 'onclick' put: 'simTalkCallback0(''$', self appName,''', ''close''); event.stopPropagation();';
+			inTag: 'img' do: [:builder2 |
+				builder2
+					attributeAt: 'src' put: 'closeButton.png';
+					attributeAt: 'width' put: '30';
+					attributeAt: 'height' put: '30'
+				]]
+! !
+
+! WebUI methodsFor: 'opening' !
+defaultWindowExtent
+
+	^nil! !
+
+! WebUI methodsFor: 'opening' !
+defaultWindowOrigin
+
+	^WebSession current nextOpenLocation! !
+
+! WebUI methodsFor: 'opening' !
+dragBarDivOn: anHTMLBuilder
+
+	anHTMLBuilder div: [:builder |
+		builder
+			attributeAt: 'id' put: (self idFor: 'dragbar');
+			attributeAt: 'style' put: 'background-color: #0000C0; color: white; width: 100%; font-family: sans-serif; font-weight: bold; padding: 8px;';
+			attributeAt: 'onmousedown' put: self titleClickCallbackString;
+			text: self title]! !
+
+! WebUI methodsFor: 'opening' !
+dragDiv
+
+	^HTMLBuilder new
+		div: [:builder |
+			builder
+				attributeAt: 'id' put: (self idFor: 'windowDrag');
+				attributeAt: 'style' put: 'position: absolute; top: 0; bottom: 0; width: 3000px; height: 2000px; background-color: transparent;';
+				attributeAt: 'onmousemove' put: self mouseMoveCallbackString;
+				attributeAt: 'onmouseup' put: self mouseUpCallbackString];
+		htmlString! !
+
+! WebUI methodsFor: 'opening' !
+dragWindow: aDictionary
+
+	| offset |
+
+	dragPoint isNil ifTrue: [^self].
+
+	offset := (aDictionary at: 'pageX') @ (aDictionary at: 'pageY') - (self origin + dragPoint).
+	self origin: origin + offset.
+	self setAbsoluteWindowBounds! !
+
+! WebUI methodsFor: 'opening' !
+enableDisableDivOn: anHTMLBuilder
+
+	anHTMLBuilder div: [:builder |
+		builder
+			attributeAt: 'id' put: (self idFor: 'enableDisable');
+			attributeAt: 'style' put: 'background-color: white;'.
+
+		self titleBarDivOn: builder]
+! !
+
+! WebUI methodsFor: 'opening' !
+fixedOffset
+
+	^5 @ -40! !
+
+! WebUI methodsFor: 'opening' !
+html
+
+	| builder |
+
+	builder := HTMLBuilder new.
+	self appDivOn: builder.
+	^builder htmlString! !
+
+! WebUI methodsFor: 'opening' !
+htmlForSpec: specName
+
+	self log: 'htmlForSpec: ', specName.
+	^(self class perform: specName asSymbol)
+		copyReplaceAll: '$appName$' with: self appName! !
+
+! WebUI methodsFor: 'opening' !
+mouseMoveCallbackString
+
+	| stream |
+
+	stream := WriteStream on: (String new: 40).
+	stream
+		nextPutAll: 'requestedFieldsCallback(''$', self appName, ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''dragWindow:'', [''pageX'', ''pageY''], event);'.
+
+	^stream contents! !
+
+! WebUI methodsFor: 'opening' !
+mouseUpCallbackString
+
+	| stream |
+
+	stream := WriteStream on: (String new: 40).
+	stream
+		nextPutAll: 'requestedFieldsCallback(''$', self appName, ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''stopDrag:'', [''pageX'', ''pageY''], event);'.
+
+	^stream contents! !
+
+! WebUI methodsFor: 'opening' !
+open
+
+	WebSession current openApplication: self.
+
+	self postBuild.
+	self addToInnerHTML: self html.
+
+	self postOpen.
+
+	self opened: true! !
+
+! WebUI methodsFor: 'opening' !
+open: specName
+
+	WebSession current openApplication: self.
+	self postBuild.
+	self addToInnerHTML: (self htmlForSpec: specName).
+
+	self postOpen! !
+
+! WebUI methodsFor: 'opening' !
+replaceAppNameIn: aString
+
+	^aString copyReplaceAll: '$appName$' with: self appName! !
+
+! WebUI methodsFor: 'opening' !
+resizeBottomRight: aDictionary
+
+	dragPoint := (aDictionary at: 'pageX') @ (aDictionary at: 'pageY') - self origin.
+	self addHTMLBeforeEndOf: self rootName to: self bottomRightResizeDiv! !
+
+! WebUI methodsFor: 'opening' !
+resizeBottomRightCallback
+
+	| stream |
+
+	stream := WriteStream on: (String new: 40).
+	stream
+		nextPutAll: 'requestedFieldsCallback(''$', self appName, ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''resizeBottomRight:'', [''pageX'', ''pageY''], event);'.
+
+	^stream contents! !
+
+! WebUI methodsFor: 'opening' !
+resizeBottomRightWindow: aDictionary
+
+	| offset oldDragPoint |
+
+	dragPoint isNil ifTrue: [^self].
+
+	offset := (aDictionary at: 'pageX') @ (aDictionary at: 'pageY') - self origin.
+
+	self extent: offset + self fixedOffset.
+	self setAbsoluteWindowBounds.
+	self windowResized! !
+
+! WebUI methodsFor: 'opening' !
+resizeDivOn: anHTMLBuilder
+
+	anHTMLBuilder div: [:builder |
+		builder
+			attributeAt: 'id' put: (self idFor: 'resize');
+			attributeAt: 'style' put: 'display: grid; grid-template-columns: 1fr 8px; background-color: transparent; width: 100%; height: 8px;';
+			div: [:builder2 | builder2 attributeAt: 'style' put: 'background-color: transparent;'];
+			div: [:builder2 | builder2
+				attributeAt: 'style' put: 'background-color: black;';
+				attributeAt: 'onmousedown' put: self resizeBottomRightCallback]]! !
+
+! WebUI methodsFor: 'opening' !
+setAbsoluteWindowBounds
+
+	self extent isNil
+		ifTrue: [
+			self
+			setAttribute: 'style'
+			of: self appName
+			to: 'position: absolute; top: ', self origin  y printString, 'px; left: ', self origin x printString, 'px;']
+		ifFalse: [
+			self
+			setAttribute: 'style'
+			of: self appName
+			to: 'position: absolute; top: ', self origin y printString, 'px; left: ', origin x printString, 'px; width: ', self extent x printString, 'px; height: ', self extent y printString,'px;']! !
+
+! WebUI methodsFor: 'opening' !
+stopDrag: aDictionary
+
+	dragPoint := nil.
+	self removeElement: (self idFor: 'windowDrag')! !
+
+! WebUI methodsFor: 'opening' !
+title
+
+	^'Sample title'! !
+
+! WebUI methodsFor: 'opening' !
+titleBarDivOn: anHTMLBuilder
+
+	anHTMLBuilder div: [:builder |
+		builder
+			attributeAt: 'id' put: (self idFor: 'titlebar');
+			attributeAt: 'style' put: 'display: grid; grid-template-columns: 1fr auto; background-color: #0000C0; border: 1px solid black;'.
+
+		self
+			dragBarDivOn: builder;
+			closeButtonDivOn: builder]
+! !
+
+! WebUI methodsFor: 'opening' !
+titleClickCallbackString
+
+	| stream |
+
+	stream := WriteStream on: (String new: 40).
+	stream
+		nextPutAll: 'requestedFieldsCallback(''$', self appName, ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''';
+		nextPutAll: self appName;
+		nextPutAll: ''', ''bringToTop:'', [''pageX'', ''pageY''], event);'.
+
+	^stream contents! !
+
+! WebUI methodsFor: 'opening' !
+titleDivOn: anHTMLBuilder
+
+	anHTMLBuilder div: [:builder |
+		builder
+			attributeAt: 'id' put: (self idFor: 'Title');
+			"attributeAt: 'class' put: 'title';"
+			text: self title]! !
+
+! WebUI methodsFor: 'opening' !
+windowResized! !
+
+! WebUI methodsFor: 'testing' !
+disable
+
+	self flags add: #disabled.
+	self
+		setAttribute: 'style'
+		of: (self idFor: 'enableDisable')
+		to: 'background-color: #c0c0c0; color: #808080; pointer-events: none;'! !
+
+! WebUI methodsFor: 'testing' !
+disableWhile: aBlock
+
+	self disable.
+	aBlock ensure: [self enable]
+! !
+
+! WebUI methodsFor: 'testing' !
+enable
+
+	self flags remove: #disabled ifAbsent: [].
+	self setAttribute: 'style' of: (self idFor: 'enableDisable') to: 'background-color: white;'! !
+
+! WebUI methodsFor: 'testing' !
+isDisabled
+
+	^self flags includes: #disabled! !
+
+! WebUI methodsFor: 'testing' !
+isEnabled
+
+	^self isDisabled not! !
+
+! WebUI methodsFor: 'testing' !
+isUI
+
+	^true! !
+
+! WebUI methodsFor: 'uncategorized' !
+widgetContentType
+
+	self widgetSpec size >= 4 ifFalse: [^nil].
+
+	^self widgetSpec at: 4! !
+
+! WebUI methodsFor: 'uncategorized' !
+write: aString inRichTextArea: idString position: aNumber
+
+	self runJavaScript: 'insertRichText("' , idString, '", "', (self javascriptQuote: aString), '",',  aNumber printString, ');'! !
+
+! WebUI methodsFor: 'uncategorized' !
+write: aString inTextArea: idString position: aNumber
+
+	self runJavaScript: 'insertText("' , idString, '", "', (self javascriptQuote: aString), '",',  aNumber printString, ');'! !
+
+! WebUI methodsFor: 'utility' !
+errorMessage: aString
+
+	MessageBox errorMessage: aString! !
+
+! WebUI methodsFor: 'utility' !
+idFor: aString
+
+	^self appName, '-', aString! !
+
+! WebUI methodsFor: 'utility' !
+infoMessage: aString
+
+	MessageBox infoMessage: aString! !
+
+! WebUI methodsFor: 'utility' !
+message: aString
+
+	MessageBox message: aString! !
+
+! WebUI methodsFor: 'utility' !
+message: aString choices: choicesList blocks: blocksList
+
+	self disable.
+	MultipleChoiceBox
+		message: aString choices: choicesList blocks: (blocksList collect: [:each | [each value. self enable]])! !
+
+! WebUI methodsFor: 'utility' !
+message: aString okBlock: okBlock cancelBlock: cancelBlock
+
+	self disable.
+	MultipleChoiceBox
+		message: aString okBlock: [okBlock value. self enable] cancelBlock: [cancelBlock value. self enable]! !
+
+! WebUI methodsFor: 'utility' !
+message: aString yesBlock: yesBlock noBlock: noBlock
+
+	self disable.
+	MultipleChoiceBox
+		message: aString yesBlock: [yesBlock value. self enable] noBlock: [noBlock value. self enable]! !
+
+! WebUI methodsFor: 'utility' !
+request: aString initialAnswer: initialAnswer answerBlock: answerBlock
+
+	self disable.
+	RequestBox
+		request: aString initialAnswer: initialAnswer answerBlock: [:answer | answerBlock value: answer. self enable]! !
+
+! WebUI methodsFor: 'utility' !
+request: aString initialAnswer: initialAnswer answerBlock: answerBlock at: aPoint
+
+	self disable.
+	RequestBox
+		request: aString initialAnswer: initialAnswer answerBlock: [:answer | answerBlock value: answer. self enable] at: aPoint! !
+
+! WebUI methodsFor: 'utility' !
+warningMessage: aString
+
+	MessageBox warningMessage: aString! !
+
+! WebUI class methodsFor: 'instance creation' !
+allAspects
+
+	^#()! !
+
+! WebUI class methodsFor: 'instance creation' !
+new
+
+	^super new initialize! !
+
+! WebUI class methodsFor: 'opening' !
+open
+
+	^self new open! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+answerBlock
+
+	^answerBlock ! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+answerBlock: aCollection
+
+	answerBlock := aCollection ! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+choices
+
+	^choices ! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+choices: aCollection
+
+	choices := aCollection ! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+message
+
+	^message ! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+message: aString
+
+	message := aString ! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+values
+
+	^values ! !
+
+! ListChoiceBox methodsFor: 'accessing' !
+values: aCollection
+
+	values := aCollection ! !
+
+! ListChoiceBox methodsFor: 'updating' !
+doCancel
+
+	self close
+ ! !
+
+! ListChoiceBox methodsFor: 'updating' !
+doOk: anIntegerString
+
+	| index |
+
+	index := Integer readFrom: anIntegerString readStream.
+
+	self close.
+
+	(index >= 0 and: [self answerBlock notNil])
+		ifTrue: [self answerBlock value: (self values at: index + 1)].
+
+ ! !
+
+! ListChoiceBox methodsFor: 'updating' !
+listChoiceBoxHTML
+
+	| htmlStream |
+
+	htmlStream := WriteStream on: (String new: 100).
+	htmlStream
+		nextPutAll: '<div>', self message, '</div>';
+		nextPutAll: '<div id="$appName$-listdiv">';
+		nextPutAll: '<select id=''$appName$-list'' size=12;>'.
+
+	choices keysAndValuesDo: [:key :choice |
+		htmlStream nextPutAll: '<option>', choice, '</option>'].
+
+	htmlStream
+		nextPutAll: '</select>';
+		nextPutAll: '<div style="display: flex;">';
+		nextPutAll: '<div style="border: 1px solid black; padding: 5px; margin: 2px;" onclick="simTalkCallback1(''$$appName$'', ''doOk:'', document.getElementById(''$appName$-list'').selectedIndex);">Ok</div>';
+		nextPutAll: '<div style="border: 1px solid black; padding: 5px; margin: 2px;" onclick="simTalkCallback0(''$$appName$'', ''doCancel'');">Cancel</div>';
+		nextPutAll: '</div>'.
+
+	^htmlStream contents ! !
+
+! ListChoiceBox methodsFor: 'updating' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+	self withinWebUpdateDo: [self update] ! !
+
+! ListChoiceBox methodsFor: 'updating' !
+update
+
+	self addHTMLBeforeEndOf: (self idFor: 'enableDisable') to: self listChoiceBoxHTML ! !
+
+! ListChoiceBox class methodsFor: 'ui specs' !
+uiSpec
+
+	^'<div id="$appName$">
+	<div id="$appName$-ListChoiceToolbar" style="display: flex">
+		<div id="$appName$-Title" class="title">Choice</div>
+	</div>
+</div>
+' ! !
+
+! MessageBox methodsFor: 'accessing' !
+message
+
+	^message! !
+
+! MessageBox methodsFor: 'accessing' !
+message: aString
+
+	message := aString! !
+
+! MessageBox methodsFor: 'accessing' !
+severity
+
+	^severity! !
+
+! MessageBox methodsFor: 'accessing' !
+severity: aString
+
+	severity := aString! !
+
+! MessageBox methodsFor: 'accessing' !
+title
+
+	^(self severity ifNil: ['Message']) capitalized! !
+
+! MessageBox methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+	self withinWebUpdateDo: [self update] ! !
+
+! MessageBox methodsFor: 'updating' !
+messageString
+	^'<div style="', self styleForSeverity, '">', self message, '</div>'! !
+
+! MessageBox methodsFor: 'updating' !
+styleForSeverity
+	self severity = #error ifTrue: [^'background-color: red; color: white;'].
+	self severity = #warning ifTrue: [^'background-color: yellow;'].
+	self severity = #info ifTrue: [^'background-color: lightblue;'].
+	^'background-color: white;'! !
+
+! MessageBox methodsFor: 'updating' !
+update
+
+	self addHTMLBeforeEndOf: (self idFor: 'enableDisable') to: self messageString! !
+
+! MessageBox class methodsFor: 'opening' !
+errorMessage: aString
+
+	self errorMessage: aString at: 100 @ 100! !
+
+! MessageBox class methodsFor: 'opening' !
+errorMessage: aString at: aPoint
+
+	self
+		message: aString
+		severity: #error
+		at: aPoint
+! !
+
+! MessageBox class methodsFor: 'opening' !
+infoMessage: aString
+
+	self 
+		infoMessage: aString
+		at: 100 @ 100! !
+
+! MessageBox class methodsFor: 'opening' !
+infoMessage: aString at: aPoint
+
+	self
+		message: aString
+		severity: #info
+		at: aPoint! !
+
+! MessageBox class methodsFor: 'opening' !
+message: aString
+
+	self
+		message: aString
+		at: 100 @ 100! !
+
+! MessageBox class methodsFor: 'opening' !
+message: aString at: aPoint
+
+	self
+		message: aString
+		severity: #message
+		at: aPoint! !
+
+! MessageBox class methodsFor: 'opening' !
+message: aString severity: aSymbol at: aPoint
+
+	self new
+		origin: aPoint;
+		extent: nil;
+		severity: aSymbol;
+		message: aString;
+		open
+! !
+
+! MessageBox class methodsFor: 'opening' !
+uiSpec
+
+	^'<div id="$appName$">
+	<div id="$appName$-MessageToolbar" style="display: flex">
+		<div id="$appName$-Title" class="title">Message</div>
+		<div id="$appName$-closeButton" class="toolbarButton" onclick="simTalkCallback0(''$$appName$'', ''close'');">Close</div>
+	</div>
+</div>
+'! !
+
+! MessageBox class methodsFor: 'opening' !
+warningMessage: aString
+
+	self warningMessage: aString at: 100 @ 100! !
+
+! MessageBox class methodsFor: 'opening' !
+warningMessage: aString at: aPoint
+
+	self
+		message: aString
+		severity: #warning
+		at: aPoint! !
+
+! MultipleChoiceBox methodsFor: 'accessing' !
+choices
+
+	^choices! !
+
+! MultipleChoiceBox methodsFor: 'accessing' !
+choices: aCollection
+
+	choices := aCollection! !
+
+! MultipleChoiceBox methodsFor: 'accessing' !
+message
+
+	^message! !
+
+! MultipleChoiceBox methodsFor: 'accessing' !
+message: aString
+
+	message := aString! !
+
+! MultipleChoiceBox methodsFor: 'accessing' !
+values
+
+	^values! !
+
+! MultipleChoiceBox methodsFor: 'accessing' !
+values: aCollection
+
+	values := aCollection! !
+
+! MultipleChoiceBox methodsFor: 'opening' !
+choiceBoxHTML
+
+	| stream |
+
+	stream := WriteStream on: (String new: 100).
+	stream
+		nextPutAll: '<div style="background-color: white; border: 1px solid black; padding: 5px;">';
+		nextPutAll: '<div>', self message, '</div>';
+		nextPutAll: '<div id="$appName$-', self appName, '" style="display: flex;">'.
+
+	choices keysAndValuesDo: [:key :choice |
+			stream nextPutAll: '<div style="border: 1px solid black; padding: 5px; margin: 2px;" onclick="simTalkCallback1(''$$appName$'', ''doChoice:'', ', key printString, ');">', choice, '</div>'].
+
+	stream nextPutAll: '</div>'.
+	stream nextPutAll: '</div>'.
+	^stream contents
+! !
+
+! MultipleChoiceBox methodsFor: 'opening' !
+doChoice: aString
+
+	| number |
+
+	number := Integer readFrom: aString readStream.
+	self close.
+	(self values at: number) value! !
+
+! MultipleChoiceBox methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+	self withinWebUpdateDo: [self update]! !
+
+! MultipleChoiceBox methodsFor: 'opening' !
+title
+
+	^'Choice'! !
+
+! MultipleChoiceBox methodsFor: 'opening' !
+update
+
+	self addHTMLBeforeEndOf: (self idFor: 'enableDisable') to: self choiceBoxHTML! !
+
+! MultipleChoiceBox class methodsFor: 'opening' !
+message: aString choices: choicesCollection blocks: blockCollection
+
+	self message: aString choices: choicesCollection blocks: blockCollection at: 100 @ 100! !
+
+! MultipleChoiceBox class methodsFor: 'opening' !
+message: aString choices: choicesCollection blocks: blockCollection at: aPoint
+
+	self new
+		origin: aPoint;
+		message: aString;
+		choices: choicesCollection;
+		values: blockCollection;
+		open! !
+
+! MultipleChoiceBox class methodsFor: 'opening' !
+message: aString okBlock: okBlock cancelBlock: cancelBlock
+
+	self message: aString okBlock: okBlock cancelBlock: cancelBlock at: 100 @ 100! !
+
+! MultipleChoiceBox class methodsFor: 'opening' !
+message: aString okBlock: okBlock cancelBlock: cancelBlock at: aPoint
+
+	self
+		message: aString
+		choices: #('Ok' 'Cancel')
+		blocks: (Array with: okBlock with: cancelBlock)
+		at: aPoint! !
+
+! MultipleChoiceBox class methodsFor: 'opening' !
+message: aString yesBlock: yesBlock noBlock: noBlock
+
+	self message: aString yesBlock: yesBlock noBlock: noBlock at: 100 @ 100! !
+
+! MultipleChoiceBox class methodsFor: 'opening' !
+message: aString yesBlock: yesBlock noBlock: noBlock at: aPoint
+
+	self
+		message: aString
+		choices: #('Yes' 'No')
+		blocks: (Array with: yesBlock with: noBlock)
+		at: aPoint! !
+
+! PopupMenuUI methodsFor: 'accessing' !
+menuItems
+
+	^menuItems
+! !
+
+! PopupMenuUI methodsFor: 'accessing' !
+menuItems: aCollection
+
+	menuItems := aCollection
+! !
+
+! PopupMenuUI methodsFor: 'accessing' !
+widgetId
+
+	^widgetId! !
+
+! PopupMenuUI methodsFor: 'accessing' !
+widgetId: aString
+
+	widgetId := aString! !
+
+! PopupMenuUI methodsFor: 'actions' !
+doMenuWith: aDictionary
+
+	| menuId menuItem |
+
+	self close.
+	menuId := (aDictionary at: 'menuId') asSymbol.
+	menuItem := self menuItems detect: [:each | each id = menuId] ifNone: [nil].
+	menuItem isNil ifTrue: [^self].
+	menuItem action value: aDictionary! !
+
+! PopupMenuUI methodsFor: 'actions' !
+hideMenu
+
+	self close! !
+
+! PopupMenuUI methodsFor: 'adding and removing' !
+addMenuItem: aMenuItem
+
+	self menuItems add: aMenuItem.
+	aMenuItem widgetId: self widgetId! !
+
+! PopupMenuUI methodsFor: 'closing' !
+close
+
+	WebSession current sessionVariables removeKey: self appName.
+	self runJavaScript: 'document.getElementById("', self appName, '").remove();'! !
+
+! PopupMenuUI methodsFor: 'initializing' !
+initialize
+
+	super initialize.
+	self menuItems: OrderedCollection new! !
+
+! PopupMenuUI methodsFor: 'opening' !
+openIn: componentId x: x y: y
+
+	WebSession current sessionVariableAt: self appName put: self.
+
+	self 
+		origin: (Integer readFrom: x readStream) @ (Integer readFrom: y readStream);
+		extent: nil;
+		addHTMLBeforeEndOf: 'simTalkRootSection' to: self htmlString;
+		postOpen! !
+
+! PopupMenuUI methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.! !
+
+! PopupMenuUI methodsFor: 'rendering' !
+htmlString
+
+	| htmlBuilder |
+
+	htmlBuilder := HTMLBuilder new.
+	self renderHTMLOn: htmlBuilder.
+
+	^htmlBuilder htmlString
+! !
+
+! PopupMenuUI methodsFor: 'rendering' !
+renderHTMLOn: htmlBuilder
+
+	htmlBuilder div: [
+		htmlBuilder
+			attributeAt: 'class' put: 'menuBox';
+			attributeAt: 'id' put: '$appName$';
+			attributeAt: 'onmouseleave' put: 'simTalkCallback0(''$$appName$'', ''hideMenu'');'.
+		self menuItems do: [:eachMenuItem | eachMenuItem renderHTMLOn: htmlBuilder]]
+! !
+
+! RequestBox methodsFor: 'accessing' !
+answerBlock
+
+	^answerBlock! !
+
+! RequestBox methodsFor: 'accessing' !
+answerBlock: aBlock
+
+	answerBlock := aBlock! !
+
+! RequestBox methodsFor: 'accessing' !
+initialAnswer
+
+	^initialAnswer! !
+
+! RequestBox methodsFor: 'accessing' !
+initialAnswer: aString
+
+	initialAnswer := aString! !
+
+! RequestBox methodsFor: 'accessing' !
+message
+
+	^message! !
+
+! RequestBox methodsFor: 'accessing' !
+message: aString
+
+	message := aString! !
+
+! RequestBox methodsFor: 'opening' !
+defaultWindowExtent
+
+	^200 @ 200! !
+
+! RequestBox methodsFor: 'opening' !
+doChoice: aString with: answerString
+
+	| number |
+	number := Integer readFrom: aString readStream.
+	self close.
+	number = 1 ifTrue: [self answerBlock value: answerString].
+	number = 2 ifTrue: [self answerBlock value: nil]! !
+
+! RequestBox methodsFor: 'opening' !
+openAt: aPoint
+
+	self
+		origin: aPoint;
+		open! !
+
+! RequestBox methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+	self withinWebUpdateDo: [self update].
+
+	self runJavaScript: 'captureKeyInArea("$', self appName ,
+		'","Enter',
+		'", "', (self idFor: 'enableDisable'),
+		'", "', (self idFor: 'input'),
+		'", "pressedEnter:',
+		'", ["value"]' ,
+		');'! !
+
+! RequestBox methodsFor: 'opening' !
+requestBoxHTML
+
+	| htmlStream |
+
+	htmlStream := WriteStream on: (String new: 100).
+	htmlStream
+		nextPutAll: '<div style="background-color: white; border: 1px black solid;">';
+		nextPutAll: '<div>', self message, '</div>';
+		nextPutAll: '<input type="text" id="$appName$-input" value="', self initialAnswer, '"></input>';
+		nextPutAll: '<div id="$appName$-buttons" style="display: flex; margin: 5px;">'.
+
+
+	#('Ok' 'Cancel') keysAndValuesDo: [:key :choice |
+		htmlStream nextPutAll: '<div style="border: 1px solid black; padding: 5px; margin: 2px;" onclick="simTalkCallback2(''$$appName$'', ''doChoice:with:'', ', key printString, ',document.getElementById(''$appName$-input'').value);">', choice, '</div>'].
+
+	htmlStream nextPutAll: '</div>'.
+	htmlStream nextPutAll: '</div>'.
+
+	^htmlStream contents
+! !
+
+! RequestBox methodsFor: 'opening' !
+title
+
+	^'Choose'! !
+
+! RequestBox methodsFor: 'opening' !
+update
+
+	self addHTMLBeforeEndOf: (self idFor: 'enableDisable') to: self requestBoxHTML! !
+
+! RequestBox methodsFor: 'responding' !
+pressedEnter: aDictionary
+
+	self close.
+	self answerBlock value: (aDictionary at: 'value')
+! !
+
+! RequestBox class methodsFor: 'opening' !
+request: aString initialAnswer: initialAnswer answerBlock: answerBlock
+
+	self request: aString initialAnswer: initialAnswer answerBlock: answerBlock at: 0 @ 0! !
+
+! RequestBox class methodsFor: 'opening' !
+request: aString initialAnswer: initialAnswer answerBlock: answerBlock at: aPoint
+
+	| window |
+
+	window := self new
+		message: aString;
+		initialAnswer: initialAnswer;
+		answerBlock: answerBlock;
+		openAt: aPoint.
+! !
+
+! RequestBox class methodsFor: 'opening' !
+uiSpec
+
+	^'<div id="$appName$">
+			<style>
+	<div id="$appName$-RequestToolbar" style="display: flex;">
+		<div id="$appName$-Title" class="title">Request</div>
+	</div>
+</div>
+'! !
+
+KitManager default currentKit allDefinedClasses: #(Color CompositeComponent DoubleClickEvent Emphasis EmphasisSpan EmphasisStream Event EventModel HTMLBuilder HTMLStyleDefinition HTMLTag HTMLText JSONEvaluator KeyEvent ListChoiceBox ListComponent ListDivComponent ListSelectionEvent MessageBox MessageReceivedEvent MultipleChoiceBox PopupMenuItem PopupMenuUI PushButtonComponent Rectangle RequestBox RichTextEditorComponent SessionVariable TextComponent TextEditorComponent UIComponent UIOperation UIScreen ValueHolder WebSession WebUI) andMethods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Rectangle methods: #(#'+' #'-' #bottom #bounds #center #'containsPoint:' #corner #'corner:' #extent #height #left #origin #'origin:' #'printOn:' #right #top #'translatedBy:' #triangleVertices #width) !
+
+KitManager default currentKit allDefinedMethodsFor: Rectangle class methods: #(#'origin:corner:' #'origin:extent:') !
+
+KitManager default currentKit allDefinedMethodsFor: UIOperation methods: #(#arguments #'arguments:' #name #'name:') !
+
+KitManager default currentKit allDefinedMethodsFor: UIOperation class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: UIScreen methods: #(#'addComponent:' #addedCommands #addedComponents #'addedComponents:' #componentNumber #'componentNumber:' #components #'components:' #deletedCommands #deletedComponents #'deletedComponents:' #initialize #modifiedCommands #modifiedComponents #'modifiedComponents:' #nextComponentName #refreshCommands #'removeComponent:' #renderChanges #'renderChangesOn:' #reset #webSocket #'webSocket:') !
+
+KitManager default currentKit allDefinedMethodsFor: UIScreen class methods: #(#new) !
+
+KitManager default currentKit allDefinedMethodsFor: Event methods: #(#eventKey) !
+
+KitManager default currentKit allDefinedMethodsFor: Event class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: KeyEvent methods: #(#key #'key:' #'modifiers:') !
+
+KitManager default currentKit allDefinedMethodsFor: KeyEvent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: EventModel methods: #(#changed #'on:send:to:' #'on:send:to:with:' #'signalEvent:') !
+
+KitManager default currentKit allDefinedMethodsFor: EventModel class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: ValueHolder methods: #(#value #'value:') !
+
+KitManager default currentKit allDefinedMethodsFor: ValueHolder class methods: #(#'value:') !
+
+KitManager default currentKit allDefinedMethodsFor: MessageReceivedEvent methods: #(#message #'message:') !
+
+KitManager default currentKit allDefinedMethodsFor: MessageReceivedEvent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: WebSession methods: #(#applications #'applications:' #clearSessionVariables #closeAllApplications #closeAllWindows #'closeApplication:' #currentOpenLocation #'currentOpenLocation:' #initialize #newVariableName #nextOpenLocation #'openApplication:' #openWindowIDs #openingLocationIncrement #'removeSessionVariableAt:' #'sessionVariableAt:' #'sessionVariableAt:put:' #sessionVariables #'sessionVariables:') !
+
+KitManager default currentKit allDefinedMethodsFor: WebSession class methods: #(#closeAllApplications #current #new) !
+
+KitManager default currentKit allDefinedMethodsFor: SessionVariable methods: #(#decrement #'decrementBy:' #increment #'incrementBy:' #value #'value:') !
+
+KitManager default currentKit allDefinedMethodsFor: SessionVariable class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLTag methods: #(#'addStyle:' #'addTag:' #'attributeAt:' #'attributeAt:put:' #attributes #'attributes:' #children #'children:' #'htmlClass:' #'htmlPrintOn:' #'id:' #initialize #'on:send:to:' #'on:send:to:with:' #'printOn:' #styles #'styles:' #tagName #'tagName:' #'with:') !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLTag class methods: #(#'name:' #new) !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLText methods: #(#'htmlPrintOn:' #'printOn:' #text #'text:') !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLText class methods: #(#'text:') !
+
+KitManager default currentKit allDefinedMethodsFor: JSONEvaluator methods: #(#'evaluate:' #'evaluateCommand:' #'evaluateObject:' #webSession #'webSession:') !
+
+KitManager default currentKit allDefinedMethodsFor: JSONEvaluator class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLStyleDefinition methods: #(#'addKey:' #'attributeAt:put:' #attributes #'attributes:' #'for:' #'htmlPrintAttributesOn:' #'htmlPrintOn:' #initialize #keys #'keys:' #name #'name:' #'printOn:' #'with:') !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLStyleDefinition class methods: #(#'name:' #new) !
+
+KitManager default currentKit allDefinedMethodsFor: WebUI methods: #(#'addComponent:beforeEndOf:' #'addHTMLAfterBeginOf:to:' #'addHTMLAfterEndOf:to:' #'addHTMLBeforeBeginOf:to:' #'addHTMLBeforeEndOf:to:' #'addToInnerHTML:' #'appDivOn:' #appName #'appName:' #'bindComponent:' #'bindingAt:' #'bindingAt:ifAbsentPut:' #bindings #'bindings:' #bottomRightResizeDiv #bottomRightResizeMouseMoveCallbackString #bottomRightResizeMouseUpCallbackString #'bounds:' #bringToTop #'bringToTop:' #'changeClassOf:from:to:' #close #'closeButtonDivOn:' #defaultWindowExtent #defaultWindowOrigin #disable #'disableWhile:' #'dragBarDivOn:' #dragDiv #'dragWindow:' #enable #'enableDisableDivOn:' #'errorMessage:' #extent #'extent:' #fixedOffset #flags #'flags:' #html #'htmlForSpec:' #'htmlQuote:withEmphasis:' #htmlTree #'htmlTree:' #'idFor:' #'infoMessage:' #initialize #isDisabled #isEnabled #isUI #'javascriptQuote:' #'javascriptQuote:withEmphasis:' #'listComponentNamed:menu:' #'message:' #'message:choices:blocks:' #'message:okBlock:cancelBlock:' #'message:yesBlock:noBlock:' #mouseMoveCallbackString #mouseUpCallbackString #open #'open:' #opened #'opened:' #origin #'origin:' #parentName #'parentName:' #postBuild #postOpen #'removeElement:' #'replaceAppNameIn:' #'replaceHTMLFor:with:' #'request:initialAnswer:answerBlock:' #'request:initialAnswer:answerBlock:at:' #'resizeBottomRight:' #resizeBottomRightCallback #'resizeBottomRightWindow:' #'resizeDivOn:' #rootName #'runJavaScript:' #setAbsoluteWindowBounds #'setAttribute:of:to:' #'setInnerHTML:' #'setInnerHTMLOf:to:' #'stopDrag:' #'textEditorComponentNamed:menu:' #title #'titleBarDivOn:' #titleClickCallbackString #'titleDivOn:' #'updateIndexedTableTo:' #'updateRadioButtonField:to:' #'warningMessage:' #widgetContentType #windowResized #'withinWebUpdateDo:' #'write:inRichTextArea:position:' #'write:inTextArea:position:') !
+
+KitManager default currentKit allDefinedMethodsFor: WebUI class methods: #(#allAspects #new #open) !
+
+KitManager default currentKit allDefinedMethodsFor: PopupMenuUI methods: #(#'addMenuItem:' #close #'doMenuWith:' #hideMenu #htmlString #initialize #menuItems #'menuItems:' #'openIn:x:y:' #postOpen #'renderHTMLOn:' #widgetId #'widgetId:') !
+
+KitManager default currentKit allDefinedMethodsFor: PopupMenuUI class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: PopupMenuItem methods: #(#action #'action:' #'addRequestedValue:' #enabledBlock #'enabledBlock:' #id #'id:' #initialize #menuCallbackString #name #'name:' #'renderHTMLOn:' #requestedValues #'requestedValues:' #widgetId #'widgetId:') !
+
+KitManager default currentKit allDefinedMethodsFor: PopupMenuItem class methods: #(#new) !
+
+KitManager default currentKit allDefinedMethodsFor: ListChoiceBox methods: #(#answerBlock #'answerBlock:' #choices #'choices:' #doCancel #'doOk:' #listChoiceBoxHTML #message #'message:' #postOpen #update #values #'values:') !
+
+KitManager default currentKit allDefinedMethodsFor: ListChoiceBox class methods: #(#uiSpec) !
+
+KitManager default currentKit allDefinedMethodsFor: MultipleChoiceBox methods: #(#choiceBoxHTML #choices #'choices:' #'doChoice:' #message #'message:' #postOpen #title #update #values #'values:') !
+
+KitManager default currentKit allDefinedMethodsFor: MultipleChoiceBox class methods: #(#'message:choices:blocks:' #'message:choices:blocks:at:' #'message:okBlock:cancelBlock:' #'message:okBlock:cancelBlock:at:' #'message:yesBlock:noBlock:' #'message:yesBlock:noBlock:at:') !
+
+KitManager default currentKit allDefinedMethodsFor: MessageBox methods: #(#message #'message:' #messageString #postOpen #severity #'severity:' #styleForSeverity #title #update) !
+
+KitManager default currentKit allDefinedMethodsFor: MessageBox class methods: #(#'errorMessage:' #'errorMessage:at:' #'infoMessage:' #'infoMessage:at:' #'message:' #'message:at:' #'message:severity:at:' #uiSpec #'warningMessage:' #'warningMessage:at:') !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLBuilder methods: #(#'attributeAt:put:' #'class:' #currentNode #'currentNode:' #div #'div:' #endDiv #'endTag:' #endTagStyle #htmlNode #'htmlNode:' #htmlString #'htmlUnquote:' #'htmlUnquoteCharacter:from:to:' #'htmlUnquoteSpecialCharacterIn:out:' #'htmlUnquoteTagIn:out:' #'id:' #'inHorizontalLayout:do:' #'inStyle:do:' #'inTag:do:' #initialize #'install:' #'key:value:' #nodeStack #'nodeStack:' #'perform:on:' #'startTag:' #tagStyle #'text:') !
+
+KitManager default currentKit allDefinedMethodsFor: HTMLBuilder class methods: #(#new) !
+
+KitManager default currentKit allDefinedMethodsFor: ListComponent methods: #(#'changedSelectedItem:' #doubleClick #list #'list:' #listNumberOfRows #'listNumberOfRows:' #'optionStyleFor:' #optionStyles #'optionStyles:' #'renderOn:' #selection #selectionIndex #'selectionIndex:' #ui #'ui:' #updateList #updateSelectionIndex) !
+
+KitManager default currentKit allDefinedMethodsFor: ListComponent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: TextEditorComponent methods: #(#'addEmphasis:' #clearEmphasis #codeMenu #doItMenuItem #'doItWith:' #emphasisCollection #'emphasisCollection:' #initialize #inspectItMenuItem #'inspectItWith:' #installCodeMenu #'load:' #loadMenuItem #'loadWith:' #printItMenuItem #'printItWith:' #'renderOn:' #'save:to:' #saveMenuItem #'saveWith:' #selectionEnd #'selectionEnd:' #selectionStart #'selectionStart:' #subject #'subject:' #text #'text:' #updateText) !
+
+KitManager default currentKit allDefinedMethodsFor: TextEditorComponent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: ListSelectionEvent methods: #(#selectionIndex #'selectionIndex:') !
+
+KitManager default currentKit allDefinedMethodsFor: ListSelectionEvent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: DoubleClickEvent methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: DoubleClickEvent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Emphasis methods: #(#'endEmphasisOn:' #endEmphasisTag #'endEmphasisTag:' #'startEmphasisOn:' #startEmphasisTag #'startEmphasisTag:') !
+
+KitManager default currentKit allDefinedMethodsFor: Emphasis class methods: #(#blue #bold #brown #compileErrorHighlight #green #red #walkbackCallHighlight) !
+
+KitManager default currentKit allDefinedMethodsFor: EmphasisSpan methods: #(#emphasis #'emphasis:' #'emphasizeForPosition:to:' #'endEmphasizeForPosition:to:' #endOffset #'endOffset:' #'printOn:' #'startEmphasizeForPosition:to:' #startOffset #'startOffset:') !
+
+KitManager default currentKit allDefinedMethodsFor: EmphasisSpan class methods: #(#'from:to:with:') !
+
+KitManager default currentKit allDefinedMethodsFor: RichTextEditorComponent methods: #(#'addEmphasis:' #clearEmphasis #codeMenu #doItMenuItem #'doItWith:' #emphasisCollection #'emphasisCollection:' #initialize #inspectItMenuItem #'inspectItWith:' #installCodeMenu #'load:' #loadMenuItem #'loadWith:' #printItMenuItem #'printItWith:' #quotedText #'renderOn:' #'save:to:' #saveMenuItem #'saveWith:' #selectionEnd #'selectionEnd:' #selectionStart #'selectionStart:' #'setSelectionFrom:to:' #subject #'subject:' #text #'text:' #updateText) !
+
+KitManager default currentKit allDefinedMethodsFor: RichTextEditorComponent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: PushButtonComponent methods: #(#actionBlock #'actionBlock:' #label #'label:' #pressAction #'renderOn:') !
+
+KitManager default currentKit allDefinedMethodsFor: PushButtonComponent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Color methods: #(#alpha #'alpha:' #asHSV #asString #blue #'blue:' #'fromHSV:' #green #'green:' #hue #'hue:' #'hueFrom:c:x:' #'printOn:' #red #'red:' #saturation #'saturation:' #value #'value:') !
+
+KitManager default currentKit allDefinedMethodsFor: Color class methods: #(#'red:green:blue:' #'red:green:blue:alpha:' #white) !
+
+KitManager default currentKit allDefinedMethodsFor: ListDivComponent methods: #(#'changedSelectedItem:' #doubleClick #list #'list:' #listNumberOfRows #'listNumberOfRows:' #'optionStyleFor:' #optionStyles #'optionStyles:' #'renderOn:' #selection #selectionIndex #'selectionIndex:' #ui #'ui:' #updateList #updateSelectionIndex) !
+
+KitManager default currentKit allDefinedMethodsFor: ListDivComponent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: CompositeComponent methods: #(#children #'children:' #initialize) !
+
+KitManager default currentKit allDefinedMethodsFor: CompositeComponent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: TextComponent methods: #(#'renderOn:' #text #'text:') !
+
+KitManager default currentKit allDefinedMethodsFor: TextComponent class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: RequestBox methods: #(#answerBlock #'answerBlock:' #defaultWindowExtent #'doChoice:with:' #initialAnswer #'initialAnswer:' #message #'message:' #'openAt:' #postOpen #'pressedEnter:' #requestBoxHTML #title #update) !
+
+KitManager default currentKit allDefinedMethodsFor: RequestBox class methods: #(#'request:initialAnswer:answerBlock:' #'request:initialAnswer:answerBlock:at:' #uiSpec) !
+
+KitManager default currentKit allDefinedMethodsFor: EmphasisStream methods: #(#'on:' #'writeEmphasisOn:forIndex:' #'writeEndEmphasisOn:forIndex:' #'writeStartEmphasisOn:forIndex:') !
+
+KitManager default currentKit allDefinedMethodsFor: EmphasisStream class methods: #(#'on:') !
+
+KitManager default currentKit allDefinedMethodsFor: UIComponent methods: #(#bind #'bindTo:' #'bindTo:as:' #'bindTo:id:' #displayBlock #'displayBlock:' #height #'height:' #htmlString #id #'id:' #'idFor:' #menu #'menu:' #'openMenuX:y:' #'renderOn:' #ui #'ui:' #unbind #update) !
+
+KitManager default currentKit allDefinedMethodsFor: UIComponent class methods: #() !
+
+KitManager default finishFileinKit !

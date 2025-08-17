@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="BeagleUI.css">
+		<script src="BeagleDebugUI.js"></script>
+	</head>
+	<body onload="connectToVM()">
+		<div class="buttonBar">
+			<div class="button" onclick="over()">
+				Over
+			</div>
+			<div class="button" onclick="into()">
+				Into
+			</div>
+			<div class="button" onclick="peek()">
+				Peek
+			</div>
+			<div class="button" onclick="run()">
+				Run
+			</div>
+			<div class="button" onclick="stack()">
+				Stack
+			</div>
+			<div class="button" onclick="spaces()">
+				Spaces
+			</div>
+			<div class="button" onclick="show()">
+				Show
+			</div>
+			<div class="button" onclick="dump()">
+				Dump
+			</div>
+			<div class="button" onclick="context()">
+				Context
+			</div>
+		</div>
+		<div class="buttonBar">
+			<div class="button" onclick="doIt()">
+				Do It
+			</div>
+			<div class="button" onclick="printIt()">
+				Print It
+			</div>
+			<div class="button" onclick="debugIt()">
+				Debug It
+			</div>
+			<div class="button" onclick="closeSmalltalk()">
+				Close
+			</div>
+		</div>
+		
+		<div class="workspace">
+			<textarea id="workspace" name="workspace" rows="5" cols="85"></textarea>
+		</div>
+		<div class="result">
+			<textarea readonly id="result" name="result" rows="20" cols="85"></textarea>
+		</div>
+		<div class="uiScreen" style="display: none;">
+			<canvas id="uiCanvas" width="800" height="600" style="border:1px solid #000000;"></canvas>
+		</div>
+	</body>
+</html>

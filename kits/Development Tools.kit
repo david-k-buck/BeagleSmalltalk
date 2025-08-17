@@ -1,0 +1,3934 @@
+KitManager default currentKitNamed: 'Development Tools' !
+
+KitManager default currentKit ensureLoaded: #('CoreUI') !
+
+Object subclassNamed: #BrowserPlugin
+	instVarNames: 'browser'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+ParseTreeVisitor subclassNamed: #CodeHighlighter
+	instVarNames: 'typeOfCode compiledMethod sourceCode richTextWidget'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+WebUI subclassNamed: #Debugger
+	instVarNames: 'context frames currentFrame message selectedField selectedLocal selectedStack simulator fieldList'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+WebUI subclassNamed: #Inspector
+	instVarNames: 'object fieldList keysList selectedField text objectStack fieldListWidget inspectorTextWidget workspaceWidget'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+Inspector subclassNamed: #BasicInspector
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+BrowserPlugin subclassNamed: #KitBrowserPlugin
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+BrowserPlugin subclassNamed: #MethodBrowserPlugin
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+WebUI subclassNamed: #SystemBrowser
+	instVarNames: 'selectedKit selectedClass selectedProtocol selectedMethod kits classes protocols methods code instanceOrClass browserPlugin'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+WebUI subclassNamed: #Workspace
+	instVarNames: 'text'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Development Tools' !
+
+! CodeHighlighter methodsFor: 'accessing' !
+compiledMethod
+
+	^compiledMethod! !
+
+! CodeHighlighter methodsFor: 'accessing' !
+compiledMethod: aCompiledMethod
+
+	compiledMethod := aCompiledMethod! !
+
+! CodeHighlighter methodsFor: 'accessing' !
+richTextWidget
+
+	^richTextWidget! !
+
+! CodeHighlighter methodsFor: 'accessing' !
+richTextWidget: aRichTextEditorComponent
+
+	richTextWidget := aRichTextEditorComponent! !
+
+! CodeHighlighter methodsFor: 'accessing' !
+sourceCode
+
+	^sourceCode! !
+
+! CodeHighlighter methodsFor: 'accessing' !
+sourceCode: aString
+
+	sourceCode := aString! !
+
+! CodeHighlighter methodsFor: 'accessing' !
+typeOfCode
+
+	^typeOfCode! !
+
+! CodeHighlighter methodsFor: 'accessing' !
+typeOfCode: aSymbol
+
+	typeOfCode := aSymbol! !
+
+! CodeHighlighter methodsFor: 'highlighting' !
+highlightMethod
+
+	self richTextWidget
+		clearEmphasis;
+		addEmphasis: (EmphasisSpan from: 1 to: (self richTextWidget text indexOf: Character cr) with: Emphasis bold).
+
+	(SmalltalkParser parseForClass: self compiledMethod rootMethod mclass methodString: self compiledMethod rootMethod getSource) currentRule result
+		acceptVisitor: self
+		 ! !
+
+! CodeHighlighter methodsFor: 'highlighting' !
+highlightMethod: aCompiledMethod source: aString forWidget: aWidget
+
+	self
+		compiledMethod: aCompiledMethod;
+		sourceCode: aString;
+		richTextWidget: aWidget.
+
+	self highlightMethod! !
+
+! CodeHighlighter methodsFor: 'visiting' !
+visitBlockLiteralNode: aNode
+
+	aNode acceptVisitor: self
+! !
+
+! CodeHighlighter methodsFor: 'visiting' !
+visitGlobalVariableReferenceNode: aNode
+
+	self richTextWidget
+		addEmphasis: (EmphasisSpan from: aNode startSourceOffset + 1 to: aNode endSourceOffset + 1 with: Emphasis bold)! !
+
+! CodeHighlighter methodsFor: 'visiting' !
+visitLiteralNode: aNode
+
+	self richTextWidget
+		addEmphasis: (EmphasisSpan from: aNode startSourceOffset + 1 to: aNode endSourceOffset + 1 with: Emphasis brown)! !
+
+! CodeHighlighter methodsFor: 'visiting' !
+visitLocalVariableAssignmentNode: aNode
+
+	aNode value acceptVisitor: self.
+
+	self richTextWidget
+		addEmphasis: (EmphasisSpan from: aNode startSourceOffset + 1 to: aNode endSourceOffset + 1 with: Emphasis red)! !
+
+! CodeHighlighter methodsFor: 'visiting' !
+visitLocalVariableReferenceNode: aNode
+
+	self richTextWidget
+		addEmphasis: (EmphasisSpan from: aNode startSourceOffset + 1 to: aNode endSourceOffset + 1 with: Emphasis red)! !
+
+! CodeHighlighter methodsFor: 'visiting' !
+visitMessageNodeEnd: aNode
+
+	self richTextWidget
+		addEmphasis: (EmphasisSpan from: aNode startSourceOffset + 1 to: aNode endSourceOffset + 1 with: Emphasis blue)! !
+
+! CodeHighlighter methodsFor: 'visiting' !
+visitSpecialNode: aNode
+
+	self richTextWidget
+		addEmphasis: (EmphasisSpan from: aNode startSourceOffset + 1 to: aNode endSourceOffset + 1 with: Emphasis green)! !
+
+! Debugger methodsFor: 'accessing' !
+context
+
+	^context! !
+
+! Debugger methodsFor: 'accessing' !
+context: anObject
+
+	context := anObject! !
+
+! Debugger methodsFor: 'accessing' !
+currentFrame
+
+	^currentFrame! !
+
+! Debugger methodsFor: 'accessing' !
+currentFrame: aCodeContext
+
+	currentFrame := aCodeContext! !
+
+! Debugger methodsFor: 'accessing' !
+getSelf
+
+	^self currentFrame getSelf! !
+
+! Debugger methodsFor: 'accessing' !
+message
+
+	^message ! !
+
+! Debugger methodsFor: 'accessing' !
+message: aString
+
+	message := aString ! !
+
+! Debugger methodsFor: 'accessing' !
+selectedField
+
+	^selectedField! !
+
+! Debugger methodsFor: 'accessing' !
+selectedField: aNumber
+
+	selectedField := aNumber! !
+
+! Debugger methodsFor: 'accessing' !
+selectedLocal
+
+	^selectedLocal! !
+
+! Debugger methodsFor: 'accessing' !
+selectedLocal: aNumber
+
+	selectedLocal := aNumber! !
+
+! Debugger methodsFor: 'accessing' !
+selectedStack
+
+	^selectedStack! !
+
+! Debugger methodsFor: 'accessing' !
+selectedStack: aNumber
+
+	selectedStack := aNumber! !
+
+! Debugger methodsFor: 'accessing' !
+simulator
+
+	^simulator! !
+
+! Debugger methodsFor: 'accessing' !
+simulator: aCodeSimulator
+
+	simulator := aCodeSimulator! !
+
+! Debugger methodsFor: 'actions' !
+inspectSimulator
+
+	self simulator inspect
+! !
+
+! Debugger methodsFor: 'actions' !
+into
+
+	self simulator into.
+	self peekBytecode! !
+
+! Debugger methodsFor: 'actions' !
+over
+
+	self simulator over.
+	self peekBytecode! !
+
+! Debugger methodsFor: 'actions' !
+peekBytecode
+
+	self message: (self simulator currentContext method decompileSingleBytecodeStartingAt: self simulator currentContext pcOffset).
+	self currentFrame: self simulator currentContext.
+	self update
+
+! !
+
+! Debugger methodsFor: 'actions' !
+restart
+
+	self simulator
+		returnToFrame: self currentFrame;
+		restart.
+	self
+		update;
+		peekBytecode! !
+
+! Debugger methodsFor: 'actions' !
+restartMethod
+
+	self simulator returnToFrame: self currentFrame rootContext frame.! !
+
+! Debugger methodsFor: 'actions' !
+restartMethod: aCompiledMethod
+
+	self simulator returnToFrame: self currentFrame rootContext frame.
+	self simulator buildFrameFor: aCompiledMethod.
+	self currentFrame: self simulator currentContext! !
+
+! Debugger methodsFor: 'actions' !
+return
+
+	
+	self request: 'Expression?' initialAnswer: 'self' answerBlock: [:string |
+		self simulator currentContext push: (SmalltalkParser evaluate: string for: self getSelf).
+		self simulator return.
+		self peekBytecode]  at: self origin + (50 @ 50)! !
+
+! Debugger methodsFor: 'actions' !
+stepBytecode
+
+	self simulator stepBytecode.
+	self peekBytecode! !
+
+! Debugger methodsFor: 'actions' !
+through
+
+	self simulator through.
+	self peekBytecode! !
+
+! Debugger methodsFor: 'changing' !
+changedInspectorSelection: aNumber
+
+	self selectedField: aNumber.
+	self updateSelfTextEditor! !
+
+! Debugger methodsFor: 'changing' !
+changedLocalsSelection: aNumber
+
+	self selectedLocal: aNumber.
+	self updateLocalsEditor! !
+
+! Debugger methodsFor: 'changing' !
+changedStackSelection: aNumber
+
+	self selectedStack: aNumber.
+	self updateStackEditor! !
+
+! Debugger methodsFor: 'changing' !
+changedWalkbackSelection: aNumber
+
+	self
+		currentFrame: (self simulator frames at: aNumber);
+		selectedField: nil;
+		selectedLocal: nil;
+
+		updateCodeEditor;
+		updateSelfInspector;
+		updateSelfTextEditor;
+		updateLocalsList;
+		updateLocalsEditor ! !
+
+! Debugger methodsFor: 'code menu' !
+codeMenu
+
+	^PopupMenuUI new
+		widgetId: self codeEditorId;
+		addMenuItem: self saveMenuItem;
+		addMenuItem: self doItMenuItem;
+		addMenuItem: self printItMenuItem;
+		addMenuItem: self inspectItMenuItem;
+		yourself ! !
+
+! Debugger methodsFor: 'code menu' !
+doItMenuItem
+
+	^PopupMenuItem new
+		id: #doIt;
+		name: 'Do It';
+		action: [:args | self doItWith: args];
+		requestedValues: #('selectedString');
+		yourself ! !
+
+! Debugger methodsFor: 'code menu' !
+doItWith: aDictionary
+
+	self ui disableWhile: [SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self subject] ! !
+
+! Debugger methodsFor: 'code menu' !
+inspectItMenuItem
+
+	^PopupMenuItem new
+			id: #inspectIt;
+			name: 'Inspect It';
+			action: [:args | self inspectItWith: args];
+			requestedValues: #('selectedString');
+			yourself ! !
+
+! Debugger methodsFor: 'code menu' !
+inspectItWith: aDictionary
+
+	| object |
+
+	self ui disableWhile: [object := SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self subject].
+
+	object inspect ! !
+
+! Debugger methodsFor: 'code menu' !
+printItMenuItem
+
+	^PopupMenuItem new
+		id: #printIt;
+		name: 'Print It';
+		action: [:args | self printItWith: args];
+		requestedValues: #('selectedString' 'selectionStart' 'selectionEnd');
+		yourself ! !
+
+! Debugger methodsFor: 'code menu' !
+printItWith: aDictionary
+
+	| result |
+
+	self ui disableWhile: [result := ' ==> ', (SmalltalkParser evaluate: (aDictionary at: 'selectedString')) printString].
+
+	self write: result inTextArea: self id position: (aDictionary at: 'selectionEnd') ! !
+
+! Debugger methodsFor: 'code menu' !
+saveMenuItem
+
+	^PopupMenuItem new
+		id: #save;
+		name: 'Save';
+		action: [:args | self saveWith: args];
+		addRequestedValue: 'innerHTML';
+		yourself ! !
+
+! Debugger methodsFor: 'code menu' !
+saveWith: aDictionary
+
+	| codeString fileinStream method class protocol kit |
+
+	codeString := HTMLBuilder new htmlUnquote: (aDictionary at: 'innerHTML').
+	class := self currentFrame rootMethodClass.
+	protocol := class organizationFor: (self currentFrame rootMethod selector).
+	kit := currentFrame rootMethod kit.
+
+	fileinStream := WriteStream on: (String new: 100).
+	fileinStream
+		nextPutAll: '! ';
+		nextPutAll: class name;
+		nextPutAll: ' methodsFor: ''';
+		nextPutAll: protocol;
+		nextPutAll: ''' !';
+		cr;
+		nextPut: Character lf;
+		nextPutAll: (codeString crToCRLF);
+		nextPutAll: '! !'.
+
+	method := [fileinStream contents readStream fileIn]
+		on: CompileError , CompileWarning
+		do: [:ex |
+			self message: '#### ', ex message asString.
+			ex return: nil].
+
+	method isNil ifTrue: [
+		"self selectedMethod: nil."
+		^false].
+
+	kit isNil ifFalse: [
+		fileinStream := WriteStream on: (String new: 100).
+		fileinStream
+			nextPutAll: '(KitManager current kitNamed: ''', kit name, ''') addMethod: (';
+			nextPutAll: class name;
+			nextPutAll: ' compiledMethodAt: #';
+			nextPutAll: method selector;
+			nextPutAll: ') !';
+			cr; cr.
+
+		fileinStream contents readStream fileIn
+		].
+
+	self
+		restartMethod: method;
+		update;
+		peekBytecode
+ ! !
+
+! Debugger methodsFor: 'menus' !
+doLocalsBasicInspect
+
+	self selectedLocalObject basicInspect   ! !
+
+! Debugger methodsFor: 'menus' !
+doLocalsInspect
+
+	self selectedLocalObject inspect   ! !
+
+! Debugger methodsFor: 'menus' !
+doSelfBasicInspect
+
+	self selectedObject basicInspect   ! !
+
+! Debugger methodsFor: 'menus' !
+doSelfInspect
+
+	self selectedObject inspect   ! !
+
+! Debugger methodsFor: 'menus' !
+doStackBasicInspect
+
+	(self currentFrame stackAt: self selectedStack) basicInspect   ! !
+
+! Debugger methodsFor: 'menus' !
+doStackInspect
+
+	(self currentFrame stackAt: self selectedStack) inspect   ! !
+
+! Debugger methodsFor: 'menus' !
+localsBasicInspectMenuItem
+
+	^PopupMenuItem new
+		id: #localsBasicInspect;
+		name: 'Basic Inspect';
+		action: [:args | self localsBasicInspectWith: args];
+		requestedValues: #('selectedString');
+		enabledBlock: [self selectedLocal notNil];
+		yourself  ! !
+
+! Debugger methodsFor: 'menus' !
+localsBasicInspectWith: aDictionary
+
+	self doLocalsBasicInspect ! !
+
+! Debugger methodsFor: 'menus' !
+localsInspectMenu
+
+	^PopupMenuUI new
+		widgetId: self localsInspectorListId;
+		addMenuItem: self localsInspectMenuItem;
+		addMenuItem: self localsBasicInspectMenuItem;
+		yourself   ! !
+
+! Debugger methodsFor: 'menus' !
+localsInspectMenuItem
+
+	^PopupMenuItem new
+		id: #localsInspect;
+		name: 'Inspect';
+		action: [:args | self localsInspectWith: args];
+		requestedValues: #('selectedString');
+		enabledBlock: [self selectedLocal notNil];
+		yourself   ! !
+
+! Debugger methodsFor: 'menus' !
+localsInspectWith: aDictionary
+
+	self doLocalsInspect ! !
+
+! Debugger methodsFor: 'menus' !
+selfBasicInspectMenuItem
+
+	^PopupMenuItem new
+		id: #selfBasicInspect;
+		name: 'Basic Inspect';
+		action: [:args | self selfBasicInspectWith: args];
+		requestedValues: #('selectedString');
+		enabledBlock: [self selectedField notNil];
+		yourself  ! !
+
+! Debugger methodsFor: 'menus' !
+selfBasicInspectWith: aDictionary
+
+	self doSelfBasicInspect ! !
+
+! Debugger methodsFor: 'menus' !
+selfInspectMenu
+
+	^PopupMenuUI new
+		widgetId: self selfInspectorListId;
+		addMenuItem: self selfInspectMenuItem;
+		addMenuItem: self selfBasicInspectMenuItem;
+		yourself   ! !
+
+! Debugger methodsFor: 'menus' !
+selfInspectMenuItem
+
+	^PopupMenuItem new
+		id: #selfInspect;
+		name: 'Inspect';
+		action: [:args | self selfInspectWith: args];
+		requestedValues: #('selectedString');
+		enabledBlock: [self selectedField notNil];
+		yourself   ! !
+
+! Debugger methodsFor: 'menus' !
+selfInspectWith: aDictionary
+
+	self doSelfInspect ! !
+
+! Debugger methodsFor: 'menus' !
+stackBasicInspectMenuItem
+
+	^PopupMenuItem new
+		id: #stackBasicInspect;
+		name: 'Basic Inspect';
+		action: [:args | self stackBasicInspectWith: args];
+		requestedValues: #('selectedString');
+		enabledBlock: [self selectedStack notNil];
+		yourself  ! !
+
+! Debugger methodsFor: 'menus' !
+stackBasicInspectWith: aDictionary
+
+	self doStackBasicInspect ! !
+
+! Debugger methodsFor: 'menus' !
+stackInspectMenu
+
+	^PopupMenuUI new
+		widgetId: self stackInspectorListId;
+		addMenuItem: self stackInspectMenuItem;
+		addMenuItem: self stackBasicInspectMenuItem;
+		yourself   ! !
+
+! Debugger methodsFor: 'menus' !
+stackInspectMenuItem
+
+	^PopupMenuItem new
+		id: #stackInspect;
+		name: 'Inspect';
+		action: [:args | self stackInspectWith: args];
+		requestedValues: #('selectedString');
+		enabledBlock: [self selectedStack notNil];
+		yourself   ! !
+
+! Debugger methodsFor: 'menus' !
+stackInspectWith: aDictionary
+
+	self doStackInspect ! !
+
+! Debugger methodsFor: 'opening' !
+debuggerHTML
+
+	^HTMLBuilder new
+		div: [:builder |
+			builder
+				div: [:builder2 |
+					builder2
+						id: (self idFor: 'toolBar');
+						class: 'buttonBar';
+						install: self peekBytecodeWidget;
+						install: self stepBytecodeWidget;
+						install: self intoWidget;
+						install: self throughWidget;
+						install: self overWidget;
+						install: self restartWidget;
+						install: self returnWidget;
+						install: self inspectSimulatorWidget];
+				install: self messageWidget;
+				inHorizontalLayout: (self idFor: 'walkbackComponents') do: [:builder2 |
+					builder2
+						install: self walkbackListWidget;
+						install: self stackInspectorListWidget;
+						install: self stackTextEditorWidget];
+				install: self codeWidget;
+				inHorizontalLayout: (self idFor: 'inspectorComponents') do: [:builder2 |
+					builder2
+						install: self selfInspectorListWidget;
+						install: self selfTextEditorWidget;
+						install: self localsInspectorListWidget;
+						install: self localsTextEditorWidget]];
+		htmlString    ! !
+
+! Debugger methodsFor: 'opening' !
+defaultWindowExtent
+
+	^900 @ 400! !
+
+! Debugger methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+	self simulator: (CodeSimulator new frames: (self tossFramesToSignal: self context allFrames); yourself).
+	self simulator frames first push: nil. "to simulate the return value from the unfinished method call"
+	self withinWebUpdateDo: [self drawWindow; updateWalkbackList].
+	self runJavaScript: 'enableTabsInRichTextArea("', self codeEditorId, '");'! !
+
+! Debugger methodsFor: 'opening' !
+title
+
+	^'Debugger'! !
+
+! Debugger methodsFor: 'opening' !
+tossFramesToSignal: aCollection
+
+	[(aCollection first method isMemberOf: CompiledMethod)
+		and: [aCollection first method selector == #raiseSignal]] whileFalse: [aCollection removeFirst].
+
+	aCollection removeFirst.
+
+	((aCollection first method isMemberOf: CompiledMethod)
+		and: [aCollection first method selector == #raiseSignal2]) ifTrue: [aCollection removeFirst].
+
+	((aCollection first method isMemberOf: CompiledMethod)
+		and: [aCollection first method selector == #signal:]) ifTrue: [aCollection removeFirst].
+
+	^aCollection
+ ! !
+
+! Debugger methodsFor: 'simulating' !
+codeSimulator
+
+	^simulator! !
+
+! Debugger methodsFor: 'updating' !
+currentEmphasis
+
+	| offsets sourceOffsets |
+
+	self currentFrame isNil ifTrue: [^nil].
+
+	sourceOffsets := self currentFrame == self simulator frames first
+		ifTrue: [self currentFrame method sourceOffsetsDictionary]
+		ifFalse: [self currentFrame method sourceOffsetsDictionaryForNonCurrentFrame].
+
+	offsets := sourceOffsets at: self currentFrame pcOffset ifAbsent: [^nil].
+	^EmphasisSpan from: offsets first + 1 to: offsets last + 1 with: Emphasis walkbackCallHighlight! !
+
+! Debugger methodsFor: 'updating' !
+drawWindow
+
+	self addHTMLBeforeEndOf: (self idFor: 'enableDisable') to: self debuggerHTML! !
+
+! Debugger methodsFor: 'updating' !
+selectedLocalObject
+
+	self selectedLocal isNil ifTrue: [^nil].
+	^self currentFrame localAt: self selectedLocal! !
+
+! Debugger methodsFor: 'updating' !
+selectedObject 
+
+	| field |
+
+	self selectedField isNil ifTrue: [^nil].
+	self selectedField = 1 ifTrue: [^self getSelf].
+
+	field := self getSelf inspectorFields at: self selectedField - 1.
+	field isComputedField ifTrue: [
+		^field valueFor: self getSelf].
+	^self getSelf inspectorFieldAt: field
+ ! !
+
+! Debugger methodsFor: 'updating' !
+setEmphasis
+
+	| emphasis |
+
+	emphasis := self currentEmphasis.
+	emphasis isNil ifTrue: [^self].
+
+	self codeWidget addEmphasis: emphasis! !
+
+! Debugger methodsFor: 'updating' !
+update
+
+	self
+		updateWalkbackList;
+		updateCodeEditor;
+		updateSelfInspector;
+		updateLocalsList;
+		updateStackList.
+	self walkbackListWidget selectionIndex: 1.! !
+
+! Debugger methodsFor: 'updating' !
+updateCodeEditor
+
+	| text |
+
+	text := self currentFrame isNil
+		ifTrue: ['']
+		ifFalse: [self currentFrame rootMethod getSource].
+
+	self codeWidget text: text.
+	text isEmpty ifFalse: [
+		CodeHighlighter new
+			highlightMethod: self currentFrame method
+			source: text
+			forWidget: self codeWidget].
+
+	self setEmphasis.
+	self codeWidget updateText! !
+
+! Debugger methodsFor: 'updating' !
+updateLocalsEditor
+
+	| text |
+
+	text := self selectedLocal isNil
+		ifTrue: ['']
+		ifFalse: [(self currentFrame localAt: self selectedLocal) printString].
+
+	^self localsTextEditorWidget text: text ! !
+
+! Debugger methodsFor: 'updating' !
+updateLocalsList
+
+	| list |
+
+	list := self currentFrame isNil
+		ifTrue: [list := OrderedCollection new]
+		ifFalse: [self currentFrame allLocalNames].
+
+	self localsInspectorListWidget list: list! !
+
+! Debugger methodsFor: 'updating' !
+updateSelfInspector
+
+	self currentFrame isNil ifTrue: [
+		self selfInspectorListWidget list: OrderedCollection new.
+		^self].
+
+	fieldList := self getSelf inspectorFields addFirst: 'self'; yourself.
+	self selfInspectorListWidget list: fieldList  ! !
+
+! Debugger methodsFor: 'updating' !
+updateSelfTextEditor
+
+	| text |
+
+	text := self selectedField isNil
+		ifTrue: ['']
+		ifFalse: [self selectedObject printString].
+
+	self selfTextEditorWidget text: text; updateText! !
+
+! Debugger methodsFor: 'updating' !
+updateStackEditor
+
+	| text |
+
+	text := self selectedStack isNil
+		ifTrue: ['']
+		ifFalse: [(self currentFrame stackAt: self selectedStack) printString].
+
+	^self stackTextEditorWidget text: text ! !
+
+! Debugger methodsFor: 'updating' !
+updateStackList
+
+	| list |
+
+	list := self currentFrame isNil
+		ifTrue: [list := OrderedCollection new]
+		ifFalse: [self currentFrame stackNames].
+
+	self stackInspectorListWidget list: list; selectionIndex: 0
+ ! !
+
+! Debugger methodsFor: 'updating' !
+updateWalkbackList
+
+	self walkbackListWidget list: self simulator frames copy.
+	self messageWidget text: (self message ifNil: ['']) ! !
+
+! Debugger methodsFor: 'widgets' !
+codeEditorId
+
+	^self idFor: 'codeEditor'! !
+
+! Debugger methodsFor: 'widgets' !
+codeWidget
+
+	^self bindingAt: #codeEditor ifAbsentPut: [
+		RichTextEditorComponent new
+			bindTo: self id: self codeEditorId;
+			menu: self codeMenu;
+			subject: self;
+			yourself]  ! !
+
+! Debugger methodsFor: 'widgets' !
+inspectSimulatorWidget
+
+	^self bindingAt: #inspectSimulator ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'inspectSimulator ';
+			label: 'Inspect';
+			actionBlock: [self inspectSimulator];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+intoWidget
+
+	^self bindingAt: #into ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'into';
+			label: 'Into';
+			actionBlock: [self into];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+localsInspectorListId
+
+	^self idFor: 'localsInspectorList' ! !
+
+! Debugger methodsFor: 'widgets' !
+localsInspectorListWidget
+
+	^self bindingAt: #localsInspectorList ifAbsentPut: [
+		ListComponent new
+			bindTo: self id: self localsInspectorListId;
+			listNumberOfRows: 10;
+			onEvent: ListSelectionEvent do: [:event | self changedLocalsSelection: event selectionIndex];
+			menu: self localsInspectMenu;
+			yourself]
+   ! !
+
+! Debugger methodsFor: 'widgets' !
+localsTextEditorId
+
+	^self idFor: 'localsTextEditor' ! !
+
+! Debugger methodsFor: 'widgets' !
+localsTextEditorWidget
+
+	^self bindingAt: #localsTextEditor ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self id: self localsTextEditorId;
+			yourself]  ! !
+
+! Debugger methodsFor: 'widgets' !
+messageEditorId
+
+	^self idFor: 'messageEditor' ! !
+
+! Debugger methodsFor: 'widgets' !
+messageWidget
+
+	^self bindingAt: #messageEditor ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self id: self messageEditorId;
+			height: '100px';
+			yourself]  ! !
+
+! Debugger methodsFor: 'widgets' !
+overWidget
+
+	^self bindingAt: #over ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'over';
+			label: 'Over';
+			actionBlock: [self over];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+peekBytecodeWidget
+
+	^self bindingAt: #peekBytecode ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'peekBytecode';
+			label: 'Peek Bytecode';
+			actionBlock: [self peekBytecode];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+restartWidget
+
+	^self bindingAt: #restart ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'restart';
+			label: 'Restart';
+			actionBlock: [self restart];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+returnWidget
+
+	^self bindingAt: #return ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'return';
+			label: 'Return';
+			actionBlock: [self return];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+selfInspectorListId
+
+	^self idFor: 'selfInspectorList' ! !
+
+! Debugger methodsFor: 'widgets' !
+selfInspectorListWidget
+
+	^self bindingAt: #selfInspectorList ifAbsentPut: [
+		ListComponent new
+			bindTo: self id: self selfInspectorListId;
+			listNumberOfRows: 10;
+			onEvent: ListSelectionEvent do: [:event | self changedInspectorSelection: event selectionIndex];
+			menu: self selfInspectMenu;
+			yourself]
+      ! !
+
+! Debugger methodsFor: 'widgets' !
+selfTextEditorId
+
+	^self idFor: 'selfTextEditor' ! !
+
+! Debugger methodsFor: 'widgets' !
+selfTextEditorWidget
+
+	^self bindingAt: #selfTextEditor ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self id: self selfTextEditorId;
+			yourself]  ! !
+
+! Debugger methodsFor: 'widgets' !
+stackInspectorListId
+
+	^self idFor: 'stackInspectorList' ! !
+
+! Debugger methodsFor: 'widgets' !
+stackInspectorListWidget
+
+	^self bindingAt: #stackInspectorList ifAbsentPut: [
+		ListComponent new
+			bindTo: self id: self stackInspectorListId;
+			listNumberOfRows: 10;
+			height: '100px';
+			onEvent: ListSelectionEvent do: [:event | self changedStackSelection: event selectionIndex];
+			menu: self stackInspectMenu;
+			yourself]
+   ! !
+
+! Debugger methodsFor: 'widgets' !
+stackTextEditorId
+
+	^self idFor: 'stackTextEditor' ! !
+
+! Debugger methodsFor: 'widgets' !
+stackTextEditorWidget
+
+	^self bindingAt: #stackTextEditor ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self id: self stackTextEditorId;
+			height: '100px';
+			yourself]  ! !
+
+! Debugger methodsFor: 'widgets' !
+stepBytecodeWidget
+
+	^self bindingAt: #stepBytecode ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'stepBytecode';
+			label: 'Step Bytecode';
+			actionBlock: [self stepBytecode];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+throughWidget
+
+	^self bindingAt: #through ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'through';
+			label: 'Through';
+			actionBlock: [self through];
+			yourself] ! !
+
+! Debugger methodsFor: 'widgets' !
+walkbackListId
+
+	^self idFor: 'walkbackList'! !
+
+! Debugger methodsFor: 'widgets' !
+walkbackListWidget
+
+	^self bindingAt: #walkbackList ifAbsentPut: [
+		ListComponent new
+			bindTo: self id: self walkbackListId;
+			listNumberOfRows: 10;
+			height: '100px';
+			displayBlock: [:each | each printString];
+			onEvent: ListSelectionEvent do: [:event | self changedWalkbackSelection: event selectionIndex];
+
+			"menu: self walkbackMenu;
+			on: DoubleClickEvent do: [:event | self diveIn];"
+
+			yourself]
+   ! !
+
+! Debugger class methodsFor: 'opening' !
+openOn: aContext
+
+	^self new
+		context: aContext;
+		open;
+		yourself! !
+
+! Debugger class methodsFor: 'opening' !
+openOn: aContext message: aString
+
+	^self new
+		context: aContext;
+		message: aString;
+		open;
+		yourself ! !
+
+! Inspector methodsFor: 'accessing' !
+fieldList
+
+	^fieldList ! !
+
+! Inspector methodsFor: 'accessing' !
+fieldList: aCollection
+
+	fieldList := aCollection ! !
+
+! Inspector methodsFor: 'accessing' !
+keysList
+
+	^keysList! !
+
+! Inspector methodsFor: 'accessing' !
+keysList: anObject
+
+	keysList := anObject! !
+
+! Inspector methodsFor: 'accessing' !
+object
+
+	^object! !
+
+! Inspector methodsFor: 'accessing' !
+object: anObject
+
+	object := anObject! !
+
+! Inspector methodsFor: 'accessing' !
+objectStack
+
+	^objectStack! !
+
+! Inspector methodsFor: 'accessing' !
+objectStack: aCollection
+
+	objectStack := aCollection! !
+
+! Inspector methodsFor: 'accessing' !
+selectedField
+
+	^selectedField ! !
+
+! Inspector methodsFor: 'accessing' !
+selectedField: aNumber
+
+	selectedField := aNumber ! !
+
+! Inspector methodsFor: 'actions' !
+diveIn
+
+	self selectedObject isNil ifTrue: [^self].
+
+	objectStack add: self object.
+	self object: self selectedObject.
+	self selectedField: nil.
+
+	self updateFieldList.
+	self updateList; updateText; updateTitle! !
+
+! Inspector methodsFor: 'actions' !
+doBasicInspect
+
+	self selectedObject basicInspect! !
+
+! Inspector methodsFor: 'actions' !
+doInspect
+
+	self selectedObject inspect! !
+
+! Inspector methodsFor: 'actions' !
+popOut
+
+	objectStack isEmpty ifTrue: [^self].
+	self object: objectStack removeLast.
+	self selectedField: nil.
+
+	self updateFieldList.
+	self updateList; updateText; updateTitle! !
+
+! Inspector methodsFor: 'changing' !
+changedSelectedField: aNumber
+
+	self selectedField: aNumber.
+	self updateText
+ ! !
+
+! Inspector methodsFor: 'code menu' !
+codeMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'workspaceTextBox');
+		addMenuItem: self doItMenuItem;
+		addMenuItem: self printItMenuItem;
+		addMenuItem: self inspectItMenuItem;
+		yourself! !
+
+! Inspector methodsFor: 'code menu' !
+doItMenuItem
+
+	^PopupMenuItem new
+		id: #doIt;
+		name: 'Do It';
+		action: [:args | self doItWith: args];
+		requestedValues: #('selectedString');
+		yourself! !
+
+! Inspector methodsFor: 'code menu' !
+doItWith: aDictionary
+
+	self disableWhile: [SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self object]! !
+
+! Inspector methodsFor: 'code menu' !
+inspectItMenuItem
+
+	^PopupMenuItem new
+			id: #inspectIt;
+			name: 'Inspect It';
+			action: [:args | self inspectItWith: args];
+			requestedValues: #('selectedString');
+			yourself! !
+
+! Inspector methodsFor: 'code menu' !
+inspectItWith: aDictionary
+
+	| result |
+
+	self disableWhile: [result := SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self object].
+
+	result inspect! !
+
+! Inspector methodsFor: 'code menu' !
+openCodeMenuX: x y: y
+
+	self codeMenu openIn: (self idFor: 'workspaceTextBox') x: x y: y! !
+
+! Inspector methodsFor: 'code menu' !
+printItMenuItem
+
+	^PopupMenuItem new
+		id: #printIt;
+		name: 'Print It';
+		action: [:args | self printItWith: args];
+		requestedValues: #('selectedString' 'selectionStart' 'selectionEnd');
+		yourself! !
+
+! Inspector methodsFor: 'code menu' !
+printItWith: aDictionary
+
+	| result |
+
+	self disableWhile: [result := ' ==> ', (SmalltalkParser evaluate: (aDictionary at: 'selectedString') for: self object) printString].
+
+	self write: result inTextArea: (self idFor: 'workspaceTextBox') position: (aDictionary at: 'selectionEnd')! !
+
+! Inspector methodsFor: 'field menu' !
+basicInspectMenuItem
+
+	^PopupMenuItem new
+		id: #basicInspect;
+		name: 'Basic Inspect';
+		action: [:args | self basicInspectWith: args];
+		enabledBlock: [self selectedField notNil];
+		requestedValues: #('selectedString');
+		yourself! !
+
+! Inspector methodsFor: 'field menu' !
+basicInspectWith: args
+
+	self doBasicInspect
+! !
+
+! Inspector methodsFor: 'field menu' !
+diveInWith: args
+
+	self diveIn! !
+
+! Inspector methodsFor: 'field menu' !
+diveMenuItem
+
+	^PopupMenuItem new
+		id: #dive;
+		name: 'Dive';
+		action: [:args | self diveInWith: args];
+		enabledBlock: [self selectedField notNil];
+		requestedValues: #('selectedString');
+		yourself! !
+
+! Inspector methodsFor: 'field menu' !
+fieldMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'fieldList');
+		addMenuItem: self diveMenuItem;
+		addMenuItem: self popMenuItem;
+		addMenuItem: self inspectMenuItem;
+		addMenuItem: self basicInspectMenuItem;
+		yourself  ! !
+
+! Inspector methodsFor: 'field menu' !
+inspectMenuItem
+
+	^PopupMenuItem new
+		id: #inspect;
+		name: 'Inspect';
+		action: [:args | self inspectWith: args];
+		enabledBlock: [self selectedField notNil];
+		requestedValues: #('selectedString');
+		yourself ! !
+
+! Inspector methodsFor: 'field menu' !
+inspectWith: args
+
+	self doInspect
+! !
+
+! Inspector methodsFor: 'field menu' !
+openFieldMenuX: x y: y
+
+	self fieldMenu openIn: (self idFor: 'fieldList') x: x y: y ! !
+
+! Inspector methodsFor: 'field menu' !
+popMenuItem
+
+	^PopupMenuItem new
+		id: #pop;
+		name: 'Pop';
+		action: [:args | self popOutWith: args];
+		enabledBlock: [self objectStack notEmpty];
+		requestedValues: #('selectedString');
+		yourself! !
+
+! Inspector methodsFor: 'field menu' !
+popOutWith: args
+
+	self popOut
+! !
+
+! Inspector methodsFor: 'html' !
+inspectorHTML
+
+	^HTMLBuilder new
+		div: [:builder1 |
+			builder1
+				inHorizontalLayout: (self idFor: 'inspectorComponents') do: [:builder2 |
+					builder2
+						install: self fieldListWidget;
+					install: self inspectorTextWidget];
+				install: self workspaceWidget];
+		htmlString
+  ! !
+
+! Inspector methodsFor: 'initializing' !
+initialize
+
+	super initialize.
+	objectStack := OrderedCollection new! !
+
+! Inspector methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self
+		setAbsoluteWindowBounds;
+		install;
+		withinWebUpdateDo: [self update; updateFieldList].
+ ! !
+
+! Inspector methodsFor: 'updating' !
+defaultWindowExtent
+
+	^600 @ 200! !
+
+! Inspector methodsFor: 'updating' !
+innerAppName
+
+	^self idFor: 'enableDisable'! !
+
+! Inspector methodsFor: 'updating' !
+install
+
+	"self addHTMLBeforeEndOf: self innerAppName to: self browser2ListWidget"! !
+
+! Inspector methodsFor: 'updating' !
+selectedObject 
+
+	| field |
+
+	self selectedField isNil ifTrue: [^nil].
+	self selectedField = 1 ifTrue: [^self object].
+
+	field := self fieldList at: self selectedField.
+	field isComputedField ifTrue: [
+		^field valueFor: self object].
+	^self object inspectorFieldAt: field! !
+
+! Inspector methodsFor: 'updating' !
+title
+
+	^self object class name ifNil: ['Inspector']! !
+
+! Inspector methodsFor: 'updating' !
+update
+
+	self addHTMLBeforeEndOf: self innerAppName to: self inspectorHTML.
+	self updateList! !
+
+! Inspector methodsFor: 'updating' !
+updateFieldList
+
+	self fieldList: ((self object computedFields , self object inspectorFields) addFirst: 'self'; yourself).
+	self fieldListWidget list: (self fieldList collect: [:each | each asString])! !
+
+! Inspector methodsFor: 'updating' !
+updateList
+
+	"| stream |
+
+	self object isNil ifTrue: [^self].
+
+	stream := WriteStream on: (ByteString new: 1000).
+
+	self fieldList keysAndValuesDo: [:key :eachElement |
+		stream
+			nextPutAll: '<option value=', key printString, '>';
+			nextPutAll: eachElement;
+			nextPutAll: '</option>'].
+
+	self setInnerHTMLOf: (self idFor: 'fieldList') to: stream contents"! !
+
+! Inspector methodsFor: 'updating' !
+updateText
+
+	| text |
+
+	text := self selectedField isNil
+		ifTrue: ['']
+		ifFalse: [self selectedObject printString].
+
+	self inspectorTextWidget text: text; updateText ! !
+
+! Inspector methodsFor: 'updating' !
+updateTitle
+
+	self setInnerHTMLOf: (self idFor: 'dragbar') to: self title! !
+
+! Inspector methodsFor: 'widgets' !
+fieldListWidget
+
+	^self bindingAt: #fieldList ifAbsentPut: [
+		ListComponent new
+			bindTo: self as: 'fieldList';
+			listNumberOfRows: 10;
+			menu: self fieldMenu;
+			onEvent: ListSelectionEvent do: [:event | self changedSelectedField: event selectionIndex];
+			onEvent: DoubleClickEvent do: [:event | self diveIn];
+			yourself]
+  ! !
+
+! Inspector methodsFor: 'widgets' !
+inspectorTextWidget
+
+	^self bindingAt: #inspectorText ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self as: 'inspectorTextBox';
+			yourself]
+   ! !
+
+! Inspector methodsFor: 'widgets' !
+workspaceWidget
+
+	^self bindingAt: #workspace ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self as: 'workspaceTextBox';
+			menu: self codeMenu;
+			subject: self object;
+			yourself]
+   ! !
+
+! Inspector class methodsFor: 'opening' !
+openOn: anObject
+
+	| inspector |
+
+	^(inspector := self new)
+		object: anObject;
+		open;
+		runJavaScript: 'enableTabsInTextArea("', (inspector idFor: 'workspaceTextBox'), '");'
+		yourself
+! !
+
+! BasicInspector methodsFor: 'opening' !
+title
+
+	^'Basic Inspector'! !
+
+! BasicInspector methodsFor: 'updating' !
+selectedObject 
+
+	self selectedField isNil ifTrue: [^nil].
+	self selectedField = 1 ifTrue: [^self object].
+	^self object basicInspectorFieldAt: self selectedField - 1! !
+
+! BasicInspector methodsFor: 'updating' !
+updateFieldList
+
+	self fieldListWidget list: (self object basicInspectorFields addFirst: 'self'; yourself)! !
+
+! KitBrowserPlugin methodsFor: 'computing' !
+computeMethodsListOn: aBrowser
+
+	aBrowser computeKitBrowserMethodsList! !
+
+! KitBrowserPlugin methodsFor: 'installing' !
+installBrowserPanesOn: aWebUI
+
+	aWebUI
+		installBrowserList;
+		installKitBoxWidget;
+		installClassBoxWidget;
+		installProtocolBoxWidget;
+		installMethodBoxWidget;
+		installCodeBoxWidget! !
+
+! KitBrowserPlugin methodsFor: 'opening' !
+doPostBuildOn: aWebUI
+
+	aWebUI
+		kitsList;
+		classesList;
+		protocolsList;
+		methodsList;
+		codeTextEditor;
+		clearClasses;
+		instanceOrClass: #instance! !
+
+! KitBrowserPlugin methodsFor: 'opening' !
+doPostOpenOn: aWebUI
+
+	aWebUI computeKitList! !
+
+! KitBrowserPlugin methodsFor: 'updating' !
+update: aBrowser
+
+	aBrowser
+		updateKitList;
+		updateClassList;
+		updateInstanceClassSelection;
+		updateProtocolList;
+		updateMethodList;
+		updateCodePane! !
+
+! MethodBrowserPlugin methodsFor: 'computing' !
+computeMethodsListOn: aBrowser
+
+	aBrowser computeMethodBrowserMethodsList! !
+
+! MethodBrowserPlugin methodsFor: 'installing' !
+installBrowserPanesOn: aWebUI
+
+	aWebUI
+		installBrowserList;
+		installMethodBoxWidget;
+		installCodeBoxWidget! !
+
+! MethodBrowserPlugin methodsFor: 'opening' !
+doPostBuildOn: aWebUI
+
+	aWebUI
+		methodsList;
+		codeTextEditor;
+		instanceOrClass: #instance! !
+
+! MethodBrowserPlugin methodsFor: 'opening' !
+doPostOpenOn: aWebUI
+
+	aWebUI clearCode! !
+
+! MethodBrowserPlugin methodsFor: 'updating' !
+update: aBrowser
+
+	aBrowser
+		updateMethodListWithClass;
+		updateCodePane! !
+
+! SystemBrowser methodsFor: 'accessing' !
+browserPlugin
+
+	^browserPlugin! !
+
+! SystemBrowser methodsFor: 'accessing' !
+browserPlugin: aPlugin
+
+	browserPlugin := aPlugin! !
+
+! SystemBrowser methodsFor: 'accessing' !
+classes
+	^classes! !
+
+! SystemBrowser methodsFor: 'accessing' !
+classes: aCollection
+	classes := aCollection! !
+
+! SystemBrowser methodsFor: 'accessing' !
+code
+	^code! !
+
+! SystemBrowser methodsFor: 'accessing' !
+code: aString
+	code := aString! !
+
+! SystemBrowser methodsFor: 'accessing' !
+instanceOrClass
+	^instanceOrClass! !
+
+! SystemBrowser methodsFor: 'accessing' !
+instanceOrClass: aSymbol
+	instanceOrClass := aSymbol! !
+
+! SystemBrowser methodsFor: 'accessing' !
+kits
+	^kits! !
+
+! SystemBrowser methodsFor: 'accessing' !
+kits: aCollection
+	kits := aCollection! !
+
+! SystemBrowser methodsFor: 'accessing' !
+methods
+	^methods! !
+
+! SystemBrowser methodsFor: 'accessing' !
+methods: aCollection
+	methods := aCollection! !
+
+! SystemBrowser methodsFor: 'accessing' !
+protocols
+	^protocols! !
+
+! SystemBrowser methodsFor: 'accessing' !
+protocols: aCollection
+	protocols := aCollection! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedClass
+	^selectedClass! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedClass: aClass
+	selectedClass := aClass! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedKit
+	^selectedKit! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedKit: aKit
+	selectedKit := aKit! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedMethod
+	^selectedMethod! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedMethod: aSymbol
+	selectedMethod := aSymbol! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedProtocol
+	^selectedProtocol! !
+
+! SystemBrowser methodsFor: 'accessing' !
+selectedProtocol: aString
+	selectedProtocol := aString! !
+
+! SystemBrowser methodsFor: 'accessing' !
+title
+
+	^'System Browser' ! !
+
+! SystemBrowser methodsFor: 'aspects' !
+classesList
+
+	^self listComponentNamed: #classesList menu: self classMenu! !
+
+! SystemBrowser methodsFor: 'aspects' !
+codeTextEditor
+
+	^self codeBoxWidget! !
+
+! SystemBrowser methodsFor: 'aspects' !
+kitsList
+
+	^self listComponentNamed: #kitsList menu: self kitMenu! !
+
+! SystemBrowser methodsFor: 'aspects' !
+methodsList
+
+	^self listComponentNamed: #methodsList menu: self methodMenu! !
+
+! SystemBrowser methodsFor: 'aspects' !
+protocolsList
+
+	^self listComponentNamed: #protocolsList menu: self protocolMenu! !
+
+! SystemBrowser methodsFor: 'building' !
+postBuild
+	super postBuild.
+	self browserPlugin doPostBuildOn: self! !
+
+! SystemBrowser methodsFor: 'changing' !
+changedSelectedClass: aString
+	| class index |
+	index := Integer readFrom: aString readStream.
+	class := self classes at: index.
+	class == selectedClass ifTrue: [^self].
+	self
+		selectedClass: class;
+		computeProtocolsList;
+		computeCode.
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+changedSelectedClassEvent: anEvent
+
+	| class index |
+	index := Integer readFrom: anEvent selectionIndex.
+	class := self classes at: index.
+	class == selectedClass ifTrue: [^self].
+	self
+		selectedClass: class;
+		computeProtocolsList;
+		computeCode.
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+changedSelectedKitEvent: anEvent
+
+	| kit index |
+	kit := self kits at: anEvent selectionIndex.
+	kit == selectedKit ifTrue: [^self].
+	self
+		selectedKit: kit;
+		computeClassList;
+		computeCode.
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+changedSelectedMethod: aString
+	| method index |
+	index := Integer readFrom: aString readStream.
+	method := self methods at: index.
+	method = selectedMethod ifTrue: [^self].
+	self
+		selectedMethod: method;
+		computeCode.
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+changedSelectedMethodEvent: anEvent
+
+	| method |
+
+	method := self methods at: anEvent selectionIndex.
+	method = selectedMethod ifTrue: [^self].
+	(method first methodDictionary includesKey: (method at: 3)) ifFalse: [
+		method := nil].
+	self
+		selectedMethod: method;
+		computeCode.
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+changedSelectedProtocol: aString
+	| protocol index |
+	index := Integer readFrom: aString readStream.
+	protocol := self protocols at: index.
+	protocol == selectedProtocol ifTrue: [^self].
+	self
+		selectedProtocol: protocol;
+		computeMethodsList;
+		computeCode.
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+changedSelectedProtocolEvent: anEvent
+
+	| protocol |
+	protocol := self protocols at: anEvent selectionIndex.
+	protocol == selectedProtocol ifTrue: [^self].
+	self
+		selectedProtocol: protocol;
+		computeMethodsList;
+		computeCode.
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+clearClasses
+	self classes: OrderedCollection new.
+	self selectedClass: nil.
+	self clearProtocols! !
+
+! SystemBrowser methodsFor: 'changing' !
+clearCode
+	self code: ''! !
+
+! SystemBrowser methodsFor: 'changing' !
+clearMethods
+	self methods: OrderedCollection new.
+	self selectedMethod: nil.
+	self clearCode! !
+
+! SystemBrowser methodsFor: 'changing' !
+clearProtocols
+	self protocols: OrderedCollection new.
+	self selectedProtocol: nil.
+	self clearMethods! !
+
+! SystemBrowser methodsFor: 'changing' !
+computeClassList
+	self clearClasses.
+	self selectedKit isNil ifTrue: [^self].
+	self classes: ((self selectedKit definedClasses , self selectedKit extendedClasses) asArray sortedBy: [:a :b | a name < b name]).
+! !
+
+! SystemBrowser methodsFor: 'changing' !
+computeCode
+
+	self clearCode.
+	self selectedMethod notNil ifTrue: [
+		self code: (self selectedMethod first compiledMethodAt: (self selectedMethod at: 3)) getSource.
+		^self].
+
+	self selectedProtocol notNil ifTrue: [
+		self code: '<type method here>'.
+		^self].
+
+	self selectedClass notNil ifTrue: [
+		| stream |
+		stream := WriteStream on: (String new: 200).
+		self selectedClass fileoutDefinitionOn: stream.
+		self code: stream contents.
+		^self].
+
+	self selectedKit notNil ifTrue: [
+		| stream |
+		stream := WriteStream on: (String new: 200).
+		stream
+			nextPutAll: '(KitManager current kitNamed: ''' , self selectedKit name, ''')';
+			cr; tab;
+			nextPutAll: 'requiredKitNames: ';
+			nextPutAll: self selectedKit requiredKitNames asArray printString;
+			nextPutAll: ' !'.
+		self code: stream contents.
+		^self].
+
+	self code: ''
+! !
+
+! SystemBrowser methodsFor: 'changing' !
+computeKitBrowserMethodsList
+
+	| methodsToShow |
+
+	self clearMethods.
+	self selectedProtocol isNil ifTrue: [^self].
+	methodsToShow := self selectedProtocol first organization at: self selectedProtocol last.
+
+	(self isSelectedClassExtended: self selectedClass) ifTrue: [
+		methodsToShow := methodsToShow select: [:each | (selectedProtocol first compiledMethodAt: each) kit = self selectedKit]].
+
+	self methods: ((methodsToShow asArray sortedBy: [:a :b | a < b])
+		collect: [:eachSelector | Array with: self selectedProtocol first with: self selectedProtocol last with: eachSelector with: (self selectedProtocol first compiledMethodAt: eachSelector) kit]).
+
+! !
+
+! SystemBrowser methodsFor: 'changing' !
+computeKitList
+	self kits: (KitManager default kits asArray sortedBy: [:a :b | a name < b name]).
+	self selectedKit: nil! !
+
+! SystemBrowser methodsFor: 'changing' !
+computeMethodBrowserMethodsList
+
+	self removeDeletedMethodsFromMethodList
+! !
+
+! SystemBrowser methodsFor: 'changing' !
+computeMethodsList
+	
+	self browserPlugin computeMethodsListOn: self! !
+
+! SystemBrowser methodsFor: 'changing' !
+computeProtocolsList
+	| classOrMetaclass organizations |
+	self clearProtocols.
+	self selectedClass isNil ifTrue: [^self].
+	classOrMetaclass := self instanceOrClass = #instance
+		ifTrue: [self selectedClass]
+		ifFalse: [self selectedClass class].
+
+	organizations := classOrMetaclass organization keys.
+	(self isSelectedClassExtended: self selectedClass) ifTrue: [
+		organizations := organizations select: [:eachOrganizationName |
+			(classOrMetaclass methodsInOrganization: eachOrganizationName) anySatisfy: [:eachMethod |
+				eachMethod kit = self selectedKit]]
+		].
+
+	self protocols: ((organizations asArray sortedBy: [:a :b | a < b]) collect: [:eachSymbol |
+			Array with: classOrMetaclass with: eachSymbol]).
+! !
+
+! SystemBrowser methodsFor: 'changing' !
+removeDeletedMethodsFromMethodList
+
+	self methods copy do: [:eachMethodDescriptor |
+		(eachMethodDescriptor first methodDictionary includesKey: (eachMethodDescriptor at: 3)) ifFalse: [
+			self methods: (self methods copyWithout: eachMethodDescriptor)]].
+
+	(self methods includes: self selectedMethod) ifFalse: [
+		self selectedMethod: nil]! !
+
+! SystemBrowser methodsFor: 'changing' !
+showClassMethods
+	self instanceOrClass: #class.
+	self computeProtocolsList; computeCode.
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'changing' !
+showInstanceMethods
+	self instanceOrClass: #instance.
+	self computeProtocolsList; computeCode.
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'class list' !
+classListWidget
+
+	^HTMLBuilder new
+		div;
+			attributeAt: 'width' put: '100%';
+			attributeAt: 'style' put: 'grid-template-columns: 1fr; display: grid;';
+			div;
+				id: (self idFor: 'classListDiv');
+				attributeAt: 'oncontextmenu' put: 'simTalkCallback2(''$$appName$'', ''openClassMenuX:y:'', event.pageX, event.pageY); return false;';
+				startTag: 'select';
+					id: (self idFor: 'classesList');
+					attributeAt: 'name' put: 'classes';
+					attributeAt: 'size' put: self listNumberOfRows printString;
+					attributeAt: 'style' put: 'width: 100%; background-color: rgba(255, 255, 255, 0.0);';
+					attributeAt: 'onchange' put: 'simTalkCallback1(''$$appName$'', ''changedSelectedClass:'' , event.target.value);';
+				endTag: 'select';
+			endDiv;
+			div;
+				startTag: 'input';
+					id: (self idFor: 'instanceMethodsRadioButton');
+					attributeAt: 'type' put: 'radio';
+					attributeAt: 'value' put: 'Instance';
+					attributeAt: 'name' put: (self idFor: 'instanceClass');
+					attributeAt: 'onchange' put: 'simTalkCallback0(''$$appName$'', ''showInstanceMethods'');';
+					text: 'Instance';
+				endTag: 'input';
+				startTag: 'input';
+					id: (self idFor: 'classMethodsRadioButton');
+					attributeAt: 'type' put: 'radio';
+					attributeAt: 'value' put: 'Class';
+					attributeAt: 'name' put: (self idFor: 'instanceClass');
+					attributeAt: 'onchange' put: 'simTalkCallback0(''$$appName$'', ''showClassMethods'');';
+					text: 'Class';
+				endTag: 'input';
+			endDiv;
+		endDiv;
+		htmlString
+! !
+
+! SystemBrowser methodsFor: 'class list' !
+installClassBoxWidget
+
+	self addHTMLBeforeEndOf: self browserListsName to: self classListWidget! !
+
+! SystemBrowser methodsFor: 'class menus' !
+browseClassReferences
+
+	self selectedClass isNil ifTrue: [^self].
+	self class
+		openMethodsBrowserOn: (BeagleSystem referencesToClass: self selectedClass).! !
+
+! SystemBrowser methodsFor: 'class menus' !
+browseInstVarReferences
+
+	self selectedClass isNil ifTrue: [^self].
+	ListChoiceBox new
+		message: 'Choose one';
+		choices: self selectedClass instVarNames;
+		values: self selectedClass instVarNames;
+		answerBlock: [:x | self class openMethodsBrowserOn: (BeagleSystem referencesToInstanceVariable: x inClass: self selectedClass)];
+		open! !
+
+! SystemBrowser methodsFor: 'class menus' !
+browseInstVarReferencesWith: aDictionary
+
+	self browseInstVarReferences! !
+
+! SystemBrowser methodsFor: 'class menus' !
+browseUndeclaredReferences
+
+	ListChoiceBox new
+		message: 'Choose one';
+		choices: Undeclared keys asArray;
+		values: Undeclared keys asArray;
+		answerBlock: [:undeclaredSymbol | self class openMethodsBrowserOn: (BeagleSystem referencesToUndeclared: undeclaredSymbol)];
+		open
+! !
+
+! SystemBrowser methodsFor: 'class menus' !
+classHierarchyString
+
+	| classHierarchyStream indentLevel |
+
+	classHierarchyStream := WriteStream on: (String new: 100).
+
+	indentLevel := 0.
+
+	self writeClassHierarchyStringFor: self selectedClassOrMetaclass on: classHierarchyStream indentLevel: indentLevel.
+
+	^classHierarchyStream contents
+! !
+
+! SystemBrowser methodsFor: 'class menus' !
+classMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'classListDiv');
+		addMenuItem: self classReferencesMenuItem;
+		addMenuItem: self undeclaredReferencesMenuItem;
+		addMenuItem: self instanceVariableReferencesMenuItem;
+		addMenuItem: self removeClassMenuItem;
+		addMenuItem: self moveClassToKitMenuItem;
+		addMenuItem: self showClassHierarchyMenuItem;
+		addMenuItem: self createAccessorsMenuItem;
+		yourself
+ ! !
+
+! SystemBrowser methodsFor: 'class menus' !
+classMenuName
+	^self idFor: 'classMenu'! !
+
+! SystemBrowser methodsFor: 'class menus' !
+classReferencesMenuItem
+
+	^PopupMenuItem new
+		id: #classReferences;
+		name: 'Class References';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedClass notNil];
+		action: [:args | self classReferencesWith: args];
+		yourself ! !
+
+! SystemBrowser methodsFor: 'class menus' !
+classReferencesWith: aDictionary
+
+	| class |
+
+	class := self selectedClass.
+	class isNil ifTrue: [
+		^self message: 'No class selected.'].
+
+	self class
+		openMethodsBrowserOn: (BeagleSystem referencesToClass: class) at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')! !
+
+! SystemBrowser methodsFor: 'class menus' !
+createAccessorsForInstVar: aString
+
+	| getterName setterName |
+
+	getterName := aString asSymbol.
+	setterName := (aString, ':') asSymbol.
+
+	(self selectedClassOrMetaclass methodDictionary includesKey: getterName) ifTrue: [
+		^self message: 'Method ', getterName, ' already exists'].
+
+	(self selectedClassOrMetaclass methodDictionary includesKey: setterName) ifTrue: [
+		^self message: 'Method ', setterName, ' already exists'].
+
+	self createGetterMethodFor: getterName.
+	self createSetterMethodFor: setterName.
+
+	self
+		computeProtocolsList;
+		updateBrowser
+
+
+ ! !
+
+! SystemBrowser methodsFor: 'class menus' !
+createAccessorsMenuItem
+
+	^PopupMenuItem new
+		id: #createAccessors;
+		name: 'Create Accessors';
+		enabledBlock: [self selectedClass notNil];
+		action: [:args | self createAccessorsWith: args];
+		yourself ! !
+
+! SystemBrowser methodsFor: 'class menus' !
+createAccessorsWith: aDictionary
+
+	self selectedClass isNil ifTrue: [^self].
+	ListChoiceBox new
+		message: 'Choose one';
+		choices: self selectedClass instVarNames;
+		values: self selectedClass instVarNames;
+		answerBlock: [:x | self createAccessorsForInstVar: x];
+		open ! !
+
+! SystemBrowser methodsFor: 'class menus' !
+createGetterMethodFor: getterName
+
+	| stream |
+
+	stream := WriteStream on: (String new: 100).
+	stream
+		nextPutAll: '! ';
+		nextPutAll: self selectedClassOrMetaclass printString;
+		nextPutAll: ' methodsFor: ''accessing'' !';
+		cr;
+		nextPutAll: getterName;
+		cr;cr; tab;
+		nextPutAll: '^';
+		nextPutAll: getterName;
+		nextPutAll: '! !'.
+
+	stream contents readStream fileIn.
+
+ ! !
+
+! SystemBrowser methodsFor: 'class menus' !
+createSetterMethodFor: setterName
+
+	| stream |
+
+	stream := WriteStream on: (String new: 100).
+	stream
+		nextPutAll: '! ';
+		nextPutAll: self selectedClassOrMetaclass printString;
+		nextPutAll: ' methodsFor: ''accessing'' !';
+		cr;
+		nextPutAll: setterName;
+		nextPutAll: ' anObject';
+		cr; cr; tab;
+		nextPutAll: (setterName copyWithout: $:);
+		nextPutAll: ' := anObject! !'.
+
+	stream contents readStream fileIn
+
+ ! !
+
+! SystemBrowser methodsFor: 'class menus' !
+instanceVariableReferencesMenuItem
+
+	^PopupMenuItem new
+		id: #instVarReferences;
+		name: 'Instance Variable References';
+		enabledBlock: [self selectedClass notNil];
+		action: [:args | self browseInstVarReferencesWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'class menus' !
+moveClassToKitMenuItem
+
+	^PopupMenuItem new
+		id: #moveClassToKit;
+		name: 'Move Class to Kit';
+		enabledBlock: [self selectedClass notNil];
+		action: [:args | self moveClassToKitWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'class menus' !
+moveClassToKitWith: aDictionary
+
+	self request: 'Kit Name?' initialAnswer: 'Other' answerBlock: [:newKitName | self moveSelectedClassToKit: newKitName]! !
+
+! SystemBrowser methodsFor: 'class menus' !
+moveSelectedClassToKit: aString
+
+	| classToMove newKit |
+
+	classToMove := self selectedClass.
+	
+	aString isNil ifTrue: [^self].
+	classToMove  isNil ifTrue: [^self].
+
+	(KitManager current kitForClass: classToMove ifNone: [^self]) removeClass: classToMove.
+	(newKit := KitManager current kitNamedIfAbsentAdd: aString) addClass: classToMove.
+	self computeKitList.
+	self selectedKit: newKit;
+		computeClassList;
+		selectedClass: classToMove.
+
+	self updateBrowser
+! !
+
+! SystemBrowser methodsFor: 'class menus' !
+openClassMenuX: x y: y
+
+	self classMenu openIn: (self idFor: 'classListDiv') x: x y: y! !
+
+! SystemBrowser methodsFor: 'class menus' !
+removeClass
+
+	self selectedClass isNil ifTrue: [^self].
+
+	ClassCreator new removeClass: self selectedClass.
+	self computeClassList; updateBrowser
+
+! !
+
+! SystemBrowser methodsFor: 'class menus' !
+removeClassMenuItem
+
+	^PopupMenuItem new
+		id: #removeClass;
+		name: 'Remove Class';
+		enabledBlock: [self selectedClass notNil];
+		action: [:args | self removeClassWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'class menus' !
+removeClassWith: args
+
+	^self removeClass! !
+
+! SystemBrowser methodsFor: 'class menus' !
+showClassHierarchy
+
+	self
+		clearProtocols;
+		computeProtocolsList;
+		code: self classHierarchyString;
+		updateBrowser! !
+
+! SystemBrowser methodsFor: 'class menus' !
+showClassHierarchyMenuItem
+
+	^PopupMenuItem new
+		id: #showClassHierarchy;
+		name: 'Show Class Hierarchy';
+		enabledBlock: [self selectedClass notNil];
+		action: [:args | self showClassHierarchyWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'class menus' !
+showClassHierarchyWith: args
+
+	^self showClassHierarchy! !
+
+! SystemBrowser methodsFor: 'class menus' !
+undeclaredReferencesMenuItem
+
+	^PopupMenuItem new
+		id: #undeclaredReferences;
+		name: 'Undeclared References';
+		enabledBlock: [Undeclared notEmpty];
+		action: [:args | self undeclaredReferencesWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'class menus' !
+undeclaredReferencesWith: aDictionary
+
+	self browseUndeclaredReferences! !
+
+! SystemBrowser methodsFor: 'class menus' !
+writeClassHierarchyStringFor: aClass on: aStream indentLevel: anInteger
+
+	| indentLevel |
+
+	indentLevel := anInteger.
+
+	aClass withAllSuperclasses reverseDo: [:eachSuperclass |
+		self writeClassSummaryStringFor: eachSuperclass on: aStream indentLevel: indentLevel.
+		indentLevel := indentLevel + 1].
+
+	self writeSubclassSummaryStringsFor: aClass on: aStream indentLevel: indentLevel
+! !
+
+! SystemBrowser methodsFor: 'class menus' !
+writeClassSummaryStringFor: aClass on: aStream indentLevel: anInteger
+
+	anInteger timesRepeat: [aStream tab].
+	aStream
+		nextPutAll: aClass printString;
+		nextPutAll: ' ('.
+
+	aClass instVarNames do: [:eachInstVarName | aStream print: eachInstVarName; space].
+	aStream nextPut: $).
+	aStream cr
+
+! !
+
+! SystemBrowser methodsFor: 'class menus' !
+writeSubclassSummaryStringsFor: aClass on: aStream indentLevel: anInteger
+
+	| indentLevel |
+
+	indentLevel := anInteger + 1.
+	aClass subclasses do: [:subclass |
+		self writeClassSummaryStringFor: subclass on: aStream indentLevel: indentLevel.
+		self writeSubclassSummaryStringsFor: subclass on: aStream indentLevel: anInteger + 1]
+! !
+
+! SystemBrowser methodsFor: 'code list' !
+codeBoxWidget
+
+	^self bindingAt: #workspace ifAbsentPut: [
+		RichTextEditorComponent new
+			bindTo: self as: 'codeTextBox';
+			menu: self codeMenu;
+			subject: self;
+			yourself]
+   ! !
+
+! SystemBrowser methodsFor: 'code list' !
+installCodeBoxWidget
+
+	self addHTMLBeforeEndOf: self innerAppName to: self codeBoxWidget htmlString! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeDoitMenuItem
+
+	^PopupMenuItem new
+		id: #doit;
+		name: 'Do It';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		addRequestedValue: 'richTextSelectedString';
+		action: [:args | self doItWith: args];
+		yourself ! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeImplementersMenuItem
+
+	^PopupMenuItem new
+		id: #codeImplementers;
+		name: 'Implementers';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		addRequestedValue: 'richTextSelectionStart';
+		addRequestedValue: 'richTextSelectionEnd';
+		addRequestedValue: 'richTextSelectedString';
+		action: [:args | self codeImplementersWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeImplementersWith: aDictionary
+
+	| method selector |
+
+	(aDictionary at: 'richTextSelectedString') isEmpty ifTrue: [^self].
+
+	method := self selectedMethod first compiledMethodAt: (self selectedMethod at: 3).
+	selector := method findSendWithOffset: (aDictionary at: 'richTextSelectionStart').
+	selector isNil ifTrue: [^self].
+
+	self class
+		openMethodsBrowserOn: (BeagleSystem implementersOf: selector) at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')  ! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeInspectItMenuItem
+
+	^PopupMenuItem new
+		id: #inspectit;
+		name: 'Inspect It';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		addRequestedValue: 'richTextSelectedString';
+		action: [:args | self inspectItWith: args];
+		yourself ! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'codeTextBox');
+		addMenuItem: self saveCodeMenuItem;
+		addMenuItem: self codeSendersMenuItem;
+		addMenuItem: self codeImplementersMenuItem;
+		addMenuItem: self codeDoitMenuItem;
+		addMenuItem: self codePrintItMenuItem;
+		addMenuItem: self codeInspectItMenuItem;
+		addMenuItem: self selectedCodeClassReferencesMenuItem;
+		yourself ! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeMenuName
+
+	^self idFor: 'codeMenu'! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codePrintItMenuItem
+
+	^PopupMenuItem new
+		id: #printit;
+		name: 'Print It';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		addRequestedValue: 'richTextSelectionStart';
+		addRequestedValue: 'richTextSelectionEnd';
+		addRequestedValue: 'richTextSelectedString';
+		action: [:args | self printItWith: args];
+		yourself ! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeSendersMenuItem
+
+	^PopupMenuItem new
+		id: #codeSenders;
+		name: 'Senders';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		addRequestedValue: 'richTextSelectionStart';
+		addRequestedValue: 'richTextSelectionEnd';
+		addRequestedValue: 'richTextSelectedString';
+		action: [:args | self codeSendersWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'code menus' !
+codeSendersWith: aDictionary
+
+	| method selector |
+
+	(aDictionary at: 'richTextSelectedString') isEmpty ifTrue: [^self].
+
+	method := self selectedMethod first compiledMethodAt: (self selectedMethod at: 3).
+	selector := method findSendWithOffset: (aDictionary at: 'richTextSelectionStart').
+	selector isNil ifTrue: [^self].
+
+	self class
+		openMethodsBrowserOn: (BeagleSystem sendersOf: selector) at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')  ! !
+
+! SystemBrowser methodsFor: 'code menus' !
+inspectItWith: aDictionary
+
+	| result |
+
+	self disableWhile: [result := SmalltalkParser evaluate: (aDictionary at: 'richTextSelectedString')].
+
+	result inspect.
+	self updateCodePane! !
+
+! SystemBrowser methodsFor: 'code menus' !
+openCodeMenuX: x y: y
+
+	self codeMenu openIn: (self idFor: 'codeBoxDiv') x: x y: y! !
+
+! SystemBrowser methodsFor: 'code menus' !
+printItWith: aDictionary
+
+	| result |
+
+	self disableWhile: [result := ' ==> ', (SmalltalkParser evaluate: (aDictionary at: 'richTextSelectedString')) printString].
+
+	self code: (self code copyFrom: 1 to: (aDictionary at: 'richTextSelectionEnd')) ,
+		result, ' ',
+		(self code copyFrom: (aDictionary at: 'richTextSelectionEnd') + 1 to: self code size).
+
+	self codeBoxWidget clearEmphasis.
+	self updateCodePaneNoHighlight.
+	self codeBoxWidget setSelectionFrom: (aDictionary at: 'richTextSelectionEnd') to: ((aDictionary at: 'richTextSelectionEnd' ) + 1 + result size)
+! !
+
+! SystemBrowser methodsFor: 'code menus' !
+saveClassDefinition: aString
+
+	aString readStream fileIn! !
+
+! SystemBrowser methodsFor: 'code menus' !
+saveCodeMenuItem
+
+	^PopupMenuItem new
+		id: #saveCode;
+		name: 'Save';
+		addRequestedValue: 'innerHTML';
+		action: [:args | self saveCodeWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'code menus' !
+saveCodeWith: aDictionary
+
+	| oldSelectedMethod strippedText |
+
+	strippedText := self stripText: (aDictionary at: 'innerHTML').
+
+	(self selectedMethod isNil and: [self selectedProtocol isNil]) ifTrue: [
+		self disableWhile: [self saveClassDefinition: strippedText].
+		self
+			clearClasses;
+			computeClassList;
+			updateBrowser.
+		^self].
+
+	(self saveMethodDefinition: strippedText) ifFalse: [^self].
+
+	oldSelectedMethod := self selectedMethod.
+	self
+		clearCode;
+		computeMethodsList.
+
+	self
+		selectedMethod: oldSelectedMethod;
+		computeCode.
+
+	self updateBrowser! !
+
+! SystemBrowser methodsFor: 'code menus' !
+saveMethodDefinition: aString
+
+	| fileinStream method classString protocol kit |
+
+	classString := self selectedMethod notNil
+		ifTrue: [self selectedMethod first printString]
+		ifFalse: [self selectedClass isNil
+			ifTrue: [nil]
+			ifFalse: [self selectedClassOrMetaclass printString]].
+
+	classString isNil ifTrue: [^self].
+
+	protocol := self selectedMethod notNil
+		ifTrue: [
+			kit := self selectedMethod at: 4.
+			(self selectedMethod at: 2) ifNil: ['uncategorized'].
+			]
+		ifFalse: [
+			kit := nil.
+			self selectedProtocol notNil
+				ifTrue: [self selectedProtocol last]
+				ifFalse: ['uncategorized']].
+
+	fileinStream := WriteStream on: (String new: 100).
+	fileinStream
+		nextPutAll: '! ';
+		nextPutAll: classString;
+		nextPutAll: ' methodsFor: ''';
+		nextPutAll: protocol;
+		nextPutAll: ''' !';
+		cr;
+		nextPut: Character lf;
+		nextPutAll: (aString crToCRLF);
+		nextPutAll: '! !'.
+
+	method := [fileinStream contents readStream fileIn]
+		on: CompileError , CompileWarning
+		do: [:ex |
+			| convertedString endOffset |
+			convertedString := aString lfToCR.
+			endOffset := ex endSourceOffset + 1 min: convertedString size.
+
+			self code:
+				(convertedString copyFrom: 1 to: endOffset),
+				' ' , ex message asString, ' ',
+				(convertedString copyFrom: endOffset + 1 to: convertedString size).
+
+			self codeBoxWidget
+				text: self code;
+				updateText;
+				setSelectionFrom: (ex endSourceOffset +1 min: convertedString size) to: (ex endSourceOffset +1 min: convertedString size) + 2 + ex message asString size.
+
+			ex return: nil].
+
+	method isNil ifTrue: [
+		"self selectedMethod: nil."
+		^false].
+
+	kit isNil ifFalse: [
+		fileinStream := WriteStream on: (String new: 100).
+		fileinStream
+			nextPutAll: '(KitManager current kitNamed: ''', kit name, ''') addMethod: (';
+			nextPutAll: classString;
+			nextPutAll: ' compiledMethodAt: #';
+			nextPutAll: method selector;
+			nextPutAll: ') !';
+			cr; cr.
+
+		fileinStream contents readStream fileIn
+		].
+
+	self selectedMethod: (
+		Array
+			with: method mclass
+			with: (method mclass organizationFor: method selector)
+			with: method selector
+			with: method kit).
+
+	^true
+   ! !
+
+! SystemBrowser methodsFor: 'code menus' !
+selectedCodeClassReferencesMenuItem
+
+	^PopupMenuItem new
+		id: #classReferences;
+		name: 'Class References';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		addRequestedValue: 'richTextSelectionStart';
+		addRequestedValue: 'richTextSelectionEnd';
+		addRequestedValue: 'richTextSelectedString';
+		action: [:args | self selectedCodeClassReferencesWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'code menus' !
+selectedCodeClassReferencesWith: aDictionary
+
+	| class className |
+
+	className := (aDictionary at: 'richTextSelectedString') trimSeparators.
+	className isEmpty ifTrue: [^self].
+
+	class := Smalltalk at: className asSymbol ifAbsent: [nil].
+	class isNil ifTrue: [
+		^self message: 'No such class: ', className].
+
+	self class
+		openMethodsBrowserOn: (BeagleSystem referencesToClass: class) at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')! !
+
+! SystemBrowser methodsFor: 'html' !
+browserList
+
+	^HTMLBuilder new
+		inHorizontalLayout: self browserListsName do: [:builder | ];
+		htmlString! !
+
+! SystemBrowser methodsFor: 'html' !
+browserListsName
+
+	^self idFor: 'browserLists'! !
+
+! SystemBrowser methodsFor: 'html' !
+fixedOffset
+
+	^5 @ (self listNumberOfRows * -1 - 220)! !
+
+! SystemBrowser methodsFor: 'html' !
+highlightDoitFor: aComponent
+! !
+
+! SystemBrowser methodsFor: 'html' !
+highlightFor: aComponent
+
+	self selectedMethod isNil
+		ifTrue: [self highlightDoitFor: aComponent]
+		ifFalse: [self highlightMethodFor: aComponent]
+
+! !
+
+! SystemBrowser methodsFor: 'html' !
+highlightMethodFor: aComponent
+
+	CodeHighlighter new
+		highlightMethod: (self selectedMethod first compiledMethodAt: (self selectedMethod at: 3))
+		source: aComponent text
+		forWidget: aComponent		
+! !
+
+! SystemBrowser methodsFor: 'html' !
+innerAppName
+
+	^self idFor: 'enableDisable'! !
+
+! SystemBrowser methodsFor: 'html' !
+installBrowserList
+
+	self addHTMLBeforeEndOf: self innerAppName to: self browserList! !
+
+! SystemBrowser methodsFor: 'html' !
+installBrowserPanes
+
+	self browserPlugin installBrowserPanesOn: self! !
+
+! SystemBrowser methodsFor: 'html' !
+listNumberOfRows
+
+	^"self extent y // 30" 10! !
+
+! SystemBrowser methodsFor: 'html' !
+stripText: aString
+
+	^HTMLBuilder new htmlUnquote: aString! !
+
+! SystemBrowser methodsFor: 'kit list' !
+installKitBoxWidget
+
+	self kitsList
+		onEvent: ListSelectionEvent do: [:event | self changedSelectedKitEvent: event].
+
+	self addComponent: self kitsList beforeEndOf: self browserListsName! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+fileoutKitMenuItem
+
+	^PopupMenuItem new
+		id: #fileoutKit;
+		name: 'Fileout Kit';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedKit notNil];
+		action: [:args | self fileoutKitWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+fileoutKitWith: aDictionary
+
+	self selectedKit isNil ifTrue: [^self].
+	self selectedKit fileout! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+findClass
+
+	self request: 'Class Name?' initialAnswer: 'Object' answerBlock: [:answer | answer isNil ifFalse: [self findClass: answer]]! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+findClass: aString
+
+	| class kit classNames className |
+
+	classNames := (Smalltalk keys select: [:each | aString matches: each]) asArray sorted.
+	classNames isEmpty ifTrue: [self warningMessage: 'Class ', aString asSymbol, ' not found'. ^self].
+
+	classNames size = 1 ifTrue: [^self findClassName: classNames first].
+
+	className := ListChoiceBox new
+		message: 'Which class?';
+		choices: classNames;
+		values: classNames;
+		answerBlock: [:className | self findClassName: className];
+		open
+
+! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+findClassMenuItem
+
+	^PopupMenuItem new
+		id: #findClass;
+		name: 'Find Class';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		action: [:args | self findClassWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+findClassName: aString
+
+	| class kit |
+
+	class := Smalltalk at: aString asSymbol ifAbsent: [nil].
+	class isNil
+		ifTrue: [self warningMessage: 'Class ', aString asSymbol, ' not found'. ^self].
+
+	kit := KitManager current kitForClass: class.
+	kit isNil ifTrue: [self warningMessage: 'No kit for ', aString asSymbol printString. ^self].
+
+	self
+		selectedKit: kit;
+		computeClassList;
+		selectedClass: class;
+		instanceOrClass: #instance;
+		computeProtocolsList;
+		updateBrowser! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+findClassWith: aDictionary
+
+	self
+		request: 'Class Name?'
+		initialAnswer: 'Object'
+		answerBlock: [:answer | answer isNil ifFalse: [self findClass: answer]]
+		at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+kitMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'kitListDiv');
+		addMenuItem: self findClassMenuItem;
+		addMenuItem: self newKitMenuItem;
+		addMenuItem: self removeKitMenuItem;
+		addMenuItem: self fileoutKitMenuItem;
+		addMenuItem: self unloadKitMenuItem;
+		yourself! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+kitMenuName
+	^self idFor: 'kitMenu'! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+newKit
+
+	self request: 'Kit Name?' initialAnswer: 'New Kit' answerBlock: [:answer | self newKit: answer]! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+newKit: aString
+
+	| kit |
+
+	aString isNil ifTrue: [^self].
+	aString isEmpty ifTrue: [^self].
+	(KitManager current kitNamed: aString) notNil ifTrue: [
+		self warningMessage: 'Kit ', aString printString, ' already exists'.
+		^self].
+	kit := KitManager current addKitNamed: aString.
+	self
+		computeKitList;
+		selectedKit: kit;
+		computeClassList;
+		updateBrowser! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+newKitMenuItem
+
+	^PopupMenuItem new
+		id: #newKit;
+		name: 'New Kit';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		action: [:args | self newKitWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+newKitWith: aDictionary
+
+	self
+		request: 'Kit Name?'
+		initialAnswer: 'New Kit'
+		answerBlock: [:answer | self newKit: answer]
+		at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+openKitMenuX: x y: y
+
+	self kitMenu openIn: (self idFor: 'kitListDiv') x: x y: y
+! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+removeKit
+
+	self selectedKit isNil ifTrue: [^self].
+	self selectedKit definedClasses isEmpty ifFalse: [
+		self warningMessage: 'Kit isn''t empty - can''t remove'.
+		^self].
+	KitManager current removeKit: self selectedKit.
+	self computeKitList.
+	self updateBrowser! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+removeKitMenuItem
+
+	^PopupMenuItem new
+		id: #removeKit;
+		name: 'Remove Kit';
+		enabledBlock: [self selectedKit notNil];
+		action: [:args | self removeKitWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+removeKitWith: aDictionary
+
+	self removeKit! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+unloadKitMenuItem
+
+	^PopupMenuItem new
+		id: #unloadKit;
+		name: 'Unload Kit';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedKit notNil];
+		action: [:args | self unloadKitWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'kit menus' !
+unloadKitWith: aDictionary
+
+	| reason |
+
+	self selectedKit isNil ifTrue: [^self].
+
+	reason := self selectedKit cantUnloadReason.
+	reason notNil ifTrue: [^self message: reason].
+
+	self selectedKit unload.
+	self
+		clearClasses;
+		computeKitList;
+		updateBrowser! !
+
+! SystemBrowser methodsFor: 'method list' !
+installMethodBoxWidget
+
+	self methodsList
+			onEvent: ListSelectionEvent do: [:event | self changedSelectedMethodEvent: event].
+
+	self addComponent: self methodsList beforeEndOf: self browserListsName! !
+
+! SystemBrowser methodsFor: 'method list' !
+methodListWidget
+
+	^HTMLBuilder new
+		div;
+			id: (self idFor: 'methodListDiv');
+			attributeAt: 'width' put: '100%';
+			attributeAt: 'oncontextmenu' put: 'simTalkCallback2(''$$appName$'', ''openMethodMenuX:y:'', event.pageX, event.pageY); return false;';
+			startTag: 'select';
+				id: (self idFor: 'methodsList');
+				attributeAt: 'name' put: 'methods';
+				attributeAt: 'size' put: self listNumberOfRows printString;
+				attributeAt: 'style' put: 'width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.0);';
+				attributeAt: 'onchange' put: 'simTalkCallback1(''$$appName$'', ''changedSelectedMethod:'' , event.target.value);';
+			endTag: 'select';
+		endDiv;
+		htmlString
+! !
+
+! SystemBrowser methodsFor: 'method menus' !
+deleteMethodMenuItem
+
+	^PopupMenuItem new
+		id: #deleteMethod;
+		name: 'Delete';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedMethod notNil];
+		action: [:args | self deleteMethodWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'method menus' !
+deleteMethodWith: aDictionary
+
+	| class |
+	self selectedMethod isNil ifTrue: [^self].
+	self selectedMethod first removeSelector: (self selectedMethod at: 3).
+	self clearCode;
+		computeMethodsList.
+	self withinWebUpdateDo: [self update]
+	! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodImplementersMenuItem
+
+	^PopupMenuItem new
+		id: #methodImplementers;
+		name: 'Implementers';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedMethod notNil];
+		action: [:args | self methodImplementersWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodImplementersWith: aDictionary
+
+	self selectedMethod isNil ifTrue: [^self].
+	self class
+		openMethodsBrowserOn: (BeagleSystem implementersOf: (self selectedMethod at: 3)) at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY') ! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'methodListDiv');
+		addMenuItem: self methodSendersMenuItem;
+		addMenuItem: self methodImplementersMenuItem;
+		addMenuItem: self methodMessagesMenuItem;
+		addMenuItem: self moveMethodToProtocolMenuItem;
+		addMenuItem: self deleteMethodMenuItem;
+		addMenuItem: self moveMethodToKitMenuItem;
+		yourself
+! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodMenuName
+
+	^self idFor: 'methodMenu'! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodMessagesMenuItem
+
+	^PopupMenuItem new
+		id: #methodMessages;
+		name: 'Messages';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedMethod notNil];
+		action: [:args | self methodMessagesWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodMessagesWith: aDictionary
+
+	| selectors |
+	self selectedMethod isNil ifTrue: [^self].
+
+	selectors := (self selectedMethod first compiledMethodAt: (self selectedMethod at: 3)) allMessages.
+	ListChoiceBox new
+		message: 'Selector?';
+		choices: selectors;
+		values: selectors;
+		answerBlock: [:selector |
+			self class
+				openMethodsBrowserOn: (BeagleSystem implementersOf: selector) at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')];
+		open
+
+	 ! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodSendersMenuItem
+
+	^PopupMenuItem new
+		id: #methodSenders;
+		name: 'Senders';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedMethod notNil];
+		action: [:args | self methodSendersWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'method menus' !
+methodSendersWith: aDictionary
+
+	self selectedMethod isNil ifTrue: [^self].
+	self class
+		openMethodsBrowserOn: (BeagleSystem sendersOf: (self selectedMethod at: 3)) at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY') ! !
+
+! SystemBrowser methodsFor: 'method menus' !
+moveMethodToKitMenuItem
+
+	^PopupMenuItem new
+		id: #moveMethodToKit;
+		name: 'Move to Kit';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedMethod notNil];
+		action: [:args | self moveToKitWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'method menus' !
+moveMethodToProtocolMenuItem
+
+	^PopupMenuItem new
+		id: #moveMethodToProtocol;
+		name: 'Move to Protocol';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedMethod notNil];
+		action: [:args | self moveToProtocolWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'method menus' !
+moveToKit: aString
+
+	| kit |
+
+	aString isNil ifTrue: [^self].
+
+	kit := KitManager current kitNamed: aString.
+	kit isNil ifTrue: [
+		^self message: 'Kit not found: ', aString].
+
+	kit addMethod: (self selectedMethod first compiledMethodAt: (self selectedMethod at: 3)).
+
+	self
+		computeMethodsList;
+		updateBrowser ! !
+
+! SystemBrowser methodsFor: 'method menus' !
+moveToKitWith: aDictionary
+
+	self selectedMethod isNil ifTrue: [^self].
+
+	self
+		request: 'New kit?'
+		initialAnswer: 'uncategorized'
+		answerBlock: [:value | self moveToKit: value]
+		at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')
+! !
+
+! SystemBrowser methodsFor: 'method menus' !
+moveToProtocol: aString
+
+	| oldSelectedProtocol |
+
+	aString isNil ifTrue: [^self].
+	self selectedClassOrMetaclass organizationAt: aString add: (self selectedMethod at: 3).
+
+	oldSelectedProtocol := self selectedProtocol.
+
+	self
+		clearProtocols;
+		computeProtocolsList;
+		selectedProtocol: oldSelectedProtocol;
+		computeMethodsList;
+		updateBrowser ! !
+
+! SystemBrowser methodsFor: 'method menus' !
+moveToProtocolWith: aDictionary
+
+	| oldSelectedProtocol |
+
+	self selectedMethod isNil ifTrue: [^self].
+
+	self
+		request: 'New protocol?'
+		initialAnswer: 'uncategorized'
+		answerBlock: [:value | self moveToProtocol: value]
+		at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')
+! !
+
+! SystemBrowser methodsFor: 'method menus' !
+openMethodMenuX: x y: y
+
+	self methodMenu openIn: (self idFor: 'methodListDiv') x: x y: y! !
+
+! SystemBrowser methodsFor: 'opening' !
+defaultWindowExtent
+
+	^1000 @ 300! !
+
+! SystemBrowser methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+
+	self browserPlugin doPostOpenOn: self.
+
+	self
+		installBrowserPanes;
+		withinWebUpdateDo: [
+			self update].
+
+	self runJavaScript: 'captureControlKeyInArea("$', self appName ,
+		'","s',
+		'", "', (self idFor: 'codeTextBox'),
+		'", "', (self idFor: 'codeTextBox'),
+		'", "saveCodeWith:',
+		'", ["innerHTML"]' ,
+		');'.
+
+	self runJavaScript: 'captureControlKeyInArea("$', self appName ,
+		'","d',
+		'", "', (self idFor: 'codeTextBox'),
+		'", "', (self idFor: 'codeTextBox'),
+		'", "doItWith:',
+		'", ["richTextSelectedString", "richTextSelectionStart", "richTextSelectionEnd"]' ,
+		');'.
+
+	self runJavaScript: 'captureControlKeyInArea("$', self appName ,
+		'","p',
+		'", "', (self idFor: 'codeTextBox'),
+		'", "', (self idFor: 'codeTextBox'),
+		'", "printItWith:',
+		'", ["richTextSelectedString", "richTextSelectionStart", "richTextSelectionEnd"]' ,
+		');'.
+
+	self runJavaScript: 'captureControlKeyInArea("$', self appName ,
+		'","q',
+		'", "', (self idFor: 'codeTextBox'),
+		'", "', (self idFor: 'codeTextBox'),
+		'", "inspectItWith:',
+		'", ["richTextSelectedString", "richTextSelectionStart", "richTextSelectionEnd"]' ,
+		');'! !
+
+! SystemBrowser methodsFor: 'protocol list' !
+installProtocolBoxWidget
+
+	self protocolsList
+		onEvent: ListSelectionEvent do: [:event | self changedSelectedProtocolEvent: event].
+
+	self addComponent: self protocolsList beforeEndOf: self browserListsName! !
+
+! SystemBrowser methodsFor: 'protocol list' !
+protocolListWidget
+
+	^HTMLBuilder new
+		div;
+			id: (self idFor: 'protocolListDiv');
+			attributeAt: 'width' put: '100%';
+			attributeAt: 'onContextMenu' put: 'simTalkCallback2(''$$appName$'', ''openProtocolMenuX:y:'', event.pageX, event.pageY); return false;';
+			startTag: 'select';
+				id: (self idFor: 'protocolsList');
+				attributeAt: 'name' put: 'protocols';
+				attributeAt: 'size' put: self listNumberOfRows printString;
+				attributeAt: 'style' put: 'width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.0);';
+				attributeAt: 'onchange' put: 'simTalkCallback1(''$$appName$'', ''changedSelectedProtocol:'' , event.target.value);';
+			endTag: 'select';
+		endDiv;
+		htmlString
+! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+findMethodAnswer: aString
+
+	| methodNames |
+
+	methodNames := (self selectedClassOrMetaclass methodDictionary keys select: [:each | aString matches: each]) asArray sorted.
+	methodNames isEmpty ifTrue: [self warningMessage: 'Method ', aString asSymbol, ' not found'. ^self].
+
+	methodNames size = 1 ifTrue: [^self findMethodName: methodNames first].
+
+	ListChoiceBox new
+		message: 'Which method?';
+		choices: methodNames ;
+		values: methodNames ;
+		answerBlock: [:methodName | self findMethodName: methodName];
+		open
+
+! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+findMethodMenuItem
+
+	^PopupMenuItem new
+		id: #findMethod;
+		name: 'Find Method';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		action: [:args | self findMethodWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+findMethodName: aString
+
+	| organization methodName |
+
+	methodName := aString asSymbol.
+	(self selectedClass methodDictionary includesKey: methodName) ifFalse: [^self].
+
+	organization := self selectedClass organizationFor: methodName.
+	self
+		computeProtocolsList;
+		selectedProtocol: (Array with: self selectedClass with: organization);
+		computeMethodsList;
+		selectedMethod: (Array with: selectedClass with: organization with: methodName);
+		computeCode;
+		updateBrowser
+
+! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+findMethodWith: aDictionary
+
+	self selectedClass isNil ifTrue: [^self].
+	self
+		request: 'Method name'
+		initialAnswer: ''
+		answerBlock: [:answer | self findMethodAnswer: answer]
+		at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+locateClassFor: aSymbol
+
+	self selectedClass withAllSuperclassess do: [:eachClass |
+		(eachClass methodDictionary includesKey: aSymbol) ifTrue: [^eachClass]
+		].
+
+	^nil
+! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+newProtocolAnswer: aString
+
+	aString isNil ifTrue: [^self].
+	(self selectedClassOrMetaclass organization includesKey: aString)
+		ifTrue: [self warningMessage: 'Protocol ', aString, ' already exists'. ^self].
+
+	self selectedClassOrMetaclass newOrganization: aString.
+	self
+		clearProtocols;
+		computeProtocolsList;
+		selectedProtocol: (self protocols detect: [:each | each first = self selectedClassOrMetaclass and: [each last = aString]]);
+		updateBrowser! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+newProtocolMenuItem
+
+	^PopupMenuItem new
+		id: #newProtocol;
+		name: 'New Protocol';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		action: [:args | self newProtocolWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+newProtocolWith: aDictionary
+
+	self
+		request: 'Protocol name'
+		initialAnswer: 'uncategorized'
+		answerBlock: [:answer | self newProtocolAnswer: answer]
+		at: (aDictionary at: 'pageX') @ (aDictionary at: 'pageY')! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+openProtocolMenuX: x y: y
+
+	self protocolMenu openIn: (self idFor: 'protocolListDiv') x: x y: y! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+protocolMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'protocolListDiv');
+		addMenuItem: self newProtocolMenuItem;
+		addMenuItem: self findMethodMenuItem;
+		addMenuItem: self removeProtocolMenuItem;
+		yourself! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+protocolMenuHTML
+
+	^'	<div id="$appName$-protocolMenu"  class="menuBox" onmouseleave="simTalkCallback0(''$$appName$'', ''hideProtocolMenu'');">
+		<div  class="menuItem" onclick="simTalkCallback0(''$$appName$'', ''doNewProtocol'');">New protocol</div>
+		<div  class="menuItem" onclick="simTalkCallback0(''$$appName$'', ''doRemoveProtocol'');">Remove protocol</div>
+	</div>
+'! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+protocolMenuName
+
+	^self idFor: 'protocolMenu'! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+removeProtocolMenuItem
+
+	^PopupMenuItem new
+		id: #removeProtocol;
+		name: 'Remove Protocol';
+		addRequestedValue: 'pageX';
+		addRequestedValue: 'pageY';
+		enabledBlock: [self selectedProtocol notNil];
+		action: [:args | self removeProtocolWith: args];
+		yourself! !
+
+! SystemBrowser methodsFor: 'protocol menus' !
+removeProtocolWith: aDictionary
+
+	| classOrMetaclass |
+
+	self selectedProtocol isNil ifTrue: [
+		self infoMessage: 'No protocol is selected'.
+		^self].
+	classOrMetaclass := self selectedClassOrMetaclass.
+	classOrMetaclass isNil ifTrue: [^self].
+
+	(classOrMetaclass organization at: self selectedProtocol last) isEmpty ifFalse: [
+		self infoMessage: 'The protocol isn''t empty - can''t delete'.
+		^self].
+	classOrMetaclass organization removeKey: self selectedProtocol last.
+
+	self
+		computeProtocolsList;
+		updateBrowser! !
+
+! SystemBrowser methodsFor: 'testing' !
+isClassMethods
+
+	^self instanceOrClass = #class! !
+
+! SystemBrowser methodsFor: 'testing' !
+isInstanceMethods
+
+	^self instanceOrClass = #instance! !
+
+! SystemBrowser methodsFor: 'updating' !
+classMethodsRadioButtonName
+	^self idFor: 'classMethodsRadioButton'! !
+
+! SystemBrowser methodsFor: 'updating' !
+codeTextBoxName
+	^self idFor: 'codeTextBox'! !
+
+! SystemBrowser methodsFor: 'updating' !
+instanceMethodsRadioButtonName
+	^self idFor: 'instanceMethodsRadioButton'! !
+
+! SystemBrowser methodsFor: 'updating' !
+isSelectedClassExtended: aClass
+
+	^(self selectedKit definedClasses includes: aClass) not
+! !
+
+! SystemBrowser methodsFor: 'updating' !
+update
+	self browserPlugin update: self! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateBrowser
+
+	self withinWebUpdateDo: [self update]! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateClassList
+	| index |
+	self classesList list: (self classes collect: [:each | (self isSelectedClassExtended: each) ifTrue: ['~' , each name] ifFalse: [each name]]).
+
+	index := self selectedClass
+		ifNil: [0]
+		ifNotNil: [self classesList list indexOf: ((self isSelectedClassExtended: self selectedClass) ifTrue: ['~' , self selectedClass name] ifFalse: [self selectedClass name])].
+
+	self classesList selectionIndex: index.
+! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateCodePane
+
+	self codeBoxWidget text: self code.
+
+	self highlightFor: self codeBoxWidget.
+
+	self codeBoxWidget updateText! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateCodePaneNoHighlight
+
+	self codeBoxWidget text: self code.
+	self codeBoxWidget updateText! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateInstanceClassSelection
+
+	self isInstanceMethods
+		ifTrue: [self setAttribute: 'checked' of: self instanceMethodsRadioButtonName to: 'checked']
+		ifFalse: [self setAttribute: 'checked' of: self classMethodsRadioButtonName to: 'checked']
+! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateKitList
+	| newList index |
+	newList := self kits collect: [:each | each name].
+
+	self kitsList list: newList.
+
+	index := self selectedKit
+		ifNil: [0]
+		ifNotNil: [newList indexOf: self selectedKit name].
+	
+	self kitsList selectionIndex: index.
+! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateMethodList
+	| index |
+	self methodsList list: (self methods collect: [:each |
+		| method |
+		method := each first compiledMethodAt: (each at: 3).
+		method kit isNil
+			ifTrue: [each at: 3]
+			ifFalse: [(each at: 3) asString, ' [', method kit name, ']']]).
+
+	index := self selectedMethod
+		ifNil: [0]
+		ifNotNil: [self methods findFirst: [:each | (each at: 3) == (self selectedMethod at: 3)]].
+
+	self methodsList selectionIndex: index.
+ ! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateMethodListWithClass
+
+	| index methodsAndStrings |
+
+	methodsAndStrings := (self methods collect: [:each |
+		| method |
+		method := each first compiledMethodAt: (each at: 3).
+		method kit isNil
+			ifTrue: [Array with: each with: each first printString, ' ', (each at: 3), ' {', (each at: 2), '}']
+			ifFalse: [Array with: each with: each first printString, ' ', (each at: 3), ' {', (each at: 2), '} [' , method kit name, ']']]).
+
+	self methodsList list: (methodsAndStrings collect: [:each | each last]).
+
+	index := self selectedMethod
+		ifNil: [0]
+		ifNotNil: [self methods indexOf: self selectedMethod].
+
+	self methodsList selectionIndex: index.
+! !
+
+! SystemBrowser methodsFor: 'updating' !
+updateProtocolList
+	| index |
+	self protocolsList list: (self protocols collect: [:each | each last]).
+
+	index := self selectedProtocol
+		ifNil: [0]
+		ifNotNil: [self protocols indexOf: self selectedProtocol].
+
+	self protocolsList selectionIndex: index.
+! !
+
+! SystemBrowser methodsFor: 'utility' !
+selectedClassOrMetaclass
+
+	^self isClassMethods
+		ifTrue: [self selectedClass class]
+		ifFalse: [self selectedClass]! !
+
+! SystemBrowser class methodsFor: 'opening' !
+open
+	self openKitBrowser! !
+
+! SystemBrowser class methodsFor: 'opening' !
+openKitBrowser
+	| browser |
+	browser := self new
+		browserPlugin: KitBrowserPlugin new;
+		open;
+		yourself.
+
+	browser runJavaScript: 'enableTabsInRichTextArea("', browser codeTextBoxName, '");'! !
+
+! SystemBrowser class methodsFor: 'opening' !
+openKitBrowserAt: aPoint
+
+	| browser |
+	browser := self new
+		origin: aPoint;
+		browserPlugin: KitBrowserPlugin new;
+		open;
+		yourself.
+
+	browser runJavaScript: 'enableTabsInRichTextArea("', browser codeTextBoxName, '");'
+! !
+
+! SystemBrowser class methodsFor: 'opening' !
+openMethodsBrowserOn: aCollection
+
+	| browser |
+
+	browser := self new
+		browserPlugin: MethodBrowserPlugin new;
+		methods: aCollection;
+		open;
+		yourself.
+
+	browser runJavaScript: 'enableTabsInRichTextArea("', browser codeTextBoxName, '");'
+! !
+
+! SystemBrowser class methodsFor: 'opening' !
+openMethodsBrowserOn: aCollection at: aPoint
+
+	| browser |
+
+	browser := self new
+		origin: aPoint;
+		browserPlugin: MethodBrowserPlugin new;
+		methods: (aCollection sortedBy: [:a :b | a first name, (a at: 3) < (b first name , (b at: 3))]);
+		open;
+		yourself.
+
+	browser runJavaScript: 'enableTabsInRichTextArea("', browser codeTextBoxName, '");'
+! !
+
+! Workspace methodsFor: 'code menu' !
+codeMenu
+
+	^PopupMenuUI new
+		widgetId: (self idFor: 'workspaceTextBox');
+		addMenuItem: self doItMenuItem;
+		addMenuItem: self printItMenuItem;
+		addMenuItem: self inspectItMenuItem;
+		addMenuItem: self debugItMenuItem;
+		addMenuItem: self loadMenuItem;
+		addMenuItem: self saveMenuItem;
+		yourself! !
+
+! Workspace methodsFor: 'code menu' !
+debugItMenuItem
+
+	^PopupMenuItem new
+			id: #debugIt;
+			name: 'Debug It';
+			action: [:args | self debugItWith: args];
+			requestedValues: #('selectedString');
+			yourself! !
+
+! Workspace methodsFor: 'code menu' !
+debugItWith: aDictionary
+
+	| object |
+
+	self disableWhile: [object := SmalltalkParser evaluate: 'nil halt. [', (aDictionary at: 'selectedString'), '] value'].
+
+	^object! !
+
+! Workspace methodsFor: 'code menu' !
+doItMenuItem
+
+	^PopupMenuItem new
+		id: #doIt;
+		name: 'Do It';
+		action: [:args | self doItWith: args];
+		requestedValues: #('selectedString');
+		yourself! !
+
+! Workspace methodsFor: 'code menu' !
+doItWith: aDictionary
+
+	self disableWhile: [SmalltalkParser evaluate: (aDictionary at: 'selectedString')]! !
+
+! Workspace methodsFor: 'code menu' !
+inspectItMenuItem
+
+	^PopupMenuItem new
+			id: #inspectIt;
+			name: 'Inspect It';
+			action: [:args | self inspectItWith: args];
+			requestedValues: #('selectedString');
+			yourself! !
+
+! Workspace methodsFor: 'code menu' !
+inspectItWith: aDictionary
+
+	| object |
+
+	self disableWhile: [object := SmalltalkParser evaluate: (aDictionary at: 'selectedString')].
+
+	object inspect! !
+
+! Workspace methodsFor: 'code menu' !
+load: aString
+
+	| workspaceContents fileStream |
+
+	aString isNil ifTrue: [^self].
+	aString asFilename exists ifFalse: [^self message: 'File doesn''t exist'].
+
+	fileStream := aString asFilename readStream.
+	workspaceContents := fileStream upToEnd.
+	fileStream close.
+
+	self setAttribute: #value of: (self idFor: #workspaceTextBox) to: (self javascriptQuote: workspaceContents)! !
+
+! Workspace methodsFor: 'code menu' !
+loadMenuItem
+
+	^PopupMenuItem new
+		id: #load;
+		name: 'Load...';
+		action: [:args | self loadWith: args];
+		requestedValues: #();
+		yourself! !
+
+! Workspace methodsFor: 'code menu' !
+loadWith: aDictionary
+
+	self request: 'Filename to load?' initialAnswer: 'workspace.ws' answerBlock: [:string | self load: string]! !
+
+! Workspace methodsFor: 'code menu' !
+openCodeMenuX: x y: y
+
+	self codeMenu openIn: (self idFor: 'workspaceTextBox') x: x y: y! !
+
+! Workspace methodsFor: 'code menu' !
+printItMenuItem
+
+	^PopupMenuItem new
+		id: #printIt;
+		name: 'Print It';
+		action: [:args | self printItWith: args];
+		requestedValues: #('selectedString' 'selectionStart' 'selectionEnd');
+		yourself! !
+
+! Workspace methodsFor: 'code menu' !
+printItWith: aDictionary
+
+	| result |
+
+	self disableWhile: [result := ' ==> ', (SmalltalkParser evaluate: (aDictionary at: 'selectedString')) printString].
+
+	self write: result inTextArea: (self idFor: 'workspaceTextBox') position: (aDictionary at: 'selectionEnd')! !
+
+! Workspace methodsFor: 'code menu' !
+save: aString to: filenameString
+
+	| file |
+
+	file := filenameString asFilename writeStream.
+	file nextPutAll: aString.
+	file close
+! !
+
+! Workspace methodsFor: 'code menu' !
+saveMenuItem
+
+	^PopupMenuItem new
+		id: #save;
+		name: 'Save...';
+		action: [:args | self saveWith: args];
+		requestedValues: #('value');
+		yourself! !
+
+! Workspace methodsFor: 'code menu' !
+saveWith: aDictionary
+
+	self request: 'Filename to save?' initialAnswer: 'workspace.ws' answerBlock: [:string | self save: (aDictionary at: 'value') to: string]! !
+
+! Workspace methodsFor: 'opening' !
+defaultWindowExtent
+
+	^800 @ 200! !
+
+! Workspace methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+	self withinWebUpdateDo: [self update].
+
+	self runJavaScript: 'enableTabsInTextArea("', self workspaceTextBoxName, '");'.
+
+	self runJavaScript: 'captureControlKeyInArea("$', self appName ,
+		'","d',
+		'", "', (self idFor: 'workspaceTextBox'),
+		'", "', (self idFor: 'workspaceTextBox'),
+		'", "doItWith:',
+		'", ["selectedString", "selectionEnd"]' ,
+		');'.
+
+	self runJavaScript: 'captureControlKeyInArea("$', self appName ,
+		'","p',
+		'", "', (self idFor: 'workspaceTextBox'),
+		'", "', (self idFor: 'workspaceTextBox'),
+		'", "printItWith:',
+		'", ["selectedString", "selectionEnd"]' ,
+		');'.
+
+	self runJavaScript: 'captureControlKeyInArea("$', self appName ,
+		'","q',
+		'", "', (self idFor: 'workspaceTextBox'),
+		'", "', (self idFor: 'workspaceTextBox'),
+		'", "inspectItWith:',
+		'", ["selectedString", "selectionEnd"]' ,
+		');'! !
+
+! Workspace methodsFor: 'opening' !
+title
+
+	^'Workspace'! !
+
+! Workspace methodsFor: 'opening' !
+workspaceTextBoxHTML
+
+	^HTMLBuilder new
+		install: self workspaceWidget;
+		htmlString! !
+
+! Workspace methodsFor: 'opening' !
+workspaceTextBoxName
+
+	^self idFor: 'workspaceTextBox'! !
+
+! Workspace methodsFor: 'updating' !
+update
+
+	self addHTMLBeforeEndOf: (self idFor: 'enableDisable') to: self workspaceTextBoxHTML! !
+
+! Workspace methodsFor: 'widgets' !
+workspaceWidget
+
+	^self bindingAt: #workspace ifAbsentPut: [
+		TextEditorComponent new
+			bindTo: self id: self workspaceTextBoxName;
+			menu: self codeMenu;
+			yourself] ! !
+
+! BeagleSystem class methodsFor: 'navigating' !
+browseClassReferences
+	| selector |
+
+	RequestBox request: 'Class name?' initialAnswer: '' answerBlock: [:className |
+		| class |
+		class := Smalltalk at: className asSymbol ifAbsent: [nil].
+		class isNil ifFalse: [
+			SystemBrowser openMethodsBrowserOn: (BeagleSystem referencesToClass: class) at: 100 @ 100] ]! !
+
+KitManager default currentKit addMethod: (BeagleSystem class compiledMethodAt: #browseClassReferences) !
+
+! BeagleSystem class methodsFor: 'navigating' !
+browseImplementers
+	| selector |
+
+	RequestBox request: 'Method name?' initialAnswer: '' answerBlock: [:methodName |
+
+	SystemBrowser openMethodsBrowserOn: (BeagleSystem implementersOf: methodName asSymbol) at: 100 @ 100]   ! !
+
+KitManager default currentKit addMethod: (BeagleSystem class compiledMethodAt: #browseImplementers) !
+
+! BeagleSystem class methodsFor: 'navigating' !
+browseSenders
+	| selector |
+
+	RequestBox request: 'Method name?' initialAnswer: '' answerBlock: [:methodName |
+
+	SystemBrowser openMethodsBrowserOn: (BeagleSystem sendersOf: methodName asSymbol) at: 100 @ 100]   ! !
+
+KitManager default currentKit addMethod: (BeagleSystem class compiledMethodAt: #browseSenders) !
+
+! Dictionary methodsFor: 'inspecting' !
+inspectorFieldAt: aString
+
+	^self at: aString! !
+
+KitManager default currentKit addMethod: (Dictionary compiledMethodAt: #inspectorFieldAt:) !
+
+! Dictionary methodsFor: 'inspecting' !
+inspectorFields
+
+	| indexedFields |
+
+	indexedFields := OrderedCollection new.
+	self keys asArray do: [:each | indexedFields add: each].
+	^indexedFields sorted! !
+
+KitManager default currentKit addMethod: (Dictionary compiledMethodAt: #inspectorFields) !
+
+! Object methodsFor: 'inspecting' !
+basicInspect
+
+	BasicInspector openOn: self ! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #basicInspect) !
+
+! Object methodsFor: 'inspecting' !
+basicInspectorFieldAt: aStringOrInteger
+
+	| allInstVarNames index |
+	allInstVarNames := self class allInstVarNames.
+	index := allInstVarNames indexOf: aStringOrInteger.
+	index > 0 ifTrue: [^self instVarAt: index].
+
+	index := aStringOrInteger.
+	index > self basicSize ifTrue: [^'Bad Index'].
+	^self basicAt: index! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #basicInspectorFieldAt:) !
+
+! Object methodsFor: 'inspecting' !
+basicInspectorFields
+
+	| indexedFields |
+
+	indexedFields := OrderedCollection new.
+	1 to: (self basicSize min: 500) do: [:each | indexedFields add: each].
+	^self class allInstVarNames sorted , indexedFields ! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #basicInspectorFields) !
+
+! Object methodsFor: 'inspecting' !
+computedFields
+
+	^OrderedCollection new! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #computedFields) !
+
+! Object methodsFor: 'inspecting' !
+inspect
+
+	Inspector openOn: self ! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #inspect) !
+
+! Object methodsFor: 'inspecting' !
+inspectorFieldAt: aStringOrInteger
+
+	^self basicInspectorFieldAt: aStringOrInteger! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #inspectorFieldAt:) !
+
+! Object methodsFor: 'inspecting' !
+inspectorFields
+
+	^self basicInspectorFields! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #inspectorFields) !
+
+! Object methodsFor: 'inspecting' !
+isComputedField
+
+	^false! !
+
+KitManager default currentKit addMethod: (Object compiledMethodAt: #isComputedField) !
+
+! Point methodsFor: 'inspecting' !
+computedFields
+
+	^super computedFields
+		add: (ComputedField name: 'r' action: [:point | point r]);
+		add: (ComputedField name: 'theta' action: [:point | point theta radiansToDegrees]);
+		yourself! !
+
+KitManager default currentKit addMethod: (Point compiledMethodAt: #computedFields) !
+
+KitManager default currentKit allDefinedClasses: #(BasicInspector BrowserPlugin CodeHighlighter Debugger Inspector KitBrowserPlugin MethodBrowserPlugin SystemBrowser Workspace) andMethods: #(#(BeagleSystem class #browseClassReferences) #(BeagleSystem class #browseImplementers) #(BeagleSystem class #browseSenders) #(Dictionary #'inspectorFieldAt:') #(Dictionary #inspectorFields) #(Object #basicInspect) #(Object #'basicInspectorFieldAt:') #(Object #basicInspectorFields) #(Object #computedFields) #(Object #inspect) #(Object #'inspectorFieldAt:') #(Object #inspectorFields) #(Object #isComputedField) #(Point #computedFields)) !
+
+KitManager default currentKit allDefinedMethodsFor: KitBrowserPlugin methods: #(#'computeMethodsListOn:' #'doPostBuildOn:' #'doPostOpenOn:' #'installBrowserPanesOn:' #'update:') !
+
+KitManager default currentKit allDefinedMethodsFor: KitBrowserPlugin class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: MethodBrowserPlugin methods: #(#'computeMethodsListOn:' #'doPostBuildOn:' #'doPostOpenOn:' #'installBrowserPanesOn:' #'update:') !
+
+KitManager default currentKit allDefinedMethodsFor: MethodBrowserPlugin class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Workspace methods: #(#codeMenu #debugItMenuItem #'debugItWith:' #defaultWindowExtent #doItMenuItem #'doItWith:' #inspectItMenuItem #'inspectItWith:' #'load:' #loadMenuItem #'loadWith:' #'openCodeMenuX:y:' #postOpen #printItMenuItem #'printItWith:' #'save:to:' #saveMenuItem #'saveWith:' #title #update #workspaceTextBoxHTML #workspaceTextBoxName #workspaceWidget) !
+
+KitManager default currentKit allDefinedMethodsFor: Workspace class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: BasicInspector methods: #(#selectedObject #title #updateFieldList) !
+
+KitManager default currentKit allDefinedMethodsFor: BasicInspector class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: CodeHighlighter methods: #(#compiledMethod #'compiledMethod:' #highlightMethod #'highlightMethod:source:forWidget:' #richTextWidget #'richTextWidget:' #sourceCode #'sourceCode:' #typeOfCode #'typeOfCode:' #'visitBlockLiteralNode:' #'visitGlobalVariableReferenceNode:' #'visitLiteralNode:' #'visitLocalVariableAssignmentNode:' #'visitLocalVariableReferenceNode:' #'visitMessageNodeEnd:' #'visitSpecialNode:') !
+
+KitManager default currentKit allDefinedMethodsFor: CodeHighlighter class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: SystemBrowser methods: #(#browseClassReferences #browseInstVarReferences #'browseInstVarReferencesWith:' #browseUndeclaredReferences #browserList #browserListsName #browserPlugin #'browserPlugin:' #'changedSelectedClass:' #'changedSelectedClassEvent:' #'changedSelectedKitEvent:' #'changedSelectedMethod:' #'changedSelectedMethodEvent:' #'changedSelectedProtocol:' #'changedSelectedProtocolEvent:' #classHierarchyString #classListWidget #classMenu #classMenuName #classMethodsRadioButtonName #classReferencesMenuItem #'classReferencesWith:' #classes #'classes:' #classesList #clearClasses #clearCode #clearMethods #clearProtocols #code #'code:' #codeBoxWidget #codeDoitMenuItem #codeImplementersMenuItem #'codeImplementersWith:' #codeInspectItMenuItem #codeMenu #codeMenuName #codePrintItMenuItem #codeSendersMenuItem #'codeSendersWith:' #codeTextBoxName #codeTextEditor #computeClassList #computeCode #computeKitBrowserMethodsList #computeKitList #computeMethodBrowserMethodsList #computeMethodsList #computeProtocolsList #'createAccessorsForInstVar:' #createAccessorsMenuItem #'createAccessorsWith:' #'createGetterMethodFor:' #'createSetterMethodFor:' #defaultWindowExtent #deleteMethodMenuItem #'deleteMethodWith:' #fileoutKitMenuItem #'fileoutKitWith:' #findClass #'findClass:' #findClassMenuItem #'findClassName:' #'findClassWith:' #'findMethodAnswer:' #findMethodMenuItem #'findMethodName:' #'findMethodWith:' #fixedOffset #'highlightDoitFor:' #'highlightFor:' #'highlightMethodFor:' #innerAppName #'inspectItWith:' #installBrowserList #installBrowserPanes #installClassBoxWidget #installCodeBoxWidget #installKitBoxWidget #installMethodBoxWidget #installProtocolBoxWidget #instanceMethodsRadioButtonName #instanceOrClass #'instanceOrClass:' #instanceVariableReferencesMenuItem #isClassMethods #isInstanceMethods #'isSelectedClassExtended:' #kitMenu #kitMenuName #kits #'kits:' #kitsList #listNumberOfRows #'locateClassFor:' #methodImplementersMenuItem #'methodImplementersWith:' #methodListWidget #methodMenu #methodMenuName #methodMessagesMenuItem #'methodMessagesWith:' #methodSendersMenuItem #'methodSendersWith:' #methods #'methods:' #methodsList #moveClassToKitMenuItem #'moveClassToKitWith:' #moveMethodToKitMenuItem #moveMethodToProtocolMenuItem #'moveSelectedClassToKit:' #'moveToKit:' #'moveToKitWith:' #'moveToProtocol:' #'moveToProtocolWith:' #newKit #'newKit:' #newKitMenuItem #'newKitWith:' #'newProtocolAnswer:' #newProtocolMenuItem #'newProtocolWith:' #'openClassMenuX:y:' #'openCodeMenuX:y:' #'openKitMenuX:y:' #'openMethodMenuX:y:' #'openProtocolMenuX:y:' #postBuild #postOpen #'printItWith:' #protocolListWidget #protocolMenu #protocolMenuHTML #protocolMenuName #protocols #'protocols:' #protocolsList #removeClass #removeClassMenuItem #'removeClassWith:' #removeDeletedMethodsFromMethodList #removeKit #removeKitMenuItem #'removeKitWith:' #removeProtocolMenuItem #'removeProtocolWith:' #'saveClassDefinition:' #saveCodeMenuItem #'saveCodeWith:' #'saveMethodDefinition:' #selectedClass #'selectedClass:' #selectedClassOrMetaclass #selectedCodeClassReferencesMenuItem #'selectedCodeClassReferencesWith:' #selectedKit #'selectedKit:' #selectedMethod #'selectedMethod:' #selectedProtocol #'selectedProtocol:' #showClassHierarchy #showClassHierarchyMenuItem #'showClassHierarchyWith:' #showClassMethods #showInstanceMethods #'stripText:' #title #undeclaredReferencesMenuItem #'undeclaredReferencesWith:' #unloadKitMenuItem #'unloadKitWith:' #update #updateBrowser #updateClassList #updateCodePane #updateCodePaneNoHighlight #updateInstanceClassSelection #updateKitList #updateMethodList #updateMethodListWithClass #updateProtocolList #'writeClassHierarchyStringFor:on:indentLevel:' #'writeClassSummaryStringFor:on:indentLevel:' #'writeSubclassSummaryStringsFor:on:indentLevel:') !
+
+KitManager default currentKit allDefinedMethodsFor: SystemBrowser class methods: #(#open #openKitBrowser #'openKitBrowserAt:' #'openMethodsBrowserOn:' #'openMethodsBrowserOn:at:') !
+
+KitManager default currentKit allDefinedMethodsFor: BrowserPlugin methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: BrowserPlugin class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Inspector methods: #(#basicInspectMenuItem #'basicInspectWith:' #'changedSelectedField:' #codeMenu #defaultWindowExtent #diveIn #'diveInWith:' #diveMenuItem #doBasicInspect #doInspect #doItMenuItem #'doItWith:' #fieldList #'fieldList:' #fieldListWidget #fieldMenu #initialize #innerAppName #inspectItMenuItem #'inspectItWith:' #inspectMenuItem #'inspectWith:' #inspectorHTML #inspectorTextWidget #install #keysList #'keysList:' #object #'object:' #objectStack #'objectStack:' #'openCodeMenuX:y:' #'openFieldMenuX:y:' #popMenuItem #popOut #'popOutWith:' #postOpen #printItMenuItem #'printItWith:' #selectedField #'selectedField:' #selectedObject #title #update #updateFieldList #updateList #updateText #updateTitle #workspaceWidget) !
+
+KitManager default currentKit allDefinedMethodsFor: Inspector class methods: #(#'openOn:') !
+
+KitManager default currentKit allDefinedMethodsFor: Debugger methods: #(#'changedInspectorSelection:' #'changedLocalsSelection:' #'changedStackSelection:' #'changedWalkbackSelection:' #codeEditorId #codeMenu #codeSimulator #codeWidget #context #'context:' #currentEmphasis #currentFrame #'currentFrame:' #debuggerHTML #defaultWindowExtent #doItMenuItem #'doItWith:' #doLocalsBasicInspect #doLocalsInspect #doSelfBasicInspect #doSelfInspect #doStackBasicInspect #doStackInspect #drawWindow #getSelf #inspectItMenuItem #'inspectItWith:' #inspectSimulator #inspectSimulatorWidget #into #intoWidget #localsBasicInspectMenuItem #'localsBasicInspectWith:' #localsInspectMenu #localsInspectMenuItem #'localsInspectWith:' #localsInspectorListId #localsInspectorListWidget #localsTextEditorId #localsTextEditorWidget #message #'message:' #messageEditorId #messageWidget #over #overWidget #peekBytecode #peekBytecodeWidget #postOpen #printItMenuItem #'printItWith:' #restart #restartMethod #'restartMethod:' #restartWidget #return #returnWidget #saveMenuItem #'saveWith:' #selectedField #'selectedField:' #selectedLocal #'selectedLocal:' #selectedLocalObject #selectedObject #selectedStack #'selectedStack:' #selfBasicInspectMenuItem #'selfBasicInspectWith:' #selfInspectMenu #selfInspectMenuItem #'selfInspectWith:' #selfInspectorListId #selfInspectorListWidget #selfTextEditorId #selfTextEditorWidget #setEmphasis #simulator #'simulator:' #stackBasicInspectMenuItem #'stackBasicInspectWith:' #stackInspectMenu #stackInspectMenuItem #'stackInspectWith:' #stackInspectorListId #stackInspectorListWidget #stackTextEditorId #stackTextEditorWidget #stepBytecode #stepBytecodeWidget #through #throughWidget #title #'tossFramesToSignal:' #update #updateCodeEditor #updateLocalsEditor #updateLocalsList #updateSelfInspector #updateSelfTextEditor #updateStackEditor #updateStackList #updateWalkbackList #walkbackListId #walkbackListWidget) !
+
+KitManager default currentKit allDefinedMethodsFor: Debugger class methods: #(#'openOn:' #'openOn:message:') !
+
+KitManager default finishFileinKit !

@@ -1,0 +1,58 @@
+body {
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: 100% 100%;
+}
+
+.buttonBar {
+	padding: 5px;
+	margin: 5px;
+}
+
+.button{
+  display: inline;
+  border: 1px solid black;
+  padding: 5px;
+  margin: 2px;
+  background-color: #CBB;
+  cursor: default;
+}
+
+.workspace,.result {
+  padding: 5px;
+  margin: 5px;
+}
+
+textarea {
+    -moz-tab-size : 4;
+      -o-tab-size : 4;
+         tab-size : 4;
+}
+
+.menuBox {
+	position: absolute;
+	top: 0 left: 0;
+	background: rgba(255, 255, 255, 1.0); 
+}
+.menuItem {
+	padding: 5px; border: solid 1px black;
+}
+.menuItem:hover {
+	background-color: #c0c0c0;
+}
+.toolbarButton {
+	border: 1px solid black;
+	width: fit-content;
+	padding: 5px;
+	background-color: #c0c0c0;
+	cursor: default;
+}
+.title{
+	border: 1px solid black;
+	width: fit-content;
+	padding: 5px;
+	background-color: black;
+	color: white;
+	cursor: default;
+}

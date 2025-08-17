@@ -1,0 +1,993 @@
+KitManager default currentKitNamed: 'Tests' !
+
+KitManager default currentKit ensureLoaded: #('CoreUI') !
+
+Object subclassNamed: #Testcase
+	instVarNames: 'selector status'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+Testcase subclassNamed: #DictionaryTests
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+Testcase subclassNamed: #LargeIntegerTests
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+Testcase subclassNamed: #NumberConversionTests
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+Testcase subclassNamed: #ObjectTests
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+Testcase subclassNamed: #SmallIntegerTests
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+Testcase subclassNamed: #StringMatcherTests
+	instVarNames: ''
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+WebUI subclassNamed: #TestcaseWindow
+	instVarNames: 'suites tests'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+Object subclassNamed: #Testsuite
+	instVarNames: 'children'
+	classInstVarNames: ''
+	environment: Object systemDictionary
+	kitName: 'Tests' !
+
+! Testcase methodsFor: 'accessing' !
+assert: aBoolean
+
+	aBoolean ifFalse: [
+		Error signal: 'Assert failed']! !
+
+! Testcase methodsFor: 'accessing' !
+assert: aValue equals: anotherValue
+
+	aValue = anotherValue ifFalse: [
+		Error signal: 'Assert failed - ', aValue printString, ' should be ', anotherValue printString]! !
+
+! Testcase methodsFor: 'accessing' !
+performTest
+
+	| result |
+	self setUp.
+	result := Error try: [self perform: self selector. true]
+		catch: [:ex | ex return: false]
+		finally: [self tearDown].
+
+	^result! !
+
+! Testcase methodsFor: 'accessing' !
+performTestNoErrorHandling
+
+	self setUp.
+	self perform: self selector
+! !
+
+! Testcase methodsFor: 'accessing' !
+selector
+
+	^selector! !
+
+! Testcase methodsFor: 'accessing' !
+selector: anObject
+
+	selector := anObject! !
+
+! Testcase methodsFor: 'accessing' !
+setUp! !
+
+! Testcase methodsFor: 'accessing' !
+status
+
+	^status! !
+
+! Testcase methodsFor: 'accessing' !
+status: aSymbol
+
+	status := aSymbol! !
+
+! Testcase methodsFor: 'accessing' !
+tearDown! !
+
+! Testcase methodsFor: 'accessing' !
+testLargeAdd
+
+	self
+		assert: (SmallInteger maxVal + 10) hex equals: '+[9 0 0 0 0 0 0 10 ]';
+		"assert: (SmallInteger maxVal + 10 + 20) hex equals: '+[1D 0 0 0 0 0 0 10 ]';"
+		assert: (SmallInteger maxVal + 10 - 20) hex equals: 'FFFFFFFFFFFFFF5'! !
+
+! Testcase methodsFor: 'initializing' !
+initialize
+
+	self status: #notRun! !
+
+! Testcase methodsFor: 'printing' !
+printOn: aStream
+
+	aStream
+		nextPutAll: 'Test: ';
+		print: self class;
+		nextPutAll: ' -> ';
+		nextPutAll: self selector;
+		nextPutAll: '    ==> ';
+		nextPutAll: self status! !
+
+! Testcase class methodsFor: 'instance creation' !
+new
+
+	^super new initialize; yourself! !
+
+! Testcase class methodsFor: 'instance creation' !
+openWindow
+
+	TestcaseWindow new
+		addSuite: self;
+		open
+! !
+
+! Testcase class methodsFor: 'instance creation' !
+openWindowAllSuites
+
+	| window |
+	window := TestcaseWindow new.
+	Testcase withAllSubclasses do: [:class |
+		window addSuite: class].
+
+	window open
+! !
+
+! Testcase class methodsFor: 'instance creation' !
+selector: aSymbol
+
+	^self new
+		selector: aSymbol;
+		yourself! !
+
+! Testcase class methodsFor: 'running' !
+allTestcaseNames
+
+	^self selectors select: [:each | each size >= 4 and: [(each asString copyFrom: 1 to: 4) = 'test']]
+
+! !
+
+! Testcase class methodsFor: 'running' !
+allTestcases
+
+	^self allTestcaseNames collect: [:selector | self new selector: selector; yourself]! !
+
+! Testcase class methodsFor: 'running' !
+performAllTests
+
+	| result |
+
+	result := OrderedCollection new.
+
+	self performTestsOn: result.
+
+	^result
+ ! !
+
+! Testcase class methodsFor: 'running' !
+performTestsOn: aCollection
+
+	self allTestcaseNames do: [:selector |
+		aCollection add: (selector -> (self selector: selector) performTest)].
+
+ ! !
+
+! DictionaryTests methodsFor: 'testing' !
+testAssociationAt
+
+	| dictionary |
+	dictionary := Dictionary new.
+	1 to: 5 do: [:i | dictionary at: i printString put: i].
+
+	self
+		assert: dictionary size = 5;
+		assert: dictionary keys size = 5;
+		assert: dictionary values size = 5;
+		assert: dictionary isEmpty not.
+
+	1 to: 5 do: [:i |
+		| association |
+		association := dictionary associationAt: i printString.
+		self
+			assert: (association isMemberOf: Association);
+			assert: (association key = i printString);
+			assert: (association value = i)].
+
+	
+
+! !
+
+! DictionaryTests methodsFor: 'testing' !
+testAt
+
+	| dictionary |
+	dictionary := Dictionary new.
+	1 to: 5 do: [:i | dictionary at: i printString put: i].
+
+	self
+		assert: dictionary size = 5;
+		assert: dictionary keys size = 5;
+		assert: dictionary values size = 5;
+		assert: dictionary isEmpty not.
+
+	1 to: 5 do: [:i | self assert: (dictionary at: i printString) = i].
+
+	
+
+! !
+
+! DictionaryTests methodsFor: 'testing' !
+testAtIfAbsent
+
+	| dictionary |
+	dictionary := Dictionary new.
+	1 to: 5 do: [:i | dictionary at: i printString put: i].
+
+	self
+		assert: (dictionary at: 'hello' ifAbsent: ['junk']) = 'junk'
+	
+
+! !
+
+! DictionaryTests methodsFor: 'testing' !
+testAtIfAbsentPut
+
+	| dictionary |
+	dictionary := Dictionary new.
+	1 to: 5 do: [:i | dictionary at: i printString put: i].
+
+	self
+		assert: (dictionary at: 'hello' ifAbsentPut: ['junk']) = 'junk';
+		assert: (dictionary at: 'hello') = 'junk'
+	
+
+! !
+
+! DictionaryTests methodsFor: 'testing' !
+testAtPut
+
+	| dictionary |
+	dictionary := Dictionary new.
+	1 to: 5 do: [:i | dictionary at: i printString put: i].
+
+	self
+		assert: dictionary size = 5;
+		assert: dictionary keys size = 5;
+		assert: dictionary values size = 5;
+		assert: dictionary isEmpty not
+
+! !
+
+! DictionaryTests methodsFor: 'testing' !
+testGrow
+
+	| dictionary |
+	dictionary := Dictionary new.
+	1 to: 200 do: [:i | dictionary at: i printString put: i].
+
+	self
+		assert: dictionary size = 200;
+		assert: dictionary keys size = 200;
+		assert: dictionary values size = 200;
+		assert: dictionary isEmpty not.
+
+	1 to: 200 do: [:i | self assert: (dictionary at: i printString) = i].
+
+	
+
+! !
+
+! DictionaryTests methodsFor: 'testing' !
+testNew
+
+	| dictionary |
+	dictionary := Dictionary new.
+	self
+		assert: dictionary size = 0;
+		assert: dictionary keys size = 0;
+		assert: dictionary values size = 0;
+		assert: dictionary isEmpty
+
+! !
+
+! DictionaryTests methodsFor: 'testing' !
+testRemove
+
+	| dictionary size |
+	size := 20.
+
+	dictionary := Dictionary new.
+	1 to: size do: [:i | dictionary at: i printString put: i].
+
+	self
+		assert: dictionary size = size;
+		assert: dictionary keys size = size;
+		assert: dictionary values size = size;
+		assert: dictionary isEmpty not.
+
+	dictionary keys do: [:each |
+		dictionary removeKey: each.
+		self assert: (dictionary includesKey: each) not.
+		dictionary keys do: [:key | dictionary includesKey: key]]
+
+	
+
+! !
+
+! LargeIntegerTests methodsFor: 'tests' !
+testAdd
+
+	self
+		assert: (5 asLargeInteger + 4 asLargeInteger) equals: 9;
+		assert: (5 asLargeInteger + -4 asLargeInteger) equals: 1;
+		assert: (-5 asLargeInteger + 4 asLargeInteger) equals: -1;
+		assert: (-5 asLargeInteger + -4 asLargeInteger) equals: -9;
+
+		assert: (5 asLargeInteger + -9  asLargeInteger) equals: -4;
+		assert: (-5 asLargeInteger + 9 asLargeInteger) equals: 4
+	
+
+
+! !
+
+! LargeIntegerTests methodsFor: 'tests' !
+testLargeAdd
+
+	self
+		assert: (SmallInteger maxVal + 10) hex equals: '+[9 0 0 0 0 0 0 10 ]';
+		assert: (SmallInteger maxVal + 10 + 20) hex equals: '+[1D 0 0 0 0 0 0 10 ]';
+		assert: (SmallInteger maxVal + 10 - 20) hex equals: 'FFFFFFFFFFFFFF5'! !
+
+! LargeIntegerTests methodsFor: 'tests' !
+testSubtract
+
+	self
+		assert: (5 asLargeInteger - 4 asLargeInteger) equals: 1;
+		assert: (5 asLargeInteger - -4 asLargeInteger) equals: 9;
+		assert: (-5 asLargeInteger - 4 asLargeInteger) equals: -9;
+		assert: (-5 asLargeInteger - -4 asLargeInteger) equals: -1;
+
+		assert: (5 asLargeInteger - -9  asLargeInteger) equals: 14;
+		assert: (-5 asLargeInteger - 9 asLargeInteger) equals: -14
+	
+
+
+! !
+
+! NumberConversionTests methodsFor: 'tests' !
+testFractionToFloat
+
+	| fraction float |
+
+	fraction := 3 / 2.
+	float  := 5.3.
+
+	self
+		assert: (fraction + float) printString equals: '6.8';
+		assert: (float  + fraction) printString equals: '6.8';
+
+		assert: (fraction - float) printString equals: '-3.8';
+		assert: (float - fraction) printString equals:  '3.8';
+
+		assert: (fraction * float) printString equals: '7.95';
+		assert: (float * fraction) printString equals: '7.95';
+
+		assert: (fraction / float) printString equals: '0.2830188679245';
+		assert: (float / fraction) printString equals: '3.5333333333333';
+
+		assert: (fraction > float ) not;
+		assert: float > fraction;
+
+		assert: (fraction >= float ) not;
+		assert: float >= fraction;
+
+		assert: (float < fraction) not;
+		assert: fraction < float ;
+
+		assert: (float <= fraction) not;
+		assert: fraction <= float;
+
+		assert: (fraction = float ) not;
+		assert: (float  = fraction) not;
+
+		assert: (fraction ~= float );
+		assert: (float ~= fraction);
+
+		yourself
+! !
+
+! NumberConversionTests methodsFor: 'tests' !
+testFractionToLargeInteger
+
+	| fraction largeInteger |
+
+	fraction := 3 / 2.
+	largeInteger := SmallInteger maxVal + 10.
+
+	self
+		assert: (fraction + largeInteger) hex equals: '+[15 0 0 0 0 0 0 20 ] / 2';
+		assert: (largeInteger  + fraction) hex equals: '+[15 0 0 0 0 0 0 20 ] / 2';
+
+		assert: (fraction - largeInteger) hex equals: '-[F 0 0 0 0 0 0 20 ] / 2';
+		assert: (largeInteger - fraction) hex equals:  '+[F 0 0 0 0 0 0 20 ] / 2';
+
+		assert: (fraction * largeInteger) hex equals: '+[1B 0 0 0 0 0 0 30 ] / 2';
+		assert: (largeInteger * fraction) hex equals: '+[1B 0 0 0 0 0 0 30 ] / 2';
+
+		assert: (fraction / largeInteger) hex equals: '1 / +[9 0 0 0 0 0 0 10 ]';
+		assert: (largeInteger / fraction) hex equals: '+[12 0 0 0 0 0 0 20 ] / 3';
+
+		assert: (fraction > largeInteger) not;
+		assert: largeInteger > fraction;
+
+		assert: (fraction >= largeInteger) not;
+		assert: largeInteger >= fraction;
+
+		assert: (largeInteger < fraction) not;
+		assert: fraction < largeInteger;
+
+		assert: (largeInteger <= fraction) not;
+		assert: fraction <= largeInteger;
+
+		assert: (fraction = largeInteger) not;
+		assert: (largeInteger = fraction) not;
+
+		assert: (fraction ~= largeInteger);
+		assert: (largeInteger ~= fraction);
+
+		yourself
+! !
+
+! NumberConversionTests methodsFor: 'tests' !
+testLargeIntegerToFloat
+
+	| largeInteger float |
+
+	largeInteger := SmallInteger maxVal + 10.
+	float  := 500000.3.
+
+	self
+		assert: largeInteger asFloat printString equals: '1.15292150460685e18';
+		assert: (largeInteger + float) printString equals: '1.15292150460735e18';
+		assert: (float  + largeInteger) printString equals: '1.15292150460735e18';
+
+		assert: (largeInteger - float) printString equals: '1.15292150460635e18';
+		assert: (float - largeInteger) printString equals:  '-1.15292150460635e18';
+
+		assert: (largeInteger * float) printString equals: '5.76461098179875e23';
+		assert: (float * largeInteger) printString equals: '5.76461098179875e23';
+
+		assert: (largeInteger / float) printString equals: '2.3058416257087e12';
+		assert: (float / largeInteger) printString equals: '4.33681129202728e-13';
+
+		assert: largeInteger > float;
+		assert: (float > largeInteger) not;
+
+		assert: largeInteger >= float;
+		assert: (float >= largeInteger) not;
+
+		assert: float < largeInteger;
+		assert: (largeInteger < float) not;
+
+		assert: float <= largeInteger;
+		assert: (largeInteger <= float) not;
+
+		assert: (largeInteger = float ) not;
+		assert: (float  = largeInteger) not;
+
+		assert: (largeInteger ~= float );
+		assert: (float ~= largeInteger);
+
+		yourself
+! !
+
+! NumberConversionTests methodsFor: 'tests' !
+testSmallIntegerToFloat
+
+	| float |
+
+	float  := 5.3.
+
+	self
+		assert: (3 + float) printString equals: '8.3';
+		assert: (float  + 3) printString equals: '8.3';
+
+		assert: (3 - float) printString equals: '-2.3';
+		assert: (float - 3) printString equals:  '2.3';
+
+		assert: (3 * float) printString equals: '15.9';
+		assert: (float * 3) printString equals: '15.9';
+
+		assert: (3 / float) printString equals: '0.56603773584906';
+		assert: (float / 3) printString equals: '1.76666666666667';
+
+		assert: (3 > float ) not;
+		assert: float > 3;
+
+		assert: (3 >= float ) not;
+		assert: float >= 3;
+
+		assert: (float < 3) not;
+		assert: 3 < float ;
+
+		assert: (float <= 3) not;
+		assert: 3 <= float;
+
+		assert: (3 = float ) not;
+		assert: (float  = 3) not;
+
+		assert: (3 ~= float );
+		assert: (float ~= 3);
+
+		yourself
+! !
+
+! NumberConversionTests methodsFor: 'tests' !
+testSmallIntegerToFraction
+
+	self
+		assert: 3 + (5 / 2) equals: 11 / 2;
+		assert: (5 / 2) + 3 equals: 11 / 2;
+
+		assert: 3 - (5 / 2) equals: 1 / 2;
+		assert: (5 / 2) - 3 equals: -1 / 2;
+
+		assert: 3 * (5 / 2) equals: 15 / 2;
+		assert: (5 / 2) * 3 equals: 15 / 2;
+
+		assert: 3 / (5 / 2) equals: 6 / 5;
+		assert: (5 / 2) / 3 equals: 5 / 6;
+
+		assert: 3 > (5 / 2);
+		assert: ((5 / 2) > 3) not;
+
+		assert: 3 >= (5 / 2);
+		assert: ((5 / 2) >= 3) not;
+
+		assert: (5 / 2) < 3;
+		assert: (3 < (5 / 2)) not;
+
+		assert: (5 / 2) <= 3;
+		assert: (3 <= (5 / 2)) not;
+
+		assert: (3 = (5 / 2)) not;
+		assert: ((5 / 2) = 3) not;
+
+		assert: (3 ~= (5 / 2));
+		assert: ((5 / 2) ~= 3)! !
+
+! NumberConversionTests methodsFor: 'tests' !
+testSmallIntegerToLargeInteger
+
+	| largeInteger |
+
+	largeInteger := SmallInteger maxVal + 10.
+
+	self
+		assert: (3 + largeInteger) hex equals: '+[C 0 0 0 0 0 0 10 ]';
+		assert: (largeInteger + 3) hex equals: '+[C 0 0 0 0 0 0 10 ]';
+
+		assert: (3 - largeInteger) hex equals: '-[6 0 0 0 0 0 0 10 ]';
+		assert: (largeInteger - 3) hex equals:  '+[6 0 0 0 0 0 0 10 ]';
+
+		assert: (3 * largeInteger) hex equals: '+[1B 0 0 0 0 0 0 30 ]';
+		assert: (largeInteger * 3) hex equals: '+[1B 0 0 0 0 0 0 30 ]';
+
+		assert: (3 / largeInteger) hex equals: '3 / +[9 0 0 0 0 0 0 10 ]';
+		assert: (largeInteger / 3) hex equals: '+[9 0 0 0 0 0 0 10 ] / 3';
+
+		assert: (3 > largeInteger) not;
+		assert: largeInteger > 3;
+
+		assert: (3 >= largeInteger) not;
+		assert: largeInteger >= 3;
+
+		assert: (largeInteger < 3) not;
+		assert: 3 < largeInteger;
+
+		assert: (largeInteger <= 3) not;
+		assert: 3 <= largeInteger;
+
+		assert: (3 = largeInteger) not;
+		assert: (largeInteger = 3) not;
+
+		assert: (3 ~= largeInteger);
+		assert: (largeInteger ~= 3);
+
+		yourself
+! !
+
+! ObjectTests methodsFor: 'testing' !
+testIfNil
+
+	self assert: (nil ifNil: [5]) = 5! !
+
+! SmallIntegerTests methodsFor: 'tests' !
+testMinusSmallInteger
+
+	self
+		assert: 5 - 4 equals: 1;
+		assert: 5 - -4 equals: 9;
+		assert: -5 - 4 equals: -9;
+		assert: -5 - -4 equals: -1! !
+
+! SmallIntegerTests methodsFor: 'tests' !
+testPerformMinusSmallInteger
+
+	self
+		assert: (5 perform: #- with: 4) equals: 1;
+		assert: (5 perform: #- with:  -4) equals: 9;
+		assert: (-5 perform: #- with:  4) equals: -9;
+		assert: (-5 perform: #- with:  -4) equals: -1! !
+
+! SmallIntegerTests methodsFor: 'tests' !
+testPerformPlusSmallInteger
+
+	self
+		assert: (5 perform: #+ with: 4) equals: 9;
+		assert: (5 perform: #+ with: -4) equals: 1;
+		assert: (-5 perform: #+ with: 4) equals: -1;
+		assert: (-5 perform: #+ with: -4) equals: -9! !
+
+! SmallIntegerTests methodsFor: 'tests' !
+testPerformTimesSmallInteger
+
+	self
+		assert: (5 perform: #* with: 4) equals: 20;
+		assert: (5 perform: #* with: -4) equals: -20;
+		assert: (-5 perform: #* with: 4) equals: -20;
+		assert: (-5 perform: #* with: -4) equals: 20! !
+
+! SmallIntegerTests methodsFor: 'tests' !
+testPlusSmallInteger
+
+	self
+		assert: 5 + 4 equals: 9;
+		assert: 5 + -4 equals: 1;
+		assert: -5 + 4 equals: -1;
+		assert: -5 + -4 equals: -9! !
+
+! SmallIntegerTests methodsFor: 'tests' !
+testTimesSmallInteger
+
+	self
+		assert: 5 * 4 equals: 20;
+		assert: 5 * -4 equals: -20;
+		assert: -5 * 4 equals: -20;
+		assert: -5 * -4 equals: 20! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testMatchEndStringStarPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: 'he*'.
+
+	self assert: (matcher match: 'hello')
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testMatchMidStringStarPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: 'h*lo'.
+
+	self assert: (matcher match: 'hello')
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testMatchStringAnyCharacterPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: '?ello'.
+
+	self assert: (matcher match: 'hello')
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testMatchStringPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: 'hello'.
+
+	self assert: (matcher match: 'hello')
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testMatchStringStarPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: '*lo'.
+
+	self assert: (matcher match: 'hello')
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testMatchStringTooLongPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: 'hello'.
+
+	self assert: (matcher match: 'hello2') not
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testMatchStringTooShortPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: 'hello'.
+
+	self assert: (matcher match: 'hell') not
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testNoMatchStringPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: 'hello'.
+
+	self assert: (matcher match: 'there') not
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testNoMatchStringStarPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: '*lo'.
+
+	self assert: (matcher match: 'hell') not
+! !
+
+! StringMatcherTests methodsFor: 'testing' !
+testNoMatchStringTooLongStarPattern
+
+	| matcher |
+
+	matcher := StringMatcher pattern: '*lo'.
+
+	self assert: (matcher match: 'hello2') not
+! !
+
+! TestcaseWindow methodsFor: 'accessing' !
+suites
+
+	^suites! !
+
+! TestcaseWindow methodsFor: 'accessing' !
+suites: aCollection
+
+	suites := aCollection! !
+
+! TestcaseWindow methodsFor: 'accessing' !
+tests
+
+	^tests! !
+
+! TestcaseWindow methodsFor: 'accessing' !
+tests: aCollection
+
+	tests := aCollection! !
+
+! TestcaseWindow methodsFor: 'actions' !
+clear
+
+	self tests do: [:test |
+		test status: #notRun].
+	self update! !
+
+! TestcaseWindow methodsFor: 'actions' !
+debugAll
+
+	self tests do: [:test |
+		test status: (test performTestNoErrorHandling ifTrue: [#passed] ifFalse: [#failed])].
+	self update! !
+
+! TestcaseWindow methodsFor: 'actions' !
+runAll
+
+	self tests do: [:test |
+		test status: (test performTest ifTrue: [#passed] ifFalse: [#failed])].
+	self update! !
+
+! TestcaseWindow methodsFor: 'adding and removing' !
+addSuite: aTestcaseClass
+
+	self suites add: aTestcaseClass.
+	self tests addAll: aTestcaseClass allTestcases! !
+
+! TestcaseWindow methodsFor: 'initializing' !
+initialize
+
+	super initialize.
+	self suites: OrderedCollection new;
+		tests: OrderedCollection new
+! !
+
+! TestcaseWindow methodsFor: 'opening' !
+clearWidget
+
+	^self bindingAt: #clear ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'clear';
+			label: 'Clear';
+			actionBlock: [self clear];
+			yourself]
+ ! !
+
+! TestcaseWindow methodsFor: 'opening' !
+debugAllWidget
+
+	^self bindingAt: #debugAll ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'debugAll ';
+			label: 'Debug All';
+			actionBlock: [self debugAll];
+			yourself]
+ ! !
+
+! TestcaseWindow methodsFor: 'opening' !
+defaultWindowExtent
+
+	^400 @ 400! !
+
+! TestcaseWindow methodsFor: 'opening' !
+install
+
+	self addHTMLBeforeEndOf: (self idFor: 'enableDisable') to: self testcaseHTML! !
+
+! TestcaseWindow methodsFor: 'opening' !
+postOpen
+
+	super postOpen.
+	self setAbsoluteWindowBounds.
+	self install; update
+! !
+
+! TestcaseWindow methodsFor: 'opening' !
+runAllWidget
+
+	^self bindingAt: #runAll ifAbsentPut: [
+		PushButtonComponent new
+			bindTo: self as: 'runAll ';
+			label: 'Run All';
+			actionBlock: [self runAll];
+			yourself]
+ ! !
+
+! TestcaseWindow methodsFor: 'opening' !
+testcaseHTML
+
+	^HTMLBuilder new
+		div: [:builder |
+			builder
+				div: [:builder2 |
+					builder2
+						id: (self idFor: 'toolBar');
+						class: 'buttonBar';
+						install: self runAllWidget;
+						install: self debugAllWidget;
+						install: self clearWidget];
+				install: self testcaseListWidget;
+				yourself];
+		htmlString    ! !
+
+! TestcaseWindow methodsFor: 'opening' !
+testcaseListId
+
+	^self idFor: 'testcaseList'
+! !
+
+! TestcaseWindow methodsFor: 'opening' !
+testcaseListWidget
+
+	^self bindingAt: #testcaseList ifAbsentPut: [
+		ListComponent new
+			bindTo: self id: self testcaseListId;
+			listNumberOfRows: 10;
+			yourself]
+  
+ ! !
+
+! TestcaseWindow methodsFor: 'opening' !
+title
+
+	^'Testcase Window'! !
+
+! TestcaseWindow methodsFor: 'updating' !
+allTestcases
+
+	| collection |
+
+	collection := OrderedCollection new.
+	self suites do: [:eachSuite | collection addAll: eachSuite allTestcases].
+	^collection
+! !
+
+! TestcaseWindow methodsFor: 'updating' !
+update
+
+	self withinWebUpdateDo: [
+		(self bindingAt: #testcaseList)
+			optionStyles: (self tests collect: [:each |
+				each status = #passed
+					ifTrue: ['color: green;']
+					ifFalse: [each status = #failed
+						ifTrue: ['background-color: red; color: white;']
+						ifFalse: ['']]]);
+			list: (self tests collect: [:each | each printString])
+		]! !
+
+KitManager default currentKit allDefinedClasses: #(DictionaryTests LargeIntegerTests NumberConversionTests ObjectTests SmallIntegerTests StringMatcherTests Testcase TestcaseWindow Testsuite) andMethods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Testcase methods: #(#'assert:' #'assert:equals:' #initialize #performTest #performTestNoErrorHandling #'printOn:' #selector #'selector:' #setUp #status #'status:' #tearDown #testLargeAdd) !
+
+KitManager default currentKit allDefinedMethodsFor: Testcase class methods: #(#allTestcaseNames #allTestcases #new #openWindow #openWindowAllSuites #performAllTests #'performTestsOn:' #'selector:') !
+
+KitManager default currentKit allDefinedMethodsFor: ObjectTests methods: #(#testIfNil) !
+
+KitManager default currentKit allDefinedMethodsFor: ObjectTests class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: TestcaseWindow methods: #(#'addSuite:' #allTestcases #clear #clearWidget #debugAll #debugAllWidget #defaultWindowExtent #initialize #install #postOpen #runAll #runAllWidget #suites #'suites:' #testcaseHTML #testcaseListId #testcaseListWidget #tests #'tests:' #title #update) !
+
+KitManager default currentKit allDefinedMethodsFor: TestcaseWindow class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: DictionaryTests methods: #(#testAssociationAt #testAt #testAtIfAbsent #testAtIfAbsentPut #testAtPut #testGrow #testNew #testRemove) !
+
+KitManager default currentKit allDefinedMethodsFor: DictionaryTests class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Testsuite methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: Testsuite class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: StringMatcherTests methods: #(#testMatchEndStringStarPattern #testMatchMidStringStarPattern #testMatchStringAnyCharacterPattern #testMatchStringPattern #testMatchStringStarPattern #testMatchStringTooLongPattern #testMatchStringTooShortPattern #testNoMatchStringPattern #testNoMatchStringStarPattern #testNoMatchStringTooLongStarPattern) !
+
+KitManager default currentKit allDefinedMethodsFor: StringMatcherTests class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: LargeIntegerTests methods: #(#testAdd #testLargeAdd #testSubtract) !
+
+KitManager default currentKit allDefinedMethodsFor: LargeIntegerTests class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: SmallIntegerTests methods: #(#testMinusSmallInteger #testPerformMinusSmallInteger #testPerformPlusSmallInteger #testPerformTimesSmallInteger #testPlusSmallInteger #testTimesSmallInteger) !
+
+KitManager default currentKit allDefinedMethodsFor: SmallIntegerTests class methods: #() !
+
+KitManager default currentKit allDefinedMethodsFor: NumberConversionTests methods: #(#testFractionToFloat #testFractionToLargeInteger #testLargeIntegerToFloat #testSmallIntegerToFloat #testSmallIntegerToFraction #testSmallIntegerToLargeInteger) !
+
+KitManager default currentKit allDefinedMethodsFor: NumberConversionTests class methods: #() !
+
+KitManager default finishFileinKit !

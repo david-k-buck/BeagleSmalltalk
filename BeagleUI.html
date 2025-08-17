@@ -1,0 +1,77 @@
+<html>
+		<!-- Beagle Smalltalk -->
+		<!-- Copyright (c) 2025 Simberon Incorporated -->
+		<!-- Released under the MIT license https://opensource.org/license/MIT -->
+
+	<head>
+		<link rel="stylesheet" href="BeagleUI.css">
+		<script src="BeagleUI.js"></script>
+	</head>
+	<body onload="connectToVM()">
+		<div style="color:white;font-size:200%;">Beagle Smalltalk</div>
+		<div style="color:white">Copyright © 2025 Simberon Incorporated</div>
+		<div style="color:white">Released under the <a href="https://opensource.org/license/MIT" target="_blank" rel="noopener noreferrer" style="color:#C0C0FF">MIT License</a></div>
+		<div class="buttonBar">
+			<div class="button" onclick="openWorkspace()">
+				Workspace
+			</div>
+			<div class="button" onclick="openSystemBrowser()">
+				System Browser
+			</div>
+			<div class="button" onclick="browseSenders()">
+				Senders...
+			</div>
+			<div class="button" onclick="browseImplementers()">
+				Implementers...
+			</div>
+			<div class="button" onclick="browseClassReferences()">
+				Class References...
+			</div>
+		</div>
+		<div class="buttonBar">
+			<div class="button" onclick="fileoutSources()">
+				Fileout Kits
+			</div>
+			<div class="button" onclick="fileinSources()">
+				Filein Kits
+			</div>
+			<div class="button" onclick="garbageCollect()">
+				Garbage Collect
+			</div>
+			<div class="button" onclick="saveImage()">
+				Save Image
+			</div>
+			<div class="button" onclick="closeSmalltalk()">
+				Close
+			</div>
+			<div class="button" onclick="shutdownSmalltalk()">
+				Shut Down
+			</div>
+		</div>
+		<div class="buttonBar">
+			<div class="button" onclick="doIt()">
+				Do It
+			</div>
+			<div class="button" onclick="printIt()">
+				Print It
+			</div>
+			<div class="button" onclick="showString()">
+				Show String
+			</div>
+			<div class="button" onclick="debugIt()" style="display: none;">
+				Debug It
+			</div>
+			<div class="button" onclick="fileIn()">
+				File In
+			</div>
+		</div>
+		<div class="workspace">
+			<textarea id="workspace"  spellcheck="false" name="workspace" rows="5" cols="85" tabindex="2"></textarea>
+		</div>
+		<div class="result">
+			<textarea readonly id="result" name="result" rows="10" cols="85" tabindex="3"></textarea>
+		</div>
+		<div id="simTalkRootSection">
+		</div>
+	</body>
+</html>
