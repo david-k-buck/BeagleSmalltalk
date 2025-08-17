@@ -17,9 +17,9 @@ The "doc" folder contains some beginning information for people wanting to learn
 
 To get this Smalltalk running, you have two choices.
 
-&nbsp;	1) Download it with executables from https://www.simberon.com/BeagleSmalltalk.html
+ 	1) Download it with executables from https://www.simberon.com/BeagleSmalltalk.html
 
-&nbsp;	2) Compile it on your own
+ 	2) Compile it on your own
 
 
 
@@ -29,27 +29,27 @@ Here's how you can compile it on your own.
 
 Windows:
 
-&nbsp;	- Download and install cygwin along with the GCC compiler and make
+ 	- Download and install cygwin along with the GCC compiler and make
 
-&nbsp;	- From the cygwin bash shell, create a directory for BeagleSmalltalk and cd to it
+ 	- From the cygwin bash shell, create a directory for BeagleSmalltalk and cd to it
 
-&nbsp;	- Type make
+ 	- Type make
 
-&nbsp;	- Run with:   ./beagle.exe beagle.im
+ 	- Run with:   ./beagle.exe beagle.im
 
-&nbsp;	- Open the file BeagleUI.hml in a web browser
+ 	- Open the file BeagleUI.hml in a web browser
+
+ 	- To run outside of cygwin, copy cygwin1.dll to a folder called lib
 
 
 
 Linux:
 
-&nbsp;	- Create a directory for BeagleSmalltalk and cd to it
+ 	- Create a directory for BeagleSmalltalk and cd to it
 
  	- Type make
 
  	- Run with:   ./beagle beagle.im
 
  	- Open the file BeagleUI.hml in a web browser
-
-
 

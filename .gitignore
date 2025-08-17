@@ -4,3 +4,4 @@ beagle.exe
 beagle
 *.log
 stSource/*
+lib/*
